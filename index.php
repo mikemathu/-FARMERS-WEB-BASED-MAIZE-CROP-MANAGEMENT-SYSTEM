@@ -1,4 +1,4 @@
-<?php include('server.php');
+<?php include('includes/server.php');
 if(isset($_SESSION["Username"])){
 	$username=$_SESSION["Username"];
 	if ($_SESSION["Usertype"]==1) {
@@ -10,57 +10,19 @@ if(isset($_SESSION["Username"])){
 }
 else{
     $username="";
-	//header("location: index.php");
+	// header("location: index.php");
 }
+
+include('includes/header.php');
+
+include('includes/index-navbar.php');
 
  ?>
 
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Kilifi Artisan Marketplace</title>
-	<meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" type="text/css" href="awesome/css/fontawesome-all.min.css">
 
-<style>
-	body{padding-top: 3%;margin: 0;}
-	.header1{background-color: #EEEEEE;padding-left: 1%;}
-	.header2{padding:20px 40px 20px 40px;color:#fff;}
-	.card{box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background:#fff}
-</style>
 
-</head>
-<body>
 
-<!--Navbar menu-->
-<nav class="navbar navbar-inverse navbar-fixed-top" id="my-navbar">
-	<div class="container">
-		<div class="navber-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a href="index.php" class="navbar-brand">Kilifi Artisan Marketplace</a>
-		</div>
-		<div class="collapse navbar-collapse" id="navbar-collapse">
-			<a href="loginReg.php" class="btn btn-info navbar-btn navbar-right">Register</a>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="index.php">Home</a></li>
-				<li><a href="#how">How it works</a></li>
-				<li><a href="#faq">FAQ</a></li>
-				<li><a href="loginReg.php">Login</a></li>
-				<li><a href="admin/login.php">Admin</a></li>
-			</ul>
-		</div>		
-	</div>	
-</nav>
-<!--End Navbar menu-->
 
 
 
@@ -290,41 +252,4 @@ else{
 <!--End FAQ-->
 
 
-<!--Footer-->
-<div class="text-center" style="padding:4%;background:#222;color:#fff;margin-top:20px;">
-	<div class="row">
-			<div class="col-lg-3">
-			<h3>Quick Links</h3>
-			<p><a href="index.php">Home</a></p>
-			<p><a href="#how">How it works</a></p>
-			<p><a href="#faq">FAQ</a></p>
-			<p><a href="loginReg.php">Login</a></p>
-			<p><a href="loginReg.php">Register</a></p>
-		</div>
-		<div class="col-lg-3">
-			<h3>About Us</h3>
-			<p>Kilifi Market place</p>			
-			<p>&copy 2018</p>
-		</div>
-		<div class="col-lg-3">
-			<h3>Contact Us</h3>
-			<p>Pwani University school of Mathematics and Computer Science</p>
-			<p>Kilifi Town</p>
-			<p>&copy 2020</p>
-		</div>
-		<div class="col-lg-3">
-			<h3>Social Contact</h3>
-			<p style="font-size:20px;color:#3B579D;"><i class="fab fa-facebook-square"> Facebook</i></p>
-			<p style="font-size:20px;color:#D34438;"><i class="fab fa-google-plus-square"> Google</i></p>
-			<p style="font-size:20px;color:#2CAAE1;"><i class="fab fa-twitter-square"> Twitter</i></p>
-			<p style="font-size:20px;color:#0274B3;"><i class="fab fa-linkedin"> Linkedin</i></p>
-		</div>
-	</div>
-</div>
-<!--End Footer-->
-
-
-<script type="text/javascript" src="jquery/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-</body>
-</html>
+<?php  include('includes/footer.php');?>
