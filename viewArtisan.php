@@ -47,7 +47,7 @@ if ($result->num_rows > 0) {
 
 include('includes/header.php');
 
-include('includes/dashboard-navbar.php');
+include('includes/client-navbar.php');
 
 
  ?>

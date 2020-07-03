@@ -8,7 +8,7 @@ if(isset($_SESSION["Username"])){
 		$textBtn="Apply for this job";
 	}
 	else{
-		$linkPro="employerProfile.php";
+		$linkPro="clientProfile.php";
 		$linkEditPro="editEmployer.php";
 		$linkBtn="editJob.php";
 		$textBtn="Edit the job offer";
@@ -47,7 +47,21 @@ if(isset($_POST["s_email"])){
 
 include('includes/header.php');
 
-include('includes/dashboard-navbar.php');
+// $_SESSION["Usertype"]=2
+
+// if ($usertype=="artisan") {
+
+	if ($_SESSION["Usertype"]=1) {
+	
+	include('includes/artisan-navbar.php');
+	}
+	else if($_SESSION["Usertype"]=2){
+		include('includes/client-navbar.php');
+
+	}
+
+
+
 
  ?>
 
@@ -70,7 +84,7 @@ include('includes/dashboard-navbar.php');
 			  <div class="panel-body"><h4>
                   <table style="width:100%">
                       <tr>
-					 	 <td style="font-weight:bold; padding-bottom:10px;">photo</td>
+					 	 <td style="font-weight:bold; padding-bottom:10px;">Photo</td>
                           <td style="font-weight:bold; padding-bottom:10px;">Username</td>
                           <td style="font-weight:bold; padding-bottom:10px;">Professional Title</td>
                           <td style="font-weight:bold; padding-bottom:10px;">Email</td>

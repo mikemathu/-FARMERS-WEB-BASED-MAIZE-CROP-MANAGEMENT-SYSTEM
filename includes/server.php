@@ -66,7 +66,7 @@ if(isset($_POST["register"])){
 			if($result==true){
 				$_SESSION["Username"]=$username;
 				$_SESSION["Usertype"]=2;
-				header("location: employerProfile.php");
+				header("location: clientProfile.php");
 			}
 
 		}
@@ -99,7 +99,7 @@ if(isset($_POST["login"])){
 			$_SESSION["Username"]=$username;
 			$_SESSION["Usertype"]=2;
 			unset($_SESSION["errorMsg"]);
-			header("location: employerProfile.php");
+			header("location: clientProfile.php");
 		}
 		else{
 			$_SESSION["errorMsg"]="username/password is incorrect";
@@ -132,5 +132,5 @@ function test_input($data) {
   return $data;
 }
 
-//$conn->close();
+// $conn->close();
 ?>

@@ -1,4 +1,4 @@
-<?php include('inludes/server.php');
+<?php include('includes/server.php');
 if(isset($_SESSION["Username"])){
 	$username=$_SESSION["Username"];
 }
@@ -44,13 +44,13 @@ if(isset($_POST["editEmployer"])){
     
     $result = $conn->query($sql);
     if($result==true){
-        header("location: employerProfile.php");
+        header("location: clientProfile.php");
     }
 }
 
 include('includes/header.php');
 
-include('includes/dashboard-navbar.php');
+include('includes/client-navbar.php');
 
  ?>
 
@@ -160,7 +160,7 @@ include('includes/dashboard-navbar.php');
     </div>
 
 
-<?php include('includes/index.php')?>
+<?php include('includes/footer.php')?>
 
 
 

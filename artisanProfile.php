@@ -41,7 +41,7 @@ if ($result->num_rows > 0) {
 
 include('includes/header.php');
 
-include('includes/dashboard-navbar.php');
+include('includes/artisan-navbar.php');
  ?>
 
 
@@ -124,7 +124,7 @@ include('includes/dashboard-navbar.php');
 			<?php if(!empty($prof_title)){ ?>
 				<div class="panel panel-primary">
 				  	<div class="panel-heading">Professional Title</div>
-	               	<h4> <?php echo $prof_title; ?> </h4>
+					  <div class="panel-body">	<h4> <?php echo $prof_title; ?> </h4></div>
 					   <!-- <div class="panel-body"><h4><?php //echo $profile_sum; ?></h4></div> -->
 	           </div>
            <?php }?>
@@ -140,7 +140,7 @@ include('includes/dashboard-navbar.php');
 			<?php	if(!empty($profile_sum)){ ?>
 				<div class="panel panel-primary">
 					<div class="panel-heading">Profile Summery</div>
-					<h4> <?php echo $profile_sum; ?> </h4>
+					<div class="panel-body"><h4> <?php echo $profile_sum; ?> </h4></div>
 					<!-- <div class="panel-body"><h4><?php //echo $profile_sum; ?></h4></div> -->
 				</div>
 			<?php }?>			
@@ -148,7 +148,7 @@ include('includes/dashboard-navbar.php');
 			<?php	if(!empty($education)){ ?>
 				<div class="panel panel-primary">
 					<div class="panel-heading">Education</div>
-					<h4> <?php echo $education; ?> </h4>
+					<div class="panel-body"><h4> <?php echo $education; ?> </h4></div>
 					<!-- <div class="panel-body"><h4><?php //echo $profile_sum; ?></h4></div> -->
 				</div>
 			<?php }?>
@@ -156,7 +156,7 @@ include('includes/dashboard-navbar.php');
 			<?php	if(!empty($experience)){ ?>
 				<div class="panel panel-primary">
 					<div class="panel-heading">Experience</div>
-					<h4> <?php echo $experience; ?> </h4>
+					<div class="panel-body"><h4> <?php echo $experience; ?> </h4></div>
 					<!-- <div class="panel-body"><h4><?php //echo $profile_sum; ?></h4></div> -->
 				</div>
 			<?php }?>

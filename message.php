@@ -29,7 +29,7 @@ if(isset($_POST["sr"])){
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) {
 		$_SESSION["f_user"]=$t;
-		header("location: viewFreelancer.php");
+		header("location: viewArtisan.php");
 	} else {
 	    $sql = "SELECT * FROM employer WHERE username='$t'";
 		$result = $conn->query($sql);
@@ -74,7 +74,7 @@ if(isset($_POST["rep"])){
 
 include('includes/header.php');
 
-include('includes/dashboard-navbar.php');
+include('includes/client-navbar.php');
 
 
 

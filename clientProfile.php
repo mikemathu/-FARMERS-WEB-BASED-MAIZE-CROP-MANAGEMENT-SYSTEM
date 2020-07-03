@@ -42,7 +42,7 @@ $result = $conn->query($sql);
 
 include('includes/header.php');
 
-include('includes/dashboard-navbar.php');
+include('includes/client-navbar.php');
 
  ?>
 
