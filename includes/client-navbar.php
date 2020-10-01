@@ -14,7 +14,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="allJob.php">Browse all jobs</a></li>
 				<li><a href="allArtisan.php">Browse Artisans</a></li>
-				<!-- <li><a href="allEmployer.php">Browse Employers</a></li> -->
+				<!-- <li><a href="allclient.php">Browse clients</a></li> -->
 				<li class="dropdown" style="background:#000;padding:0 20px 0 20px;">
 			        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $username; ?>
 			        </a>

@@ -3,13 +3,13 @@ if(isset($_SESSION["Username"])){
 	$username=$_SESSION["Username"];
 	if ($_SESSION["Usertype"]==1) {
 		$linkPro="artisanProfile.php";
-		$linkEditPro="editFreelancer.php";
+		$linkEditPro="editartisan.php";
 		$linkBtn="applyJob.php";
 		$textBtn="Apply for this job";
 	}
 	else{
-		$linkPro="employerProfile.php";
-		$linkEditPro="editEmployer.php";
+		$linkPro="clientProfile.php";
+		$linkEditPro="editclient.php";
 		$linkBtn="editJob.php";
 		$textBtn="Edit the job offer";
 	}
@@ -29,7 +29,7 @@ else{
 
 if(isset($_POST["f_user"])){
 	$_SESSION["f_user"]=$_POST["f_user"];
-	header("location: viewFreelancer.php");
+	header("location: viewartisan.php");
 }
 
 if(isset($_POST["c_letter"])){
@@ -90,8 +90,9 @@ $_SESSION["msgRcv"]=$e_username;
 
 include('includes/header.php');
 
-include('includes/dashboard-navbar.php');
+// include('includes/dashboard-navbar.php');
 
+include('includes/artisan-navbar.php');
  ?>
 
 
@@ -105,7 +106,7 @@ include('includes/dashboard-navbar.php');
 <!--Column 1-->
 	<div class="col-lg-7">
 
-<!--Freelancer Profile Details-->	
+<!--artisan Profile Details-->	
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<div class="panel panel-success">
 			  <div class="panel-heading"><h3>Job Offer Details</h3></div>
@@ -133,9 +134,9 @@ include('includes/dashboard-navbar.php');
 			<a href="<?php echo $linkBtn; ?>" id="applybtn" type="button" class="btn btn-warning btn-lg"><?php echo $textBtn; ?></a>
 			<p></p>
 		</div>
-<!--End Freelancer Profile Details-->
+<!--End artisan Profile Details-->
 
-<!--Freelancer Profile Details-->	
+<!--artisan Profile Details-->	
 		<div id="applicant" class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<div class="panel panel-success">
 			  <div class="panel-heading"><h3>Applicants for this job</h3></div>
@@ -254,9 +255,10 @@ include('includes/dashboard-navbar.php');
                                     <form action="jobDetails.php" method="post">
                                     <input type="hidden" name="'.$tv.'" value="'.$f_username.'">
 									<td><input type="submit" class="btn btn-link btn-lg" value="'.$tc.'"></td>
-									<td><input type="submit" class="btn btn-link btn-lg" value="review this client"></td>
+									
                                     </tr>
-                                </form>
+								</form>
+								<a href="artisanreview.php"><input type="submit" class="btn btn-link btn-lg" value="review this Artisan"></a>
 
                                                              
                                 ';
@@ -273,7 +275,7 @@ include('includes/dashboard-navbar.php');
 			</div>
 			<p></p>
 		</div>
-<!--End Freelancer Profile Details-->
+<!--End artisan Profile Details-->
 
 
 
@@ -281,12 +283,12 @@ include('includes/dashboard-navbar.php');
 <!--End Column 1-->
 
 <?php 
-$sql = "SELECT * FROM employer WHERE username='$e_username'";
+$sql = "SELECT * FROM client WHERE username='$e_username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-    	$e_Name=$row["Name"];
+    	// $e_Name=$row["Name"];
         $email=$row["email"];
         $contact_no=$row["contact_no"];
         $address=$row["address"];
@@ -304,7 +306,7 @@ if ($result->num_rows > 0) {
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<p></p>
 			<img src="image/img04.jpg">
-			<h2><?php echo $e_Name; ?></h2>
+			<h2><?php //echo $e_Name; ?></h2>
 			<p><span class="glyphicon glyphicon-user"></span> <?php echo $e_username; ?></p>
 	        <center><a href="sendMessage.php" class="btn btn-info"><span class="glyphicon glyphicon-envelope"></span>  Send Message</a></center>
 	        <p></p>

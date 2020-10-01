@@ -14,11 +14,11 @@ if(isset($_POST["jid"])){
 
 if(isset($_POST["e_user"])){
 	$_SESSION["e_user"]=$_POST["e_user"];
-	header("location: viewEmployer.php");
+	header("location: viewclient.php");
 }
 
 
-$sql = "SELECT * FROM freelancer WHERE username='$username'";
+$sql = "SELECT * FROM artisan WHERE username='$username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
@@ -99,13 +99,15 @@ include('includes/artisan-navbar.php');
 			  <div class="panel-heading"><h4>Reputation</h4></div>
 			</div>
 			<div class="panel panel-warning">
-			  <div class="panel-heading">Reviews</div>
-			  <div class="panel-body">Nothing to show</div>
+			  <div class="panel-heading">Rating</div>
+			  <div class="panel-body">
+			  <?php
+			  include('includes/rating.php');
+			  ?>
+			  
+			  </div>
 			</div>
-			<div class="panel panel-warning">
-			  <div class="panel-heading">Ratings</div>
-			  <div class="panel-body">Nothing to show</div>
-			</div>
+			
 		</div>
 <!--End Reputation-->
 
@@ -113,7 +115,7 @@ include('includes/artisan-navbar.php');
 <!--End Column 1-->
 
 <!--Column 2-->
-	<div class="col-lg-7">
+	<div class="col-lg-6">
 
 <!--Artisan Profile Details-->	
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
@@ -168,7 +170,7 @@ include('includes/artisan-navbar.php');
                       <tr>
                           <td style="font-weight:bold; padding-bottom:10px;">Job Id</td>
                           <td style="font-weight:bold; padding-bottom:10px;">Title</td>
-                          <td style="font-weight:bold; padding-bottom:10px;">Employer</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">client</td>
                       </tr>
                       <?php 
                       	$sql = "SELECT * FROM job_offer,selected WHERE job_offer.job_id=selected.job_id AND selected.f_username='$username' AND selected.valid=1 ORDER BY job_offer.timestamp DESC";
@@ -182,13 +184,13 @@ include('includes/artisan-navbar.php');
                                 $timestamp=$row["timestamp"];
 
                                 echo '
-                                <form action="employerProfile.php" method="post">
+                                <form action="clientProfile.php" method="post">
                                 <input type="hidden" name="jid" value="'.$job_id.'">
                                     <tr>
                                     <td>'.$job_id.'</td>
                                     <td><input type="submit" class="btn btn-link btn-lg" value="'.$title.'"></td>
                                     </form>
-                                    <form action="employerProfile.php" method="post">
+                                    <form action="clientProfile.php" method="post">
                                     <input type="hidden" name="e_user" value="'.$e_username.'">
                                     <td><input type="submit" class="btn btn-link btn-lg" value="'.$e_username.'"></td>
                                     <td>'.$timestamp.'</td>
@@ -212,7 +214,7 @@ include('includes/artisan-navbar.php');
                       <tr>
                           <td style="font-weight:bold; padding-bottom:10px;">Job Id</td>
                           <td style="font-weight:bold; padding-bottom:10px;">Title</td>
-                          <td style="font-weight:bold; padding-bottom:10px;">Employer</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">client</td>
                       </tr>
                       <?php 
                       	$sql = "SELECT * FROM job_offer,selected WHERE job_offer.job_id=selected.job_id AND selected.f_username='$username' AND selected.valid=0 ORDER BY job_offer.timestamp DESC";
@@ -249,6 +251,18 @@ include('includes/artisan-navbar.php');
                   </table>
               </h4></div>
 			</div>
+
+							  
+     
+
+
+
+
+
+
+
+			<div>			
+			</div>
 		</div>
 <!--End Artisan Profile Details-->
 
@@ -257,34 +271,39 @@ include('includes/artisan-navbar.php');
 
 
 <!--Column 3-->
-	<div class="col-lg-2">
+	<div class="col-lg-3">
 <!--My Wallet-->
-		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
-			<div class="panel panel-info">
-			  <div class="panel-heading"><h3>My Wallet</h3></div>
-			</div>
-			<ul class="list-group">
-			  <li class="list-group-item">Balance: $0.0</li>
-			  <li class="list-group-item">Hourly Rate: $3.0</li>
-			  <li class="list-group-item">Payment Method: </li>
-			  <li class="list-group-item">Withdraw</li>
-			</ul>
-		</div>
+<div style="margin-top:20px">
+
+
+<div>
+<div class="panel panel-default" style="height: 400px;">
+    <div style="height:10px;"></div>
+    <span style="margin-left:10px;">Welcome to Chatroom</span><br>
+    <span style="font-size:10px; margin-left:10px;"><i>Note: Avoid using foul language and hate speech to avoid banning of account</i></span>
+    <div style="height:10px;"></div>
+    <div id="chat_area" style="margin-left:10px; max-height:320px; overflow-y:scroll;">
+    <?php
+		include('chat.php');
+    ?>
+    </div>
+</div>
+<form method="POST" action="">
+<div class="input-group">
+    <input type="text" class="form-control" placeholder="Type message..." name="chat_msg">
+    <span class="input-group-btn">
+    <button class="btn btn-success" type="submit" name="send_msg" value="<?php echo $id; ?>">
+    <span class="glyphicon glyphicon-comment"></span> Send
+    </button>
+    </span>
+</div>
+</form>
+
+</div>
+
+</div>
 <!--End My Wallet-->
 
-<!--Social Network Profiles-->
-		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
-			<div class="panel panel-info">
-			  <div class="panel-heading"><h3>Social Network Profiles</h3></div>
-			</div>
-			<ul class="list-group">
-			  <li class="list-group-item" style="font-size:20px;color:#3B579D;"><i class="fab fa-facebook-square"> Facebook</i></li>
-			  <li class="list-group-item" style="font-size:20px;color:#D34438;"><i class="fab fa-google-plus-square"> Google</i></li>
-			  <li class="list-group-item" style="font-size:20px;color:#2CAAE1;"><i class="fab fa-twitter-square"> Twitter</i></li>
-			  <li class="list-group-item" style="font-size:20px;color:#0274B3;"><i class="fab fa-linkedin"> Linkedin</i></li>
-			</ul>
-		</div>
-<!--End Social Network Profiles-->
 
 	</div>
 <!--End Column 3-->

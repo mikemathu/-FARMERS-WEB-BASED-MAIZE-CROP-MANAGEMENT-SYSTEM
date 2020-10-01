@@ -41,7 +41,7 @@ if(isset($_POST["apply"]) && $msg==""){
  
 include('includes/header.php');
 
-include('includes/dashboard-navbar.php');
+include('includes/artisan-navbar.php');
 
  ?>
 

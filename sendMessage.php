@@ -2,14 +2,14 @@
 if(isset($_SESSION["Username"])){
     $username=$_SESSION["Username"];
     if ($_SESSION["Usertype"]==1) {
-        $linkPro="freelancerProfile.php";
-        $linkEditPro="editFreelancer.php";
+        $linkPro="artisanProfile.php";
+        $linkEditPro="editartisan.php";
         $linkBtn="applyJob.php";
         $textBtn="Apply for this job";
     }
     else{
-        $linkPro="employerProfile.php";
-        $linkEditPro="editEmployer.php";
+        $linkPro="clientProfile.php";
+        $linkEditPro="editclient.php";
         $linkBtn="editJob.php";
         $textBtn="Edit the job offer";
     }

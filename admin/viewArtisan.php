@@ -8,8 +8,8 @@ if(isset($_SESSION["Username"])){
 		$textBtn="Apply for this job";
 	}
 	else{
-		$linkPro="employerProfile.php";
-		$linkEditPro="editEmployer.php";
+		$linkPro="clientProfile.php";
+		$linkEditPro="editclient.php";
 		$linkBtn="editJob.php";
 		$textBtn="Edit the job offer";
 	}
@@ -24,7 +24,7 @@ if(isset($_SESSION["f_user"])){
 	$_SESSION["msgRcv"]=$f_user;
 }
 
-$sql = "SELECT * FROM freelancer WHERE username='$f_user'";
+$sql = "SELECT * FROM artisan WHERE username='$f_user'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -52,7 +52,7 @@ if ($result->num_rows > 0) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Freelancer profile</title>
+	<title>artisan profile</title>
 	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
@@ -83,7 +83,7 @@ if ($result->num_rows > 0) {
 			<ul class="nav navbar-nav navbar-right"> 
 				<li><a href="allJob.php">Browse all jobs</a></li>
 				<li><a href="allArtisan.php">Browse Artisans</a></li>
-				<li><a href="allEmployer.php">Browse Employers</a></li>
+				<li><a href="allclient.php">Browse clients</a></li>
 				<li class="dropdown" style="background:#000;padding:0 20px 0 20px;">
 			        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $username; ?>
 			        </a>
@@ -162,10 +162,10 @@ if ($result->num_rows > 0) {
 <!--Column 2-->
 	<div class="col-lg-7">
 
-<!--Freelancer Profile Details-->	
+<!--artisan Profile Details-->	
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<div class="panel panel-primary">
-			  <div class="panel-heading"><h3>Freelancer Profile Details</h3></div>
+			  <div class="panel-heading"><h3>artisan Profile Details</h3></div>
 			</div>
 			<div class="panel panel-primary">
 			  <div class="panel-heading">Professional Title</div>
@@ -181,7 +181,7 @@ if ($result->num_rows > 0) {
 			</div>
 			
 		</div>
-<!--End Freelancer Profile Details-->
+<!--End artisan Profile Details-->
 
 	</div>
 <!--End Column 2-->
@@ -220,7 +220,7 @@ if ($result->num_rows > 0) {
 			<p><a href="index.php">Home</a></p>
 			<p><a href="allJob.php">Browse all jobs</a></p>
 			<p><a href="allArtisan.php">Browse Artisans</a></p>
-			<p><a href="allEmployer.php">Browse Employers</a></p>
+			<p><a href="allclient.php">Browse clients</a></p>
 		</div>
 		<div class="col-lg-3">
 			<h3>About Us</h3>

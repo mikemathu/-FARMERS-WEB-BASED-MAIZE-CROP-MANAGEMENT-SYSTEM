@@ -14,11 +14,11 @@ if(isset($_POST["jid"])){
 
 if(isset($_POST["e_user"])){
 	$_SESSION["e_user"]=$_POST["e_user"];
-	header("location: viewEmployer.php");
+	header("location: viewclient.php");
 }
 
 
-$sql = "SELECT * FROM freelancer WHERE username='$username'";
+$sql = "SELECT * FROM artisan WHERE username='$username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
@@ -75,7 +75,7 @@ if ($result->num_rows > 0) {
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="allJob.php">Browse all jobs</a></li>
 				<li><a href="allArtisan.php">Browse Artisans</a></li>
-				<li><a href="allEmployer.php">Browse Employers</a></li>
+				<li><a href="allclient.php">Browse clients</a></li>
 				<li class="dropdown" style="background:#000;padding:0 20px 0 20px;">
 			        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $username; ?>
 			        </a>
@@ -211,7 +211,7 @@ if ($result->num_rows > 0) {
                       <tr>
                           <td style="font-weight:bold; padding-bottom:10px;">Job Id</td>
                           <td style="font-weight:bold; padding-bottom:10px;">Title</td>
-                          <td style="font-weight:bold; padding-bottom:10px;">Employer</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">client</td>
                       </tr>
                       <?php 
                       	$sql = "SELECT * FROM job_offer,selected WHERE job_offer.job_id=selected.job_id AND selected.f_username='$username' AND selected.valid=1 ORDER BY job_offer.timestamp DESC";
@@ -225,13 +225,13 @@ if ($result->num_rows > 0) {
                                 $timestamp=$row["timestamp"];
 
                                 echo '
-                                <form action="employerProfile.php" method="post">
+                                <form action="clientProfile.php" method="post">
                                 <input type="hidden" name="jid" value="'.$job_id.'">
                                     <tr>
                                     <td>'.$job_id.'</td>
                                     <td><input type="submit" class="btn btn-link btn-lg" value="'.$title.'"></td>
                                     </form>
-                                    <form action="employerProfile.php" method="post">
+                                    <form action="clientProfile.php" method="post">
                                     <input type="hidden" name="e_user" value="'.$e_username.'">
                                     <td><input type="submit" class="btn btn-link btn-lg" value="'.$e_username.'"></td>
                                     <td>'.$timestamp.'</td>
@@ -255,7 +255,7 @@ if ($result->num_rows > 0) {
                       <tr>
                           <td style="font-weight:bold; padding-bottom:10px;">Job Id</td>
                           <td style="font-weight:bold; padding-bottom:10px;">Title</td>
-                          <td style="font-weight:bold; padding-bottom:10px;">Employer</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">client</td>
                       </tr>
                       <?php 
                       	$sql = "SELECT * FROM job_offer,selected WHERE job_offer.job_id=selected.job_id AND selected.f_username='$username' AND selected.valid=0 ORDER BY job_offer.timestamp DESC";
@@ -345,7 +345,7 @@ if ($result->num_rows > 0) {
 			<p><a href="index.php">Home</a></p>
 			<p><a href="allJob.php">Browse all jobs</a></p>
 			<p><a href="allArtisan.php">Browse Artisans</a></p>
-			<p><a href="allEmployer.php">Browse Employers</a></p>
+			<p><a href="allclient.php">Browse clients</a></p>
 		</div>
 		<div class="col-lg-3">
 			<h3>About Us</h3>

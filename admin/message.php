@@ -8,8 +8,8 @@ if(isset($_SESSION["Username"])){
 		$textBtn="Apply for this job";
 	}
 	else{
-		$linkPro="employerProfile.php";
-		$linkEditPro="editEmployer.php";
+		$linkPro="clientProfile.php";
+		$linkEditPro="editclient.php";
 		$linkBtn="editJob.php";
 		$textBtn="Edit the job offer";
 	}
@@ -25,17 +25,17 @@ $f=0;
 
 if(isset($_POST["sr"])){
 	$t=$_POST["sr"];
-	$sql = "SELECT * FROM freelancer WHERE username='$t'";
+	$sql = "SELECT * FROM artisan WHERE username='$t'";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) {
 		$_SESSION["f_user"]=$t;
-		header("location: viewFreelancer.php");
+		header("location: viewartisan.php");
 	} else {
-	    $sql = "SELECT * FROM employer WHERE username='$t'";
+	    $sql = "SELECT * FROM client WHERE username='$t'";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
 			$_SESSION["e_user"]=$t;
-			header("location: viewEmployer.php");
+			header("location: viewclient.php");
 		}
 	}
 }
@@ -112,7 +112,7 @@ if(isset($_POST["rep"])){
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="allJob.php">Browse all jobs</a></li>
 				<li><a href="allArtisan.php">Browse Artisans</a></li>
-				<li><a href="allEmployer.php">Browse Employers</a></li>
+				<li><a href="allclient.php">Browse clients</a></li>
 				<li class="dropdown" style="background:#000;padding:0 20px 0 20px;">
 			        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $username; ?>
 			        </a>
@@ -247,7 +247,7 @@ if(isset($_POST["rep"])){
 			<p><a href="index.php">Home</a></p>
 			<p><a href="allJob.php">Browse all jobs</a></p>
 			<p><a href="allArtisans.php">Browse Artisans</a></p>
-			<p><a href="allEmployer.php">Browse Employers</a></p>
+			<p><a href="allclient.php">Browse clients</a></p>
 		</div>
 		<div class="col-lg-3">
 			<h3>About Us</h3>

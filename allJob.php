@@ -8,8 +8,8 @@ if(isset($_SESSION["Username"])){
 		$textBtn="Apply for this job";
 	}
 	else{
-		$linkPro="employerProfile.php";
-		$linkEditPro="editEmployer.php";
+		$linkPro="clientProfile.php";
+		$linkEditPro="editclient.php";
 		$linkBtn="editJob.php";
 		$textBtn="Edit the job offer";
 	}
@@ -39,8 +39,8 @@ if(isset($_POST["s_type"])){
 	$result = $conn->query($sql);
 }
 
-if(isset($_POST["s_employer"])){
-	$t=$_POST["s_employer"];
+if(isset($_POST["s_client"])){
+	$t=$_POST["s_client"];
 	$sql = "SELECT * FROM job_offer WHERE e_username='$t' and valid=1";
 	$result = $conn->query($sql);
 }
@@ -63,7 +63,9 @@ if(isset($_POST["oldJob"])){
 
 include('includes/header.php');
 
-include('includes/dashboard-navbar.php');
+// include('includes/dashboard-navbar.php');
+
+include('includes/artisan-navbar.php');
 
  ?>
 
@@ -79,7 +81,7 @@ include('includes/dashboard-navbar.php');
 <!--Column 1-->
 	<div class="col-lg-9">
 
-<!--Freelancer Profile Details-->	
+<!--artisan Profile Details-->	
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<div class="panel panel-success">
 			  <div class="panel-heading"><h3>All Job Offers</h3></div>
@@ -126,7 +128,7 @@ include('includes/dashboard-navbar.php');
 			</div>
 			<p></p>
 		</div>
-<!--End Freelancer Profile Details-->
+<!--End artisan Profile Details-->
 
 	</div>
 <!--End Column 1-->
@@ -154,8 +156,8 @@ include('includes/dashboard-navbar.php');
 
 	        <form action="allJob.php" method="post">
 				<div class="form-group">
-				  <input type="text" class="form-control" name="s_employer">
-				  <center><button type="submit" class="btn btn-info">Search by Employer</button></center>
+				  <input type="text" class="form-control" name="s_client">
+				  <center><button type="submit" class="btn btn-info">Search by client</button></center>
 				</div>
 	        </form>
 

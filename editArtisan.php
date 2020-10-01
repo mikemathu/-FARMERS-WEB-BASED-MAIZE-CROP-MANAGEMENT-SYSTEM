@@ -7,7 +7,7 @@ else{
 	//header("location: index.php");
 }
 
-$sql = "SELECT * FROM freelancer WHERE username='$username'";
+$sql = "SELECT * FROM artisan WHERE username='$username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
@@ -42,7 +42,7 @@ if(isset($_POST["editArtisan"])){
     $photo=test_input($_POST["photo"]);
 
 
-	$sql = "UPDATE freelancer SET Name='$name',email='$email',contact_no='$contactNo', address='$address', gender='$gender',prof_title='$prof_title',profile_sum='$profile_sum',experience='$experience', birthdate='$birthdate', photo='$photo' WHERE username='$username'";
+	$sql = "UPDATE artisan SET Name='$name',email='$email',contact_no='$contactNo', address='$address', gender='$gender',prof_title='$prof_title',profile_sum='$profile_sum',experience='$experience', birthdate='$birthdate', photo='$photo' WHERE username='$username'";
 
 	
 	$result = $conn->query($sql);
@@ -53,7 +53,7 @@ if(isset($_POST["editArtisan"])){
 
 include('includes/header.php');
 
-include('includes/dashboard-navbar.php');
+include('includes/artisan-navbar.php');
 
 
  ?>

@@ -8,8 +8,8 @@ if(isset($_SESSION["Username"])){
 		$textBtn="Apply for this job";
 	}
 	else{
-		$linkPro="employerProfile.php";
-		$linkEditPro="editEmployer.php";
+		$linkPro="clientProfile.php";
+		$linkEditPro="editclient.php";
 		$linkBtn="editJob.php";
 		$textBtn="Edit the job offer";
 	}
@@ -24,7 +24,7 @@ if(isset($_SESSION["f_user"])){
 	$_SESSION["msgRcv"]=$f_user;
 }
 
-$sql = "SELECT * FROM freelancer WHERE username='$f_user'";
+$sql = "SELECT * FROM artisan WHERE username='$f_user'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -101,13 +101,19 @@ include('includes/client-navbar.php');
 			  <div class="panel-heading"><h4>Reputation</h4></div>
 			</div>
 			<div class="panel panel-warning">
-			  <div class="panel-heading">Reviews</div>
-			  <div class="panel-body">Nothing to show</div>
+			  <div class="panel-heading">Rating</div>
+			
+
+			  
+			  <div class="panel-body">
+			  <?php
+			  include('includes/rating.php');
+			  ?>
+			  
+			  </div>
+			
 			</div>
-			<div class="panel panel-warning">
-			  <div class="panel-heading">Ratings</div>
-			  <div class="panel-body">Nothing to show</div>
-			</div>
+		
 		</div>
 <!--End Reputation-->
 
@@ -117,10 +123,10 @@ include('includes/client-navbar.php');
 <!--Column 2-->
 	<div class="col-lg-7">
 
-<!--Freelancer Profile Details-->	
+<!--artisan Profile Details-->	
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<div class="panel panel-primary">
-			  <div class="panel-heading"><h3>Freelancer Profile Details</h3></div>
+			  <div class="panel-heading"><h3>artisan Profile Details</h3></div>
 			</div>
 			<div class="panel panel-primary">
 			  <div class="panel-heading">Professional Title</div>
@@ -136,7 +142,7 @@ include('includes/client-navbar.php');
 			</div>
 			
 		</div>
-<!--End Freelancer Profile Details-->
+<!--End artisan Profile Details-->
 
 	</div>
 <!--End Column 2-->

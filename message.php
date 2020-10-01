@@ -8,8 +8,8 @@ if(isset($_SESSION["Username"])){
 		$textBtn="Apply for this job";
 	}
 	else{
-		$linkPro="employerProfile.php";
-		$linkEditPro="editEmployer.php";
+		$linkPro="clientProfile.php";
+		$linkEditPro="editclient.php";
 		$linkBtn="editJob.php";
 		$textBtn="Edit the job offer";
 	}
@@ -25,17 +25,17 @@ $f=0;
 
 if(isset($_POST["sr"])){
 	$t=$_POST["sr"];
-	$sql = "SELECT * FROM freelancer WHERE username='$t'";
+	$sql = "SELECT * FROM artisan WHERE username='$t'";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) {
 		$_SESSION["f_user"]=$t;
 		header("location: viewArtisan.php");
 	} else {
-	    $sql = "SELECT * FROM employer WHERE username='$t'";
+	    $sql = "SELECT * FROM client WHERE username='$t'";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
 			$_SESSION["e_user"]=$t;
-			header("location: viewEmployer.php");
+			header("location: viewclient.php");
 		}
 	}
 }

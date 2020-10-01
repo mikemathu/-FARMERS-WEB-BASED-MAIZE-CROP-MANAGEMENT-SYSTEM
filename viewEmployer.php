@@ -3,13 +3,13 @@ if(isset($_SESSION["Username"])){
 	$username=$_SESSION["Username"];
 	if ($_SESSION["Usertype"]==1) {
 		$linkPro="artisanProfile.php";
-		$linkEditPro="editFreelancer.php";
+		$linkEditPro="editartisan.php";
 		$linkBtn="applyJob.php";
 		$textBtn="Apply for this job";
 	}
 	else{
-		$linkPro="employerProfile.php";
-		$linkEditPro="editEmployer.php";
+		$linkPro="clientProfile.php";
+		$linkEditPro="editclient.php";
 		$linkBtn="editJob.php";
 		$textBtn="Edit the job offer";
 	}
@@ -24,7 +24,7 @@ if(isset($_SESSION["e_user"])){
 	$_SESSION["msgRcv"]=$e_user;
 }
 
-$sql = "SELECT * FROM employer WHERE username='$e_user'";
+$sql = "SELECT * FROM client WHERE username='$e_user'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -51,7 +51,7 @@ if ($result->num_rows > 0) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Employer profile</title>
+	<title>client profile</title>
 	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
@@ -82,7 +82,7 @@ if ($result->num_rows > 0) {
 			<ul class="nav navbar-nav navbar-right"> 
 				<li><a href="allJob.php">Browse all jobs</a></li>
 				<li><a href="allArtisan.php">Browse Artisans</a></li>
-				<!-- <li><a href="allEmployer.php">Browse Employers</a></li> -->
+				<!-- <li><a href="allclient.php">Browse clients</a></li> -->
 				<li class="dropdown" style="background:#000;padding:0 20px 0 20px;">
 			        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $username; ?>
 			        </a>
@@ -161,10 +161,10 @@ if ($result->num_rows > 0) {
 <!--Column 2-->
 	<div class="col-lg-7">
 
-<!--Employer Profile Details-->	
+<!--client Profile Details-->	
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<div class="panel panel-primary">
-			  <div class="panel-heading"><h3>Employer Profile Details</h3></div>
+			  <div class="panel-heading"><h3>client Profile Details</h3></div>
 			</div>
 
 			<?php	if(!empty($company)){ ?>
@@ -177,7 +177,7 @@ if ($result->num_rows > 0) {
 
 			<?php	if(!empty($e_user)){ ?>
 				<div class="panel panel-primary">
-					<div class="panel-heading">Previously Hired Freelancers</div>
+					<div class="panel-heading">Previously Hired artisans</div>
 					<h4> <?php // echo $company; ?> </h4>
 					<div class="panel-body"><h4><?php echo $e_user; ?></h4></div>
 				</div>
@@ -192,7 +192,7 @@ if ($result->num_rows > 0) {
 			<?php }?>
 			
 		</div>
-<!--End Employer Profile Details-->
+<!--End client Profile Details-->
 
 	</div>
 <!--End Column 2-->
@@ -231,7 +231,7 @@ if ($result->num_rows > 0) {
 			<p><a href="index.php">Home</a></p>
 			<p><a href="allJob.php">Browse all jobs</a></p>
 			<p><a href="allArtisan.php">Browse Artisans</a></p>
-			<!-- <p><a href="allEmployer.php">Browse Employers</a></p> -->
+			<!-- <p><a href="allclient.php">Browse clients</a></p> -->
 		</div>
 		<div class="col-lg-3">
 			<h3>About Us</h3>

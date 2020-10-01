@@ -3,13 +3,13 @@ if(isset($_SESSION["Username"])){
 	$username=$_SESSION["Username"];
 	if ($_SESSION["Usertype"]==1) {
 		$linkPro="artisanProfile.php";
-		$linkEditPro="editFreelancer.php";
+		$linkEditPro="editartisan.php";
 		$linkBtn="applyJob.php";
 		$textBtn="Apply for this job";
 	}
 	else{
-		$linkPro="employerProfile.php";
-		$linkEditPro="editEmployer.php";
+		$linkPro="clientProfile.php";
+		$linkEditPro="editclient.php";
 		$linkBtn="editJob.php";
 		$textBtn="Edit the job offer";
 	}
@@ -29,7 +29,7 @@ else{
 
 if(isset($_POST["f_user"])){
 	$_SESSION["f_user"]=$_POST["f_user"];
-	header("location: viewFreelancer.php");
+	header("location: viewartisan.php");
 }
 
 if(isset($_POST["c_letter"])){
@@ -132,7 +132,7 @@ $_SESSION["msgRcv"]=$e_username;
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="allJob.php">Browse all jobs</a></li>
 				<li><a href="allArtisan.php">Browse Artisans</a></li>
-				<li><a href="allEmployer.php">Browse Employers</a></li>
+				<li><a href="allclient.php">Browse clients</a></li>
 				<li class="dropdown" style="background:#000;padding:0 20px 0 20px;">
 			        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $username; ?>
 			        </a>
@@ -157,7 +157,7 @@ $_SESSION["msgRcv"]=$e_username;
 <!--Column 1-->
 	<div class="col-lg-7">
 
-<!--Freelancer Profile Details-->	
+<!--artisan Profile Details-->	
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<div class="panel panel-success">
 			  <div class="panel-heading"><h3>Job Offer Details</h3></div>
@@ -185,9 +185,9 @@ $_SESSION["msgRcv"]=$e_username;
 			<a href="<?php echo $linkBtn; ?>" id="applybtn" type="button" class="btn btn-warning btn-lg"><?php echo $textBtn; ?></a>
 			<p></p>
 		</div>
-<!--End Freelancer Profile Details-->
+<!--End artisan Profile Details-->
 
-<!--Freelancer Profile Details-->	
+<!--artisan Profile Details-->	
 		<div id="applicant" class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<div class="panel panel-success">
 			  <div class="panel-heading"><h3>Applicants for this job</h3></div>
@@ -325,7 +325,7 @@ $_SESSION["msgRcv"]=$e_username;
 			</div>
 			<p></p>
 		</div>
-<!--End Freelancer Profile Details-->
+<!--End artisan Profile Details-->
 
 
 
@@ -333,7 +333,7 @@ $_SESSION["msgRcv"]=$e_username;
 <!--End Column 1-->
 
 <?php 
-$sql = "SELECT * FROM employer WHERE username='$e_username'";
+$sql = "SELECT * FROM client WHERE username='$e_username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
@@ -436,8 +436,8 @@ if ($result->num_rows > 0) {
 			<h3>Quick Links</h3>
 			<p><a href="index.php">Home</a></p>
 			<p><a href="allJob.php">Browse all jobs</a></p>
-			<p><a href="allArtisan.php">Browse Freelancers</a></p>
-			<p><a href="allEmployer.php">Browse Employers</a></p>
+			<p><a href="allArtisan.php">Browse artisans</a></p>
+			<p><a href="allclient.php">Browse clients</a></p>
 		</div>
 		<div class="col-lg-3">
 			<h3>About Us</h3>

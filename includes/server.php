@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+//
+
 
 // Create connection
 $conn = new mysqli("localhost", "root", "35703436mikemathu", "fmarket");
@@ -9,7 +11,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-/*$sql = "SELECT * FROM employer";
+/*$sql = "SELECT * FROM client";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -36,14 +38,14 @@ if(isset($_POST["register"])){
 	$usertype=test_input($_POST["usertype"]);
 
 	if ($usertype=="artisan") {
-		$sql = "SELECT * FROM freelancer,employer WHERE freelancer.username = '$username' OR employer.username = '$username'";
+		$sql = "SELECT * FROM artisan,client WHERE artisan.username = '$username' OR client.username = '$username'";
 		$result = $conn->query($sql);
 		if($result->num_rows > 0){
 			$_SESSION["errorMsg2"]="The username is already taken";
 		}
 		else{
 			unset($_SESSION["errorMsg2"]);
-			$sql = "INSERT INTO freelancer (username, password, Name, email, contact_no, address, gender, birthdate) VALUES ('$username', '$password', '$name','$email','$contactNo','$address','$gender','$birthdate')";
+			$sql = "INSERT INTO artisan (username, password, Name, email, contact_no, address, gender, birthdate) VALUES ('$username', '$password', '$name','$email','$contactNo','$address','$gender','$birthdate')";
 			$result = $conn->query($sql);
 			if($result==true){
 				$_SESSION["Username"]=$username;
@@ -54,14 +56,14 @@ if(isset($_POST["register"])){
 		}
 	}
 	else{
-		$sql = "SELECT * FROM freelancer,employer WHERE freelancer.username = '$username' OR employer.username = '$username'";
+		$sql = "SELECT * FROM artisan,client WHERE artisan.username = '$username' OR client.username = '$username'";
 		$result = $conn->query($sql);
 		if($result->num_rows > 0){
 			$_SESSION["errorMsg2"]="The username is already taken";
 		}
 		else{
 			unset($_SESSION["errorMsg2"]);
-			$sql = "INSERT INTO employer (username, password, Name, email, contact_no, address, gender, birthdate) VALUES ('$username', '$password', '$name','$email','$contactNo','$address','$gender','$birthdate')";
+			$sql = "INSERT INTO client (username, password, Name, email, contact_no, address, gender, birthdate) VALUES ('$username', '$password', '$name','$email','$contactNo','$address','$gender','$birthdate')";
 			$result = $conn->query($sql);
 			if($result==true){
 				$_SESSION["Username"]=$username;
@@ -80,7 +82,7 @@ if(isset($_POST["login"])){
 	$usertype=test_input($_POST["usertype"]);
 
 	if ($usertype=="artisan") {
-		$sql = "SELECT * FROM freelancer WHERE username = '$username' AND password = '$password'";
+		$sql = "SELECT * FROM artisan WHERE username = '$username' AND password = '$password'";
 		$result = $conn->query($sql);
 		if($result->num_rows == 1){
 			$_SESSION["Username"]=$username;
@@ -93,7 +95,7 @@ if(isset($_POST["login"])){
 		}
 	}
 	else{
-		$sql = "SELECT * FROM employer WHERE username = '$username' AND password = '$password'";
+		$sql = "SELECT * FROM client WHERE username = '$username' AND password = '$password'";
 		$result = $conn->query($sql);
 		if($result->num_rows == 1){
 			$_SESSION["Username"]=$username;

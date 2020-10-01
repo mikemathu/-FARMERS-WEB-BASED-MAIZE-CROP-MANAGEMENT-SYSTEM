@@ -7,7 +7,7 @@ else{
 	//header("location: index.php");
 }
 
-$sql = "SELECT * FROM employer WHERE username='$username'";
+$sql = "SELECT * FROM client WHERE username='$username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
@@ -22,12 +22,13 @@ if ($result->num_rows > 0) {
         $company=$row["company"];
         $photo=$row["photo"];
         }
-} else {
-    echo "0 results";
-}
+} 
+// else {
+//     echo "0 results";
+// }
 
 
-if(isset($_POST["editEmployer"])){
+if(isset($_POST["editclient"])){
     $name=test_input($_POST["name"]);
     $email=test_input($_POST["email"]);
     $contactNo=test_input($_POST["contactNo"]);
@@ -39,7 +40,7 @@ if(isset($_POST["editEmployer"])){
     $photo=test_input($_POST["photo"]);
 
 
-    $sql = "UPDATE employer SET Name='$name',email='$email',contact_no='$contactNo', address='$address', gender='$gender', profile_sum='$profile_sum', birthdate='$birthdate', company='$company', photo='$photo' WHERE username='$username'";
+    $sql = "UPDATE client SET Name='$name',email='$email',contact_no='$contactNo', address='$address', gender='$gender', profile_sum='$profile_sum', birthdate='$birthdate', company='$company', photo='$photo' WHERE username='$username'";
 
     
     $result = $conn->query($sql);
@@ -151,7 +152,7 @@ include('includes/client-navbar.php');
                 <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3">
                         <!-- Do NOT use name="submit" or id="submit" for the Submit button -->
-                        <button type="submit" name="editEmployer" class="btn btn-info btn-lg">Save changes</button>
+                        <button type="submit" name="editclient" class="btn btn-info btn-lg">Save changes</button>
                     </div>
                 </div>
             </form>

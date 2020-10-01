@@ -80,7 +80,7 @@
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="usertype" value="employer" /> Employer
+                                <input type="radio" name="usertype" value="client" /> client
                             </label>
                         </div>
                     </div>
@@ -190,7 +190,7 @@
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="usertype" value="employer" /> Employer
+                                <input type="radio" name="usertype" value="client" /> client
                             </label>
                         </div>
                     </div>

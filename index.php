@@ -5,7 +5,7 @@ if(isset($_SESSION["Username"])){
 		header("location: artisanProfile.php");
 	}
 	else{
-		header("location: employerProfile.php");
+		header("location: clientProfile.php");
 	}
 }
 else{
@@ -207,8 +207,8 @@ include('includes/index-navbar.php');
 	</div>
 	<div class="row card" style="padding:30px 60px 30px 60px;margin:30px;">
 		<div class="col-lg-6">
-			<h3>Build An Employer Profile</h3>
-			<p>If you have a lot of works to be done or run a small business that needs some Artisans in a daily basis, this is the perfect place for you. Build your employer profile today and start hiring.</p>
+			<h3>Build An client Profile</h3>
+			<p>If you have a lot of works to be done or run a small business that needs some Artisans in a daily basis, this is the perfect place for you. Build your client profile today and start hiring.</p>
 		</div>
 		<div class="col-lg-6">
 			<img src="image/img04.jpg">
@@ -226,10 +226,10 @@ include('includes/index-navbar.php');
   <button type="button" class="btn btn-default btn-lg" data-toggle="collapse" data-target="#demo" style="width:1062px"><h3>What is Kilifi Artisan Marketplace?</h3></button>
   <div id="demo" class="collapse">
   	<div class="card" style="padding:20px 40px 20px 40px;">
-  		<h4>Kilifi Artisan marketplace is an online outsourcing platform that puts employers and businesses in contact with a global network of Artisans. Any member can post a project, whether a short- or long-term job, and choose from skilled Artisans who offer bid proposals with rate for completing the work. It's a mutually beneficial arrangement. <br>Employers can have their pick of thousands of Artisans who have the exact skills needed to get the job done, without undertaking the expense and commitment of hiring full-time employees in person. <br>Artisan can tap into a readily available source of constant part-time and full-time work opportunities from employers who are specifically seeking them out.</h4>
+  		<h4>Kilifi Artisan marketplace is an online outsourcing platform that puts clients and businesses in contact with a global network of Artisans. Any member can post a project, whether a short- or long-term job, and choose from skilled Artisans who offer bid proposals with rate for completing the work. It's a mutually beneficial arrangement. <br>clients can have their pick of thousands of Artisans who have the exact skills needed to get the job done, without undertaking the expense and commitment of hiring full-time employees in person. <br>Artisan can tap into a readily available source of constant part-time and full-time work opportunities from clients who are specifically seeking them out.</h4>
   	</div>
   </div>
-  <button type="button" class="btn btn-default btn-lg" data-toggle="collapse" data-target="#demo1" style="width:1062px"><h3>I am an Employer, how will this site work for me?</h3></button>
+  <button type="button" class="btn btn-default btn-lg" data-toggle="collapse" data-target="#demo1" style="width:1062px"><h3>I am an client, how will this site work for me?</h3></button>
   <div id="demo1" class="collapse">
   	<div class="card" style="padding:20px 40px 20px 40px;">
   		<h4>You can gain a competitive advantage over your competition by tapping into a skilled global workforce on demand. <br>If you are a small business and can't afford to hire a full-time staff, don't fret! The power of this platform is available for small to medium businesses! Whether it's a website that needs building, business cards or stationery that needs designing, a product that needs to be designed or manufactured, or research that needs to be done, this is the place for you! <br>Thousands of skilled workers are ready to start working right now! All you need to do is post a project!</h4>
@@ -238,13 +238,13 @@ include('includes/index-navbar.php');
   <button type="button" class="btn btn-default btn-lg" data-toggle="collapse" data-target="#demo2" style="width:1062px"><h3>I am an Artisan, how will this site work for me?</h3></button>
   <div id="demo2" class="collapse">
   	<div class="card" style="padding:20px 40px 20px 40px;">
-  		<h4>With your account, you can work at home and tap into a global network of businesses and projects across a huge range of industries - the ultimate opportunity in job flexibility! <br>Work on what you want, when you want and where you want to! The lifestyle of a freelancer is taking off. By working as a Artisan online, you can greatly increase your client base and job throughput. <br>To start, all you need to do is sign up and start bidding. It's FREE!</h4>
+  		<h4>With your account, you can work at home and tap into a global network of businesses and projects across a huge range of industries - the ultimate opportunity in job flexibility! <br>Work on what you want, when you want and where you want to! The lifestyle of a artisan is taking off. By working as a Artisan online, you can greatly increase your client base and job throughput. <br>To start, all you need to do is sign up and start bidding. It's FREE!</h4>
   	</div>
   </div>
   <button type="button" class="btn btn-default btn-lg" data-toggle="collapse" data-target="#demo3" style="width:1062px"><h3>Do I have to pay to register?</h3></button>
   <div id="demo3" class="collapse">
   	<div class="card" style="padding:20px 40px 20px 40px;">
-  		<h4>No. Freelance marketplace is absolutely free to register and explore the posted job offers, Artisans and employers.</h4>
+  		<h4>No. Freelance marketplace is absolutely free to register and explore the posted job offers, Artisans and clients.</h4>
   	</div>
   </div>
   </div>

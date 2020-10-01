@@ -1,5 +1,5 @@
 <!--Footer-->
-<div class="text-center" style="padding:4%;background:#222;color:#fff;margin-top:20px;">
+<!-- <div class="text-center" style="padding:4%;background:#222;color:#fff;margin-top:20px;">
 	<div class="row">
 			<div class="col-lg-3">
 			<h3>Quick Links</h3>
@@ -28,15 +28,189 @@
 			<p style="font-size:20px;color:#0274B3;"><i class="fab fa-linkedin"> Linkedin</i></p>
 		</div>
 	</div>
-</div>
+</div> -->
 <!--End Footer-->
 
 
-<script type="text/javascript" src="jquery/jquery-3.2.1.min.js"></script>
+
+<!-- 
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+
+<script type="text/javascript" src="js/bootstrapjquery.min.js"></script>
+<script type="text/javascript" src="js/popper.js"></script>
+<script type="text/javascript" src="dist/js/bootstrapValidator.js"></script>
+
+
+<script  src="js/jquery.dataTables.min.js"></script>
+
+<script src="js/dataTables.bootstrap.min.js"></script>
+
+<script src="js/dataTables.responsive.js"></script> -->
+
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="dist/js/bootstrapValidator.js"></script>
 
-<script>
+        <script>
+
+        // Script 1
+// Scripts 2
+$(document).ready(function(){
+	
+	$('#myChatRoom').DataTable({
+	"sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>',
+	"bLengthChange": false,
+	"bInfo": false,
+	"bPaginate": true,
+	"bFilter": false,
+	"bSort": false,
+	"pageLength": 8
+	});
+	
+	displayChat();
+	
+		$(document).on('click', '#send_msg', function(){
+			id = <?php echo $id; ?>;
+			if($('#chat_msg').val() == ""){
+				alert('Please write message first');
+			}else{
+				$msg = $('#chat_msg').val();
+				$.ajax({
+					type: "POST",
+					url: "send_message.php",
+					data: {
+						msg: $msg,
+						id: id,
+					},
+					success: function(){
+						$('#chat_msg').val("");
+						displayChat();
+					}
+				});
+			}	
+		});
+		
+		$(document).on('click', '#confirm_leave', function(){
+			id = <?php echo $id; ?>;
+			$('#leave_room').modal('hide');
+			$('body').removeClass('modal-open');
+			$('.modal-backdrop').remove();
+				$.ajax({
+					type: "POST",
+					url: "leaveroom.php",
+					data: {
+						id: id,
+						leave: 1,
+					},
+					success: function(){
+						window.location.href='index.php';
+					}
+				});
+				
+		});
+		
+		$(document).on('click', '#confirm_delete', function(){
+			id = <?php echo $id; ?>;
+			$('#confirm_delete').modal('hide');
+			$('body').removeClass('modal-open');
+			$('.modal-backdrop').remove();
+				$.ajax({
+					type: "POST",
+					url: "deleteroom.php",
+					data: {
+						id: id,
+						del: 1,
+					},
+					success: function(){
+						window.location.href='index.php';
+					}
+				});
+				
+		});
+		
+		$(document).keypress(function(e){
+			if (e.which == 13){
+			$("#send_msg").click();
+			}
+		});
+		
+		$("#user_details").hover(function(){
+			$('.showme').removeClass('hidden');
+		},function(){
+			$('.showme').addClass('hidden');
+		});
+		
+		//
+	$(document).on('click', '.delete2', function(){
+		var rid=$(this).val();
+		$('#delete_room2').modal('show');
+		$('.modal-footer #confirm_delete2').val(rid);
+	});
+	
+	$(document).on('click', '#confirm_delete2', function(){
+		var nrid=$(this).val();
+		$('#delete_room2').modal('hide');
+		$('body').removeClass('modal-open');
+		$('.modal-backdrop').remove();
+			$.ajax({
+				url:"deleteroom.php",
+				method:"POST",
+				data:{
+					id: nrid,
+					del: 1,
+				},
+				success:function(){
+					window.location.href='index.php';
+				}
+			});
+	});
+	
+	$(document).on('click', '.leave2', function(){
+		var rid=$(this).val();
+		$('#leave_room2').modal('show');
+		$('.modal-footer #confirm_leave2').val(rid);
+	});
+	
+	$(document).on('click', '#confirm_leave2', function(){
+		var nrid=$(this).val();
+		$('#leave_room2').modal('hide');
+		$('body').removeClass('modal-open');
+		$('.modal-backdrop').remove();
+			$.ajax({
+				url:"leaveroom.php",
+				method:"POST",
+				data:{
+					id: nrid,
+					leave: 1,
+				},
+				success:function(){
+					window.location.href='index.php';
+				}
+			});
+	});
+});
+	
+	function displayChat(){
+		id = <?php echo $id; ?>;
+		$.ajax({
+			url: 'fetch_chat.php',
+			type: 'POST',
+			async: false,
+			data:{
+				id: id,
+				fetch: 1,
+			},
+			success: function(response){
+				$('#chat_area').html(response);
+				$("#chat_area").scrollTop($("#chat_area")[0].scrollHeight);
+			}
+		});
+	}
+
+
+// Scripts 2
+
 $(document).ready(function() {
     $('#registrationForm').bootstrapValidator({
         // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
@@ -249,6 +423,10 @@ $(document).ready(function() {
     });
 
 });
+
+
+
+
 </script>
 
 

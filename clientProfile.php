@@ -18,7 +18,7 @@ if(isset($_POST["f_user"])){
 }
 
 
-$sql = "SELECT * FROM employer WHERE username='$username'";
+$sql = "SELECT * FROM client WHERE username='$username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
@@ -65,7 +65,7 @@ include('includes/client-navbar.php');
 			<p><span class="glyphicon glyphicon-user"></span> <?php echo $username; ?></p>
 			<ul class="list-group">
 				<a href="postJob.php" class="list-group-item list-group-item-info">Post a job offer</a>
-	          	<a href="editEmployer.php" class="list-group-item list-group-item-info">Edit Profile</a>
+	          	<a href="editclient.php" class="list-group-item list-group-item-info">Edit Profile</a>
 			  	<a href="message.php" class="list-group-item list-group-item-info">Messages</a>
 			  	<a href="logout.php" class="list-group-item list-group-item-info">Logout</a>
 	        </ul>
@@ -114,10 +114,10 @@ include('includes/client-navbar.php');
 <!--Column 2-->
 	<div class="col-lg-7">
 
-<!--Employer Profile Details-->	
+<!--client Profile Details-->	
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<div class="panel panel-primary">
-			  <div class="panel-heading"><h3>Employer Profile Details</h3></div>
+			  <div class="panel-heading"><h3>client Profile Details</h3></div>
 			</div>
 
 
@@ -156,7 +156,7 @@ include('includes/client-navbar.php');
                                 $timestamp=$row["timestamp"];
 
                                 echo '
-                                <form action="employerProfile.php" method="post">
+                                <form action="clientProfile.php" method="post">
                                 <input type="hidden" name="jid" value="'.$job_id.'">
                                     <tr>
                                     <td>'.$job_id.'</td>
@@ -196,7 +196,7 @@ include('includes/client-navbar.php');
                                 $timestamp=$row["timestamp"];
 
                                 echo '
-                                <form action="employerProfile.php" method="post">
+                                <form action="clientProfile.php" method="post">
                                 <input type="hidden" name="jid" value="'.$job_id.'">
                                     <tr>
                                     <td>'.$job_id.'</td>
@@ -235,7 +235,7 @@ include('includes/client-navbar.php');
                                 $timestamp=$row["timestamp"];
 
                                 echo '
-                                <form action="employerProfile.php" method="post">
+                                <form action="clientProfile.php" method="post">
                                 <input type="hidden" name="jid" value="'.$job_id.'">
                                     <tr>
                                     <td>'.$job_id.'</td>
@@ -255,13 +255,13 @@ include('includes/client-navbar.php');
               </h4></div>
 			</div>
 			<div class="panel panel-primary">
-			  <div class="panel-heading">Currently Hired Freelancers</div>
+			  <div class="panel-heading">Currently Hired artisans</div>
 			  <div class="panel-body"><h4>
                   <table style="width:100%">
                       <tr>
                           <td style="font-weight:bold; padding-bottom:10px;">Job Id</td>
                           <td style="font-weight:bold; padding-bottom:10px;">Title</td>
-                          <td style="font-weight:bold; padding-bottom:10px;">Freelancer</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">artisan</td>
                       </tr>
                       <?php 
                       	$sql = "SELECT * FROM job_offer,selected WHERE job_offer.job_id=selected.job_id AND selected.e_username='$username' AND selected.valid=1 ORDER BY job_offer.timestamp DESC";
@@ -275,13 +275,13 @@ include('includes/client-navbar.php');
                                 $timestamp=$row["timestamp"];
 
                                 echo '
-                                <form action="employerProfile.php" method="post">
+                                <form action="clientProfile.php" method="post">
                                 <input type="hidden" name="jid" value="'.$job_id.'">
                                     <tr>
                                     <td>'.$job_id.'</td>
                                     <td><input type="submit" class="btn btn-link btn-lg" value="'.$title.'"></td>
                                     </form>
-                                    <form action="employerProfile.php" method="post">
+                                    <form action="clientProfile.php" method="post">
                                     <input type="hidden" name="f_user" value="'.$f_username.'">
                                     <td><input type="submit" class="btn btn-link btn-lg" value="'.$f_username.'"></td>
                                     <td>'.$timestamp.'</td>
@@ -299,13 +299,13 @@ include('includes/client-navbar.php');
               </h4></div>
 			</div>
 			<div class="panel panel-primary">
-			  <div class="panel-heading">Previously Hired Freelancers</div>
+			  <div class="panel-heading">Previously Hired artisans</div>
 			  <div class="panel-body"><h4>
                   <table style="width:100%">
                       <tr>
                           <td style="font-weight:bold; padding-bottom:10px;">Job Id</td>
                           <td style="font-weight:bold; padding-bottom:10px;">Title</td>
-                          <td style="font-weight:bold; padding-bottom:10px;">Freelancer</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">artisan</td>
                       </tr>
                       <?php 
                       	$sql = "SELECT * FROM job_offer,selected WHERE job_offer.job_id=selected.job_id AND selected.e_username='$username' AND selected.valid=0 ORDER BY job_offer.timestamp DESC";
@@ -319,13 +319,13 @@ include('includes/client-navbar.php');
                                 $timestamp=$row["timestamp"];
 
                                 echo '
-                                <form action="employerProfile.php" method="post">
+                                <form action="clientProfile.php" method="post">
                                 <input type="hidden" name="jid" value="'.$job_id.'">
                                     <tr>
                                     <td>'.$job_id.'</td>
                                     <td><input type="submit" class="btn btn-link btn-lg" value="'.$title.'"></td>
                                     </form>
-                                    <form action="employerProfile.php" method="post">
+                                    <form action="clientProfile.php" method="post">
                                     <input type="hidden" name="f_user" value="'.$f_username.'">
                                     <td><input type="submit" class="btn btn-link btn-lg" value="'.$f_username.'"></td>
                                     <td>'.$timestamp.'</td>
@@ -343,7 +343,7 @@ include('includes/client-navbar.php');
               </h4></div>
 			</div>
 		</div>
-<!--End Employer Profile Details-->
+<!--End client Profile Details-->
 
 	</div>
 <!--End Column 2-->

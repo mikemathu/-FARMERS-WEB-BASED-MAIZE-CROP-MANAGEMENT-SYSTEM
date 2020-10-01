@@ -4,9 +4,18 @@
 	<title>Kilifi Artisan Marketplace</title>
 	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- <link rel="stylesheet"  href="bootstrap/css/bootstrap.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="awesome/css/fontawesome-all.min.css">
+
+	<link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.css" >
+	<link rel="stylesheet" type="text/css" href="css/dataTables.responsive.css"> -->
+
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" type="text/css" href="awesome/css/fontawesome-all.min.css">
+
 
 <style>
 	body{padding-top: 3%;margin: 0;}

@@ -9,7 +9,7 @@ if(isset($_SESSION["Username"])){
 	}
 	else{
 		$linkPro="clientProfile.php";
-		$linkEditPro="editEmployer.php";
+		$linkEditPro="editclient.php";
 		$linkBtn="editJob.php";
 		$textBtn="Edit the job offer";
 	}
@@ -24,24 +24,24 @@ if(isset($_POST["f_user"])){
 	header("location: viewArtisan.php");
 }
 
-$sql = "SELECT * FROM freelancer";
+$sql = "SELECT * FROM artisan";
 $result = $conn->query($sql);
 
 if(isset($_POST["s_username"])){
 	$t=$_POST["s_username"];
-	$sql = "SELECT * FROM freelancer WHERE username='$t'";
+	$sql = "SELECT * FROM artisan WHERE username='$t'";
 	$result = $conn->query($sql);
 }
 
 if(isset($_POST["s_name"])){
 	$t=$_POST["s_name"];
-	$sql = "SELECT * FROM freelancer WHERE Name='$t'";
+	$sql = "SELECT * FROM artisan WHERE Name='$t'";
 	$result = $conn->query($sql);
 }
 
 if(isset($_POST["s_email"])){
 	$t=$_POST["s_email"];
-	$sql = "SELECT * FROM freelancer WHERE email='$t'";
+	$sql = "SELECT * FROM artisan WHERE email='$t'";
 	$result = $conn->query($sql);
 }
 

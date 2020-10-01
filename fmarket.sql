@@ -74,6 +74,7 @@ CREATE TABLE `e_social` (
 --
 
 CREATE TABLE `freelancer` (
+	
   `username` varchar(200) NOT NULL,
   `password` varchar(200) NOT NULL,
   `Name` varchar(200) NOT NULL,

@@ -43,7 +43,7 @@ include('includes/loginReg-navbar.php');
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="usertype" value="employer" /> Client
+                                <input type="radio" name="usertype" value="client" /> Client
                             </label>
                         </div>
                     </div>
@@ -153,7 +153,7 @@ include('includes/loginReg-navbar.php');
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="usertype" value="employer" /> Client
+                                <input type="radio" name="usertype" value="client" /> Client
                             </label>
                         </div>
                     </div>

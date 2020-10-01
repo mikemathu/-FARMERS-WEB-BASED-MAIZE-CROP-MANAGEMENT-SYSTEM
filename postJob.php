@@ -28,7 +28,9 @@ if(isset($_POST["postJob"])){
 
 include('includes/header.php');
 
-include('includes/dashboard-navbar.php');
+// include('includes/dashboard-navbar.php');
+
+include('includes/artisan-navbar.php');
 
 
  ?>
