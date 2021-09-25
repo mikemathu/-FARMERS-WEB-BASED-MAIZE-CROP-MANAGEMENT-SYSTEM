@@ -41,17 +41,75 @@ p.text-address {
 </style>
 
 <?php
-
 require_once "functions.php";
+
 // Here the user id is harcoded.
 // You can integrate your authentication code here to get the logged in user id
-$clientId = 1;
+// clientId = 1;
 
 
-// $id = 3;
 
-// $query = "SELECT * FROM artisan ORDER BY id DESC";
-$query ='SELECT * FROM artisan WHERE artisanid=2';
+
+$clientName = $_SESSION["Username"];
+
+$checkClientID = mysqli_query
+// ($conn, "SELECT * FROM artisan WHERE username= '$clientName' ");
+($conn, "SELECT * FROM freelancer WHERE username= '$clientName' ");
+
+if(mysqli_num_rows($checkClientID) > 0){
+//    echo 'Hi mike';
+
+
+   $checkClientID = mysqli_query
+// ($conn, "SELECT * FROM artisan WHERE username= '$clientName' ");
+($conn, "SELECT * FROM freelencer WHERE username= '$clientName' ");
+
+if(mysqli_num_rows($checkClientID) > 0){
+    $row   = mysqli_fetch_row($checkClientID);
+
+     $clientId = $row[0];
+   }   
+
+
+
+
+   }
+   else{
+    // $clientName = $_SESSION["Username"];
+
+    // Get ClientID
+$checkClientID = mysqli_query
+// ($conn, "SELECT * FROM client WHERE username= '$clientName' ");
+($conn, "SELECT * FROM clients WHERE username= '$clientName' ");
+
+if(mysqli_num_rows($checkClientID) > 0){
+    $row   = mysqli_fetch_row($checkClientID);
+
+     $clientId = $row[0];
+   }   
+   }
+
+if(isset($_SESSION["offer_id"])){
+    $offer_id=$_SESSION["offer_id"];
+}
+else{
+    $offer_id="";
+    //header("location: index.php");
+}
+
+
+// $query=mysqli_query($conn, "select * from `selected` left join `artisan` on artisan.username=selected.f_username where offer_id='$offer_id'") or die(mysqli_error());
+$query=mysqli_query($conn, "select * from `selected` left join `freelancer` on freelancer.username=selected.f_username where offer_id='$offer_id'") or die(mysqli_error());
+
+while($row=mysqli_fetch_array($query)){
+
+        $artisanName =$row["f_username"];
+
+}
+// $query ="SELECT * FROM artisan WHERE username='$artisanName'";
+$query ="SELECT * FROM freelancer WHERE username='$username'";
+
+
 $result = mysqli_query($conn, $query);
 
 $outputString = '';
@@ -79,7 +137,8 @@ foreach ($result as $row) {
  </ul>
  
  <p class="review-note">Total Reviews: ' . $totalRating . '</p>
- <p class="text-address">' . $row["address"] . '</p>
+ <p class="review-note"> Name: ' . $row["Name"] . '</p>
+ <p class="review-note"> Address ' . $row["address"] . '</p>
 </div>
  ';
 }

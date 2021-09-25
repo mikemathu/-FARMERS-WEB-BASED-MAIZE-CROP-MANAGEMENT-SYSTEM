@@ -1,5 +1,5 @@
 <?php
- include('server.php');
+ include('includes/server.php');
 
 if(isset($_SESSION["Username"])){
 	$username=$_SESSION["Username"];
@@ -21,11 +21,11 @@ else{
 	//header("location: index.php");
 }
 
-if(isset($_SESSION["offer_id"])){
-    $offer_id=$_SESSION["offer_id"];
+if(isset($_SESSION["job_id"])){
+    $job_id=$_SESSION["job_id"];
 }
 else{
-    $offer_id="";
+    $job_id="";
     //header("location: index.php");
 }
 
@@ -43,7 +43,8 @@ if(isset($_POST["c_letter"])){
 	$artisanName = $_SESSION["Username"];
 	
 	$checkArtisanID = mysqli_query
-	($conn, "SELECT * FROM artisan WHERE username= '$artisanName' ");
+	// ($conn, "SELECT * FROM artisan WHERE username= '$artisanName' ");
+	($conn, "SELECT * FROM clients WHERE username= '$artisanName' ");
 	
 	if(mysqli_num_rows($checkArtisanID) > 0){
 		$row   = mysqli_fetch_row($checkArtisanID);
@@ -60,7 +61,7 @@ if(isset($_POST["f_hire"])){
 	// Get ClientID
 
 // $checkClientID = mysqli_query
-// ($conn, "SELECT * FROM apply WHERE bid= '$offer_id' ");
+// ($conn, "SELECT * FROM apply WHERE bid= '$job_id' ");
 
 // if(mysqli_num_rows($checkClientID) > 0){
 //     $row   = mysqli_fetch_row($checkClientID);
@@ -71,14 +72,15 @@ if(isset($_POST["f_hire"])){
 // 		echo $clientId;
 
 
-	$sql = "INSERT INTO selected (artisanid,f_username, offer_id, e_username, price, valid) VALUES ('$artisanid','$f_hire', '$offer_id', '$username','$f_price',1)";
+	$sql = "INSERT INTO selected (artisanid,f_username, job_id, e_username, price, valid) VALUES ('$artisanid','$f_hire', '$job_id', '$username','$f_price',1)";
     
     $result = $conn->query($sql);
     if($result==true){
-    	$sql = "DELETE FROM apply WHERE offer_id='$offer_id'";
+    	$sql = "DELETE FROM apply WHERE job_id='$job_id'";
 		$result = $conn->query($sql);
 		if($result==true){
-			$sql = "UPDATE farm_output SET valid=0 WHERE offer_id='$offer_id'";
+			// $sql = "UPDATE farm_output SET valid=0 WHERE job_id='$job_id'";
+			$sql = "UPDATE farm_output SET valid=0 WHERE job_id='$job_id'";
 			$result = $conn->query($sql);
 			if($result==true){
 				header("location: offerDetails.php");
@@ -90,7 +92,7 @@ if(isset($_POST["f_hire"])){
 
 if(isset($_POST["f_done"])){
 	$f_done=$_POST["f_done"];
-	$sql = "UPDATE selected SET valid=0 WHERE offer_id='$offer_id'";
+	$sql = "UPDATE selected SET valid=0 WHERE job_id='$job_id'";
 	$result = $conn->query($sql);
     if($result==true){
     	header("location: offerDetails.php");
@@ -98,19 +100,27 @@ if(isset($_POST["f_done"])){
 }
 
 
-$sql = "SELECT * FROM farm_output WHERE offer_id='$offer_id'";
+// $sql = "SELECT * FROM farm_output WHERE job_id='$job_id'";
+$sql = "SELECT * FROM farm_output WHERE job_id='$job_id'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
     	$e_username=$row["e_username"];
-        $title=$row["title"];
-        $description=$row["description"];
+        // $title=$row["title"];
+        // $description=$row["description"];
         $budget=$row["budget"];
-        $location=$row["location"];
+        // $location=$row["location"];
         $timestamp=$row["timestamp"];
         $jv=$row["valid"];
         // $deadline=$row["deadline"];
+
+		$title=$row["title"];
+		$maize_type=$row["maize_type"];
+		$description=$row["description"];
+		$number_of_bags=$row["number_of_bags"];
+		$selling_price=$row["selling_price"];
+		$location=$row["location"];
         }
 } else {
     echo "0 results";
@@ -118,11 +128,23 @@ if ($result->num_rows > 0) {
 
 $_SESSION["msgRcv"]=$e_username;
 
-include('../includes/header.php');
+include('includes/header.php');
 
 // include('includes/dashboard-navbar.php');
 
-include('../includes/client-navbar.php');
+// include('includes/client-navbar.php');
+
+
+if ($_SESSION["Usertype"]=1) {
+	
+	include('includes/artisan-navbar.php');
+	// include('includes/client-navbar.php');
+}
+else if($_SESSION["Usertype"]=2){
+	include('includes/client-navbar.php');
+	// include('includes/artisan-navbar.php');
+
+	}
  ?>
 
 
@@ -139,27 +161,31 @@ include('../includes/client-navbar.php');
 <!--client Profile Details-->	
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<div class="panel panel-success">
-			  <div class="panel-heading"><h3>Job Offer Details</h3></div>
+			  <div class="panel-heading"><h3>Offer Details</h3></div>
 			</div>
 			<div class="panel panel-success">
-			  <div class="panel-heading">Job Title</div>
+			  <div class="panel-heading">Title</div>
 			  <div class="panel-body"><h4><?php echo $title; ?></h4></div>
 			</div>
 			<div class="panel panel-success">
-			  <div class="panel-heading">Job Description</div>
+			  <div class="panel-heading">Type</div>
+			  <div class="panel-body"><h4><?php echo $maize_type; ?></h4></div>
+			</div>
+			<div class="panel panel-success">
+			  <div class="panel-heading">Description</div>
 			  <div class="panel-body"><h4><?php echo $description; ?></h4></div>
 			</div>
 			<div class="panel panel-success">
-			  <div class="panel-heading">Budget</div>
-			  <div class="panel-body"><h4><?php echo $budget; ?></h4></div>
+			  <div class="panel-heading">Number of Bags</div>
+			  <div class="panel-body"><h4><?php echo $number_of_bags; ?></h4></div>
+			</div>
+			<div class="panel panel-success">
+			  <div class="panel-heading">Price per Bag</div>
+			  <div class="panel-body"><h4><?php echo $selling_price; ?></h4></div>
 			</div>
 			<div class="panel panel-success">
 			  <div class="panel-heading">Location</div>
 			  <div class="panel-body"><h4><?php echo $location; ?></h4></div>
-			</div>
-			<div class="panel panel-success">
-			  <div class="panel-heading">Deadline</div>
-			  <div class="panel-body"><h4><?php // echo $deadline; ?></h4></div>
 			</div>
 
 			<a href="<?php echo $linkBtn; ?>" id="applybtn" type="button" class="btn btn-warning btn-lg"><?php echo $textBtn; ?></a>
@@ -192,14 +218,15 @@ include('../includes/client-navbar.php');
 // echo $artisanemail;
 // echo $artisanid;
 
- $sql = "SELECT * FROM apply WHERE offer_id='$offer_id' ORDER BY bid";
+ $sql = "SELECT * FROM apply WHERE job_id='$job_id' ORDER BY bid";
 					$result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         // output data of each row
                         while($row = $result->fetch_assoc()) {
-						$artisanid=$row["artisanid"];
+						// $artisanid=$row["artisanid"];
 
-$query=mysqli_query($conn, "select * from `apply` left join `artisan` on artisan.artisanid=apply.artisanid where offer_id='$offer_id' ORDER BY bid") or die(mysqli_error());
+// $query=mysqli_query($conn, "select * from `apply` left join `artisan` on artisan.artisanid=apply.artisanid where job_id='$job_id' ORDER BY bid") or die(mysqli_error());
+$query=mysqli_query($conn, "select * from `apply` left join `farmer` on farmer.username=apply.f_username where job_id='$job_id' ORDER BY bid") or die(mysqli_error());
 						}
 					}
 				
@@ -207,7 +234,7 @@ if ($result->num_rows > 0) {
 	// if ($result->num_rows > 0 && $_SESSION["Usertype"] == 2 ) {
 	
 						 while($row=mysqli_fetch_array($query)){
-							$artisanid=$row["artisanid"];
+							// $artisanid=$row["artisanid"];
 						
                         $f_username=$row["username"];
                         $bid=$row["bid"];
@@ -239,7 +266,7 @@ if ($result->num_rows > 0) {
 
                         }
                     } else {
-                      $sql = "SELECT * FROM selected WHERE offer_id='$offer_id'";
+                      $sql = "SELECT * FROM selected WHERE job_id='$job_id'";
 					  $result = $conn->query($sql);
                       if ($result->num_rows > 0) {
                             // output data of each row
@@ -287,7 +314,8 @@ if ($result->num_rows > 0) {
 						}		  
 
 						 $checkartisanName = mysqli_query
-($conn, "SELECT * FROM client WHERE username= '$username' ");
+// ($conn, "SELECT * FROM client WHERE username= '$username' ");
+($conn, "SELECT * FROM clients WHERE username= '$username' ");
 
 if(mysqli_num_rows($checkartisanName) > 0){
     $row   = mysqli_fetch_row($checkartisanName);
@@ -296,11 +324,12 @@ if(mysqli_num_rows($checkartisanName) > 0){
    }
 
 
-$query=mysqli_query($conn, "select * from `artisan` left join `selected` on selected.f_username=artisan.username") or die(mysqli_error());
+// $query=mysqli_query($conn, "select * from `artisan` left join `selected` on selected.f_username=artisan.username") or die(mysqli_error());
+$query=mysqli_query($conn, "select * from `freelancer` left join `selected` on selected.f_username=freelancer.username") or die(mysqli_error());
 
 
 						 while($row=mysqli_fetch_array($query)){
-						 $artisanid = $row['artisanid'];
+						//  $artisanid = $row['artisanid'];
 						 $artisanemail = $row['email'];
 						 }
 ?>
@@ -338,7 +367,8 @@ $query=mysqli_query($conn, "select * from `artisan` left join `selected` on sele
 <!--End Column 1-->
 
 <?php 
-$sql = "SELECT * FROM client WHERE username='$e_username'";
+// $sql = "SELECT * FROM client WHERE username='$e_username'";
+$sql = "SELECT * FROM clients WHERE username='$e_username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
@@ -347,7 +377,7 @@ if ($result->num_rows > 0) {
         $email=$row["email"];
         $contact_no=$row["contact_no"];
 		$address=$row["address"];
-		$photo=$row["photo"];
+		// $photo=$row["photo"];
         }
 } else {
     // echo "0 results";
@@ -415,12 +445,12 @@ if ($_SESSION["Usertype"] == 1) {
 
 
 <?php
- include('../includes/footer.php');
+ include('includes/footer.php');
 
- include('../includes/review_modal.php');
+ include('includes/review_modal.php');
 
 
-include('../includes/job_modal.php'); 
+include('includes/job_modal.php'); 
 ?>
 
 

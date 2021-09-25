@@ -48,7 +48,18 @@ if ($result->num_rows > 0) {
 
 include('includes/header.php');
 
-include('includes/client-navbar.php');
+// include('includes/client-navbar.php');
+
+if ($_SESSION["Usertype"]=1) {
+	
+	// include('includes/artisan-navbar.php');
+	include('includes/client-navbar.php');
+}
+else if($_SESSION["Usertype"]=2){
+	// include('includes/client-navbar.php');
+	include('includes/artisan-navbar.php');
+
+	}
 
 
  ?>

@@ -2,7 +2,8 @@
 
 
 $checkartisanID = mysqli_query
-($conn, "SELECT * FROM artisan WHERE username= '$username' ");
+// ($conn, "SELECT * FROM artisan WHERE username= '$username' ");
+($conn, "SELECT * FROM freelancer WHERE username= '$username' ");
 
 if(mysqli_num_rows($checkartisanID) > 0){
     $row   = mysqli_fetch_row($checkartisanID);
@@ -11,7 +12,8 @@ if(mysqli_num_rows($checkartisanID) > 0){
    }
 
 
-$query=mysqli_query($conn, "select * from `chat` left join `artisan` on artisan.artisanid=chat.artisanid order by chat_date asc") or die(mysqli_error());
+// $query=mysqli_query($conn, "select * from `chat` left join `artisan` on artisan.artisanid=chat.artisanid order by chat_date asc") or die(mysqli_error());
+$query=mysqli_query($conn, "select * from `chat` left join `freelancer` on freelancer.username=chat.username order by chat_date asc") or die(mysqli_error());
 
 
 while($row=mysqli_fetch_array($query)){

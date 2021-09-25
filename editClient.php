@@ -7,7 +7,8 @@ else{
 	//header("location: index.php");
 }
 
-$sql = "SELECT * FROM client WHERE username='$username'";
+// $sql = "SELECT * FROM client WHERE username='$username'";
+$sql = "SELECT * FROM freelancer WHERE username='$username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
@@ -19,8 +20,8 @@ if ($result->num_rows > 0) {
         $birthdate=$row["birthdate"];
         $address=$row["address"];
         $profile_sum=$row["profile_sum"];
-        $company=$row["company"];
-        $photo=$row["photo"];
+        // $company=$row["company"];
+        // $photo=$row["photo"];
         }
 } 
 // else {
@@ -45,13 +46,14 @@ if(isset($_POST["editclient"])){
     
     $result = $conn->query($sql);
     if($result==true){
-        header("location: clientProfile.php");
+        header("location: farmerProfile.php");
     }
 }
 
 include('includes/header.php');
 
-include('includes/client-navbar.php');
+// include('includes/client-navbar.php');
+include('includes/artisan-navbar.php');
 
  ?>
 

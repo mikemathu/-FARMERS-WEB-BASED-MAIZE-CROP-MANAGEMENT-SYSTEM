@@ -38,12 +38,12 @@ include('includes/loginReg-navbar.php');
                     <div class="col-sm-5">
                         <div class="radio">
                             <label>
-                                <input type="radio" name="usertype" value="artisan" /> Artisan
+                                <input type="radio" name="usertype" value="farmer" /> Farmer
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="usertype" value="client" /> Client
+                                <input type="radio" name="usertype" value="client" /> Client/ Buyer
                             </label>
                         </div>
                     </div>
@@ -66,12 +66,12 @@ include('includes/loginReg-navbar.php');
                 <div style="color:red;">
                     <p><?php echo $errorMsg2; ?></p>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="col-sm-4 control-label">Name</label>
                     <div class="col-sm-5">
                         <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" />
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Username</label>
@@ -80,12 +80,12 @@ include('includes/loginReg-navbar.php');
                     </div>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="col-sm-4 control-label">Email address</label>
                     <div class="col-sm-5">
                         <input type="text" class="form-control" name="email" value="<?php echo $email; ?>" />
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Password</label>
@@ -105,6 +105,54 @@ include('includes/loginReg-navbar.php');
                     <label class="col-sm-4 control-label">Contact no.</label>
                     <div class="col-sm-5">
                         <input type="text" class="form-control" name="contactNo" value="<?php echo $contactNo; ?>" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">ID Card no.</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="IdCardNo" value="<?php echo $IdCardNo; ?>" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Farm Location</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="farm_location" value="<?php echo $farm_location; ?>" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Farm Size in hectare(ha)</label>
+                    <div class="col-sm-5">
+
+                        <select  name="farm_size" class="form-control" id="doctor" required="required">
+                            <option value="<?php echo $farm_size; ?>" disabled selected>Select Farm Size in hectare(ha)</option>                
+                            <option value="<0.5">Less than 1/2 ha</option>
+                            <option value="0.5">1/2 ha</option>
+                            <option value="1">1 ha</option>
+                            <option value="2">2 ha</option>
+                            <option value="3">3 ha</option>
+                            <option value="4">4 ha</option>
+                            <option value="5">5 ha</option>
+                            <option value=">5">More than 5 ha</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Farm Soil Type</label>
+                    <div class="col-sm-5">
+
+                        <select name="soil_type" class="form-control" id="doctor" required="required">
+                            <option value="<?php echo $soil_type; ?>" disabled selected>Select Soil Type in your Farm</option>                
+                            <option value="Not Yet Tested">Not Yet Tested</option>
+                            <option value="Sand">Sand</option>
+                            <option value="clay">clay</option>
+                            <option value="loam">loam</option>
+                            <option value="sandy-clay">sandy-clay</option>
+                            <option value="sandy-loam">sandy-loam</option>
+                            <option value="silty-clay">silty-clay</option>
+                            <option value="other">Other</option>
+                        </select>
+
                     </div>
                 </div>
 
@@ -129,31 +177,31 @@ include('includes/loginReg-navbar.php');
                     </div>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="col-sm-4 control-label">Date of birth</label>
                     <div class="col-sm-5">
                         <input type="text" class="form-control" name="birthdate" value="<?php echo $birthdate; ?>" placeholder="YYYY-MM-DD" />
                     </div>
-                </div>
+                </div> -->
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="col-sm-4 control-label">Address</label>
                     <div class="col-sm-5">
                         <input type="text" class="form-control" name="address" value="<?php echo $address; ?>" />
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Usertype</label>
                     <div class="col-sm-5">
                         <div class="radio">
                             <label>
-                                <input type="radio" name="usertype" value="artisan" /> Artisan
+                                <input type="radio" name="usertype" value="farmer" /> Farmer
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="usertype" value="client" /> Client
+                                <input type="radio" name="usertype" value="client" /> Client/ Buyer
                             </label>
                         </div>
                     </div>

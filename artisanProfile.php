@@ -1,4 +1,5 @@
-<?php include('includes/server.php');
+<?php 
+include('includes/server.php');
 if(isset($_SESSION["Username"])){
 	$username=$_SESSION["Username"];
 }
@@ -8,8 +9,8 @@ else{
 }
 
 if(isset($_POST["jid"])){
-	$_SESSION["job_id"]=$_POST["jid"];
-	header("location: jobDetails.php");
+	$_SESSION["offer_id"]=$_POST["jid"];
+	header("location: offerDetails.php");
 }
 
 if(isset($_POST["e_user"])){
@@ -18,7 +19,8 @@ if(isset($_POST["e_user"])){
 }
 
 
-$sql = "SELECT * FROM artisan WHERE username='$username'";
+// $sql = "SELECT * FROM artisan WHERE username='$username'";
+$sql = "SELECT * FROM clients WHERE username='$username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
@@ -29,14 +31,14 @@ if ($result->num_rows > 0) {
 		$gender=$row["gender"];
 		$birthdate=$row["birthdate"];
 		$address=$row["address"];
-		$prof_title=$row["prof_title"];
-		$location=$row["location"];
+		// $prof_title=$row["prof_title"];
+		// $location=$row["location"];
 		$profile_sum=$row["profile_sum"];
-		$experience=$row["experience"];
-		$photo=$row["photo"];
+		// $experience=$row["experience"];
+		// $photo=$row["photo"];
 	    }
 } else {
-    echo "0 results";
+    // echo "0 results";
 }
 
 include('includes/header.php');
@@ -102,7 +104,7 @@ include('includes/artisan-navbar.php');
 			  <div class="panel-heading">Rating</div>
 			  <div class="panel-body">
 			  <?php
-			  include('includes/rating.php');
+			  include('includes/artisan_rating.php');
 			  ?>
 			  
 			  </div>
@@ -117,10 +119,10 @@ include('includes/artisan-navbar.php');
 <!--Column 2-->
 	<div class="col-lg-6">
 
-<!--Artisan Profile Details-->	
+<!--Client Profile Details-->	
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<div class="panel panel-primary">
-			  <div class="panel-heading"><h3>Artisan Profile Details</h3></div>
+			  <div class="panel-heading"><h3>Client Profile Details</h3></div>
 			</div>
 
 			<?php if(!empty($prof_title)){ ?>
@@ -173,24 +175,24 @@ include('includes/artisan-navbar.php');
                           <td style="font-weight:bold; padding-bottom:10px;">client</td>
                       </tr>
                       <?php 
-                      	$sql = "SELECT * FROM job_offer,selected WHERE job_offer.job_id=selected.job_id AND selected.f_username='$username' AND selected.valid=1 ORDER BY job_offer.timestamp DESC";
+                      	$sql = "SELECT * FROM farm_output,selected WHERE farm_output.offer_id=selected.offer_id AND selected.f_username='$username' AND selected.valid=1 ORDER BY farm_output.timestamp DESC";
 						$result = $conn->query($sql);
                       if ($result->num_rows > 0) {
                             // output data of each row
                             while($row = $result->fetch_assoc()) {
-                                $job_id=$row["job_id"];
+                                $offer_id=$row["offer_id"];
                                 $title=$row["title"];
                                 $e_username=$row["e_username"];
                                 $timestamp=$row["timestamp"];
 
                                 echo '
-                                <form action="clientProfile.php" method="post">
-                                <input type="hidden" name="jid" value="'.$job_id.'">
+                                <form action="farmerProfile.php" method="post">
+                                <input type="hidden" name="jid" value="'.$offer_id.'">
                                     <tr>
-                                    <td>'.$job_id.'</td>
+                                    <td>'.$offer_id.'</td>
                                     <td><input type="submit" class="btn btn-link btn-lg" value="'.$title.'"></td>
                                     </form>
-                                    <form action="clientProfile.php" method="post">
+                                    <form action="farmerProfile.php" method="post">
                                     <input type="hidden" name="e_user" value="'.$e_username.'">
                                     <td><input type="submit" class="btn btn-link btn-lg" value="'.$e_username.'"></td>
                                     <td>'.$timestamp.'</td>
@@ -208,7 +210,7 @@ include('includes/artisan-navbar.php');
               </h4></div>
 			</div>
 			<div class="panel panel-primary">
-			  <div class="panel-heading">Previous Works</div>
+			  <div class="panel-heading">Previous Deals</div>
 			  <div class="panel-body"><h4>
                   <table style="width:100%">
                       <tr>
@@ -217,24 +219,24 @@ include('includes/artisan-navbar.php');
                           <td style="font-weight:bold; padding-bottom:10px;">client</td>
                       </tr>
                       <?php 
-                      	$sql = "SELECT * FROM job_offer,selected WHERE job_offer.job_id=selected.job_id AND selected.f_username='$username' AND selected.valid=0 ORDER BY job_offer.timestamp DESC";
+                      	$sql = "SELECT * FROM farm_output,selected WHERE farm_output.offer_id=selected.offer_id AND selected.f_username='$username' AND selected.valid=0 ORDER BY farm_output.timestamp DESC";
 						$result = $conn->query($sql);
                       if ($result->num_rows > 0) {
                             // output data of each row
                             while($row = $result->fetch_assoc()) {
-                                $job_id=$row["job_id"];
+                                $offer_id=$row["offer_id"];
                                 $title=$row["title"];
                                 $e_username=$row["e_username"];
                                 $timestamp=$row["timestamp"];
 
                                 echo '
-                                <form action="artisanProfile.php" method="post">
-                                <input type="hidden" name="jid" value="'.$job_id.'">
+                                <form action="farmerProfile.php" method="post">
+                                <input type="hidden" name="jid" value="'.$offer_id.'">
                                     <tr>
-                                    <td>'.$job_id.'</td>
+                                    <td>'.$offer_id.'</td>
                                     <td><input type="submit" class="btn btn-link btn-lg" value="'.$title.'"></td>
                                     </form>
-                                    <form action="artisanProfile.php" method="post">
+                                    <form action="farmerProfile.php" method="post">
                                     <input type="hidden" name="e_user" value="'.$e_username.'">
                                     <td><input type="submit" class="btn btn-link btn-lg" value="'.$e_username.'"></td>
                                     <td>'.$timestamp.'</td>
@@ -264,7 +266,7 @@ include('includes/artisan-navbar.php');
 			<div>			
 			</div>
 		</div>
-<!--End Artisan Profile Details-->
+<!--End Client Profile Details-->
 
 	</div>
 <!--End Column 2-->

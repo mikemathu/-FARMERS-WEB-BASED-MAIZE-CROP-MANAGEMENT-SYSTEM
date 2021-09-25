@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Kilifi Artisan Marketplace</title>
+	<title>MCMS</title>
 	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- <link rel="stylesheet"  href="bootstrap/css/bootstrap.min.css"> -->
@@ -22,6 +22,11 @@
 	.header1{background-color: #EEEEEE;padding-left: 1%;}
 	.header2{padding:20px 40px 20px 40px;color:#fff;}
 	.card{box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background:#fff}
+
+
+	
+
+
 </style>
 
 </head>

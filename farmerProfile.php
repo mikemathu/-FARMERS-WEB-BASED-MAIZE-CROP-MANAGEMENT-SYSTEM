@@ -24,12 +24,12 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        $name=$row["Name"];
-        $email=$row["email"];
+        // $name=$row["Name"];
+        // $email=$row["email"];
         $contactNo=$row["contact_no"];
         $gender=$row["gender"];
         $birthdate=$row["birthdate"];
-        $address=$row["address"];
+        // $address=$row["address"];
         $profile_sum=$row["profile_sum"];
 		$company=$row["company"];
 		// $photo=$row["photo"];
@@ -62,11 +62,11 @@ include('includes/client-navbar.php');
 			<p></p>
 			<img src="<?php echo (!empty($photo)) ? 'image/'.$photo : 'image/profile.jpg'; ?>" width="100%">
 			
-			<h2><?php echo $name; ?></h2>
+			<h2><?php //echo $name; ?></h2>
 			<p><span class="glyphicon glyphicon-user"></span> <?php echo $username; ?></p>
 			<ul class="list-group">
-				<a href="postFarmOutput.php" class="list-group-item list-group-item-info">Post a job offer</a>
-	          	<a href="editclient.php" class="list-group-item list-group-item-info">Edit Profile</a>
+				<a href="postFarmOutput.php" class="list-group-item list-group-item-info">Sell Your Maize Here</a>
+	          	<a href="editFarmer.php" class="list-group-item list-group-item-info">Edit Profile</a>
 			  	<a href="message.php" class="list-group-item list-group-item-info">Messages</a>
 			  	<a href="logout.php" class="list-group-item list-group-item-info">Logout</a>
 	        </ul>
@@ -80,7 +80,7 @@ include('includes/client-navbar.php');
 			</div>
 			<div class="panel panel-success">
 			  <div class="panel-heading">Email</div>
-			  <div class="panel-body"><?php echo $email; ?></div>
+			  <div class="panel-body"><?php //echo $email; ?></div>
 			</div>
 			<div class="panel panel-success">
 			  <div class="panel-heading">Mobile</div>
@@ -88,7 +88,7 @@ include('includes/client-navbar.php');
 			</div>
 			<div class="panel panel-success">
 			  <div class="panel-heading">Address</div>
-			  <div class="panel-body"><?php echo $address; ?></div>
+			  <div class="panel-body"><?php //echo $address; ?></div>
 			</div>
 		</div>
 <!--End Contact Information-->
@@ -164,7 +164,7 @@ include('includes/client-navbar.php');
 			</div>
 
 			<div class="panel panel-primary">
-			  <div class="panel-heading">Ongoing crop Offerings</div>
+			  <div class="panel-heading">Ongoing deals Offerings</div>
 			  <div class="panel-body"><h4>
                   <table style="width:100%">
                       <tr>
@@ -207,13 +207,13 @@ include('includes/client-navbar.php');
 
 			
 			<div class="panel panel-primary">
-			  <div class="panel-heading">Currently Hired artisans(Clients)</div>
+			  <div class="panel-heading">Currently Hired Clients</div>
 			  <div class="panel-body"><h4>
                   <table style="width:100%">
                       <tr>
                           <td style="font-weight:bold; padding-bottom:10px;">Crop Id</td>
                           <td style="font-weight:bold; padding-bottom:10px;">Title</td>
-                          <td style="font-weight:bold; padding-bottom:10px;">artisan</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">Client</td>
                       </tr>
                       <?php 
                       	$sql = "SELECT * FROM farm_output,selected WHERE farm_output.offer_id=selected.offer_id AND selected.e_username='$username' AND selected.valid=1 ORDER BY farm_output.timestamp DESC";

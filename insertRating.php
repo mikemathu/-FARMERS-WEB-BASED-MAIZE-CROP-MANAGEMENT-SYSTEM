@@ -1,9 +1,23 @@
 <?php
 // require_once ('db.php');
 include('includes/server.php');
+
+
 // Here the user id is harcoded.
 // You can integrate your authentication code here to get the logged in user id
-$clientId = 1;
+// $clientId = 1;
+
+// Get ClientID
+$clientName = $_SESSION["Username"];
+
+$checkClientID = mysqli_query
+($conn, "SELECT * FROM client WHERE username= '$clientName' ");
+
+if(mysqli_num_rows($checkClientID) > 0){
+    $row   = mysqli_fetch_row($checkClientID);
+
+     $clientId = $row[0];
+   }
 
 if (isset($_POST["index"], $_POST["artisan_id"])) {
     

@@ -3,59 +3,58 @@ if(isset($_SESSION["Username"])){
 	$username=$_SESSION["Username"];
 }
 else{
-	$username="";
+    $username="";
 	//header("location: index.php");
 }
 
-// $sql = "SELECT * FROM artisan WHERE username='$username'";
-$sql = "SELECT * FROM clients WHERE username='$username'";
+// $sql = "SELECT * FROM client WHERE username='$username'";
+// $sql = "SELECT * FROM freelancer WHERE username='$username'";
+$sql = "SELECT * FROM farmer WHERE username='$username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-		$name=$row["Name"];
-		$email=$row["email"];
-		$contactNo=$row["contact_no"];
-		$gender=$row["gender"];
-		$birthdate=$row["birthdate"];
-		$address=$row["address"];
-		// $prof_title=$row["prof_title"];
-		// $location=$row["location"];
-		$profile_sum=$row["profile_sum"];
-        // $experience=$row["experience"];
-        // $photo=$row["photo"];
-	    }
-} else {
-    echo "0 results";
-}
+        $name=$row["Name"];
+        $email=$row["email"];
+        $contactNo=$row["contact_no"];
+        $gender=$row["gender"];
+        $birthdate=$row["birthdate"];
+        $address=$row["address"];
+        // $profile_sum=$row["profile_sum"];
+        // $company=$row["company"];
+        $photo=$row["photo"];
+        }
+} 
+// else {
+//     echo "0 results";
+// }
 
 
-if(isset($_POST["editArtisan"])){
-	$name=test_input($_POST["name"]);
-	$email=test_input($_POST["email"]);
-	$contactNo=test_input($_POST["contactNo"]);
-	$gender=test_input($_POST["gender"]);
-	$birthdate=test_input($_POST["birthdate"]);
-	$address=test_input($_POST["address"]);
-	$prof_title=test_input($_POST["prof_title"]);
-	$profile_sum=test_input($_POST["profile_sum"]);
-    $experience=test_input($_POST["experience"]);
+if(isset($_POST["editclient"])){
+    $name=test_input($_POST["name"]);
+    $email=test_input($_POST["email"]);
+    $contactNo=test_input($_POST["contactNo"]);
+    $gender=test_input($_POST["gender"]);
+    $birthdate=test_input($_POST["birthdate"]);
+    $address=test_input($_POST["address"]);
+    // $profile_sum=test_input($_POST["profile_sum"]);
+    // $company=test_input($_POST["company"]);
     $photo=test_input($_POST["photo"]);
 
 
-	$sql = "UPDATE artisan SET Name='$name',email='$email',contact_no='$contactNo', address='$address', gender='$gender',prof_title='$prof_title',profile_sum='$profile_sum',experience='$experience', birthdate='$birthdate', photo='$photo' WHERE username='$username'";
+    // $sql = "UPDATE client SET Name='$name',email='$email',contact_no='$contactNo', address='$address', gender='$gender', profile_sum='$profile_sum', birthdate='$birthdate', company='$company', photo='$photo' WHERE username='$username'";
+    $sql = "UPDATE farmer SET Name='$name',email='$email',contact_no='$contactNo', address='$address', gender='$gender', birthdate='$birthdate', photo='$photo' WHERE username='$username'";
 
-	
-	$result = $conn->query($sql);
-	if($result==true){
-		header("location: farmerProfile.php");
-	}
+    
+    $result = $conn->query($sql);
+    if($result==true){
+        header("location: farmerProfile.php");
+    }
 }
 
 include('includes/header.php');
 
-include('includes/artisan-navbar.php');
-
+include('includes/client-navbar.php');
 
  ?>
 
@@ -77,7 +76,6 @@ include('includes/artisan-navbar.php');
                         <input type="file" name="photo" class="form-control-file" id="exampleFormControlFile1">
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Name</label>
                     <div class="col-sm-5">
@@ -104,21 +102,21 @@ include('includes/artisan-navbar.php');
                     <div class="col-sm-5">
                         <div class="radio">
                             <label>
-                                <input type="radio" name="gender"
+                                <input type="radio" name="gender" 
                                 <?php if (isset($gender) && $gender=="male") echo "checked";?>
                                  value="male" /> Male
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="gender"
+                                <input type="radio" name="gender" 
                                 <?php if (isset($gender) && $gender=="female") echo "checked";?>
                                  value="female" /> Female
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="gender"
+                                <input type="radio" name="gender" 
                                 <?php if (isset($gender) && $gender=="other") echo "checked";?>
                                  value="other" /> Other
                             </label>
@@ -141,9 +139,9 @@ include('includes/artisan-navbar.php');
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Professional Title</label>
+                    <label class="col-sm-4 control-label">Company Name</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" name="prof_title" value="<?php echo $prof_title; ?>" />
+                        <input type="text" class="form-control" name="company" value="<?php echo $company; ?>" />
                     </div>
                 </div>
 
@@ -155,16 +153,9 @@ include('includes/artisan-navbar.php');
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Experience</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="experience" value="<?php echo $experience; ?>" />
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3">
                         <!-- Do NOT use name="submit" or id="submit" for the Submit button -->
-                        <button type="submit" name="editArtisan" class="btn btn-info btn-lg">Save changes</button>
+                        <button type="submit" name="editclient" class="btn btn-info btn-lg">Save changes</button>
                     </div>
                 </div>
             </form>
@@ -173,5 +164,7 @@ include('includes/artisan-navbar.php');
     </div>
 
 
-<?php include('includes/footer.php');?>
+<?php include('includes/footer.php')?>
+
+
 

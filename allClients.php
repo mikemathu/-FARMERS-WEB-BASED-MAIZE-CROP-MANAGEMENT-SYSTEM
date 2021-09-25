@@ -2,13 +2,16 @@
 if(isset($_SESSION["Username"])){
 	$username=$_SESSION["Username"];
 	if ($_SESSION["Usertype"]==1) {
-		$linkPro="farmerProfile.php";
-		$linkEditPro="editArtisan.php";
+		// $linkPro="farmerProfile.php";
+		$linkPro="clientProfile.php";
+		// $linkEditPro="editArtisan.php";
+		$linkEditPro="editClient.php";
 		$linkBtn="bidOffer.php";
 		$textBtn="Bid this Offer";
 	}
 	else{
-		$linkPro="farmerProfile.php";
+		// $linkPro="farmerProfile.php";
+		$linkPro="clientProfile.php";
 		$linkEditPro="editclient.php";
 		$linkBtn="editFarmOutputOffer.php";
 		$textBtn="Edit the Offer";
@@ -57,9 +60,11 @@ include('includes/header.php');
 	if ($_SESSION["Usertype"]=1) {
 	
 	include('includes/artisan-navbar.php');
-	}
-	else if($_SESSION["Usertype"]=2){
-		include('includes/client-navbar.php');
+	// include('includes/client-navbar.php');
+}
+else if($_SESSION["Usertype"]=2){
+	include('includes/client-navbar.php');
+	// include('includes/artisan-navbar.php');
 
 	}
 

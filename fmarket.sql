@@ -10,7 +10,7 @@
 
 CREATE TABLE `apply` (
   `f_username` varchar(200) NOT NULL,
-  `job_id` varchar(30) NOT NULL,
+  `offer_id` varchar(30) NOT NULL,
   `bid` int(11) NOT NULL,
   `cover_letter` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -19,7 +19,7 @@ CREATE TABLE `apply` (
 -- Dumping data for table `apply`
 --
 
-INSERT INTO `apply` (`f_username`, `job_id`, `bid`, `cover_letter`) VALUES
+INSERT INTO `apply` (`f_username`, `offer_id`, `bid`, `cover_letter`) VALUES
 ('freelancer1', '10', 20, 'This is a cover letter\r\nThis is a cover letter\r\nThis is a cover letter\r\nThis is a cover letter\r\nThis is a cover letter\r\nThis is a cover letter\r\nThis is a cover letter\r\nThis is a cover letter'),
 ('freelancer2', '10', 80, 'This is a cover letter\r\nThis is a cover letter\r\nThis is a cover letter\r\nThis is a cover letter\r\nThis is a cover letter\r\nThis is a cover letter\r\nThis is a cover letter\r\nThis is a cover letter'),
 ('freelancer3', '10', 100, 'This is a cover letter\r\nThis is a cover letter\r\nThis is a cover letter\r\nThis is a cover letter\r\nThis is a cover letter\r\nThis is a cover letter\r\nThis is a cover letter\r\nThis is a cover letter');
@@ -27,10 +27,10 @@ INSERT INTO `apply` (`f_username`, `job_id`, `bid`, `cover_letter`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `employer`
+-- Table structure for table `clients`
 --
 
-CREATE TABLE `employer` (
+CREATE TABLE `clients` (
   `username` varchar(200) NOT NULL,
   `password` varchar(200) NOT NULL,
   `Name` varchar(200) NOT NULL,
@@ -44,16 +44,16 @@ CREATE TABLE `employer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `employer`
+-- Dumping data for table `clients`
 --
 
-INSERT INTO `employer` (`username`, `password`, `Name`, `email`, `contact_no`, `address`, `gender`, `birthdate`, `company`, `profile_sum`) VALUES
+INSERT INTO `clients` (`username`, `password`, `Name`, `email`, `contact_no`, `address`, `gender`, `birthdate`, `company`, `profile_sum`) VALUES
 ('aaa', 'aaa', 'aaa', 'aaa', 'aaa', 'aaa', 'aaa', '2018-06-07', 'aaa', 'aaa'),
 ('aaa1', 'aaa', 'aaa', 'aaa', 'aaa', 'aaa', 'aaa', '2018-06-07', 'aaa', 'aaa'),
 ('dddddd', '1dddddd', 'Ddd Dd', 'd@d', '123456', 'dfd', 'female', '2222-11-11', 'qqq', 'qqq'),
-('employer1', '111111', 'Employer One', 'e@e1', '123456', 'Raojan, Chittagong', 'male', '1999-11-11', 'Company1', 'This is a profile summery'),
-('employer2', '111111', 'Employer Two', 'e@e2', '123456', 'Raojan, Chittagong', 'male', '1999-11-11', 'Company1', 'This is a profile summery'),
-('employer3', '111111', 'Employer Three', 'e@e3', '123456', 'Raojan, Chittagong', 'male', '1999-11-11', 'Company1', 'This is a profile summery'),
+('clients1', '111111', 'clients One', 'e@e1', '123456', 'Raojan, Chittagong', 'male', '1999-11-11', 'Company1', 'This is a profile summery'),
+('clients2', '111111', 'clients Two', 'e@e2', '123456', 'Raojan, Chittagong', 'male', '1999-11-11', 'Company1', 'This is a profile summery'),
+('clients3', '111111', 'clients Three', 'e@e3', '123456', 'Raojan, Chittagong', 'male', '1999-11-11', 'Company1', 'This is a profile summery'),
 ('rrrupom', 'rrrupom', 'Rupom', 'rupom', 'rupom', 'rupom', '', '2018-06-04', 'rupom', 'rupom');
 
 -- --------------------------------------------------------
@@ -129,11 +129,11 @@ CREATE TABLE `f_social` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `job_offer`
+-- Table structure for table `farm_output`
 --
 
-CREATE TABLE `job_offer` (
-  `job_id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE `farm_output` (
+  `offer_id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(200) NOT NULL,
   `type` varchar(200) NOT NULL,
   `description` varchar(1000) NOT NULL,
@@ -146,10 +146,10 @@ CREATE TABLE `job_offer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `job_offer`
+-- Dumping data for table `farm_output`
 --
 
-INSERT INTO `job_offer` (`job_id`, `title`, `type`, `description`, `budget`, `skills`, `special_skill`, `e_username`, `valid`, `timestamp`) VALUES
+INSERT INTO `farm_output` (`offer_id`, `title`, `type`, `description`, `budget`, `skills`, `special_skill`, `e_username`, `valid`, `timestamp`) VALUES
 (1, 'jjj', 'kkk', 'lll', 0, '', '20', 'nnn', 0, '0000-00-00 00:00:00'),
 (2, '', '', '', 20, '', '', '', 1, '2018-06-06 07:27:25'),
 (3, '', '', '', 500, '', '', '', 2, '2018-06-06 07:29:10'),
@@ -159,12 +159,12 @@ INSERT INTO `job_offer` (`job_id`, `title`, `type`, `description`, `budget`, `sk
 (7, 'wwwww', 'wwwww', 'wwwwww', 44, 'www', 'ww', 'dddddd', 1, '2018-06-07 11:22:38'),
 (8, 'ppppp', 'ppp', 'ppp', 55, 'ppp', 'ppp', 'dddddd', 0, '2018-06-07 11:27:19'),
 (9, 'wwwww', 'wwww', 'wwww', 99, 'www', 'wwww', 'dddddd', 0, '2018-06-24 14:48:50'),
-(10, 'Job Title 1', 'Job Type 1', 'This will be a detail job description.', 100, 'skill1, skill2, skill3', 'special skill', 'employer3', 1, '2018-06-28 08:27:27'),
-(11, 'Job Title 2', 'Job Type 2', 'This will be a detail job description.', 200, 'web design', 'special skill', 'employer3', 1, '2018-06-28 08:28:05'),
-(12, 'Job Title 3', 'Job Type 1', 'This will be a detail job description.', 100, 'skill1, skill2, skill3', 'special skill', 'employer1', 1, '2018-06-28 08:28:45'),
-(13, 'Job Title 4', 'Job Type 2', 'This will be a detail job description.', 200, 'skill1, skill2, skill3', 'special skill', 'employer1', 1, '2018-06-28 08:29:29'),
-(14, 'Job Title 5', 'Job Type 2', 'This will be a detail job description.', 200, 'web design', 'special skill', 'employer1', 1, '2018-06-28 08:29:58'),
-(15, 'Job Title6', 'Job Type 2', 'This will be a detail job description.', 100, 'web design', 'special skill', 'employer1', 1, '2018-06-28 08:30:27');
+(10, 'Job Title 1', 'Job Type 1', 'This will be a detail job description.', 100, 'skill1, skill2, skill3', 'special skill', 'clients3', 1, '2018-06-28 08:27:27'),
+(11, 'Job Title 2', 'Job Type 2', 'This will be a detail job description.', 200, 'web design', 'special skill', 'clients3', 1, '2018-06-28 08:28:05'),
+(12, 'Job Title 3', 'Job Type 1', 'This will be a detail job description.', 100, 'skill1, skill2, skill3', 'special skill', 'clients1', 1, '2018-06-28 08:28:45'),
+(13, 'Job Title 4', 'Job Type 2', 'This will be a detail job description.', 200, 'skill1, skill2, skill3', 'special skill', 'clients1', 1, '2018-06-28 08:29:29'),
+(14, 'Job Title 5', 'Job Type 2', 'This will be a detail job description.', 200, 'web design', 'special skill', 'clients1', 1, '2018-06-28 08:29:58'),
+(15, 'Job Title6', 'Job Type 2', 'This will be a detail job description.', 100, 'web design', 'special skill', 'clients1', 1, '2018-06-28 08:30:27');
 
 -- --------------------------------------------------------
 
@@ -173,7 +173,7 @@ INSERT INTO `job_offer` (`job_id`, `title`, `type`, `description`, `budget`, `sk
 --
 
 CREATE TABLE `job_skill` (
-  `job_id` varchar(30) NOT NULL,
+  `offer_id` varchar(30) NOT NULL,
   `skill` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -202,12 +202,12 @@ INSERT INTO `message` (`sender`, `receiver`, `msg`, `timestamp`) VALUES
 ('dddddd', 'ffffff', 'this is a reply', '2018-06-24 14:23:46'),
 ('dddddd', 'ssssss', 'Hey whats up dude', '2018-06-25 12:50:09'),
 ('ssssss', 'dddddd', 'I am fine', '2018-06-25 12:50:50'),
-('freelancer1', 'employer3', 'This is a message', '2018-07-01 07:22:58'),
-('freelancer2', 'employer3', 'This is message 2', '2018-07-01 07:24:45'),
-('freelancer3', 'employer3', 'This is message 3', '2018-07-01 07:25:36'),
-('employer3', 'freelancer3', 'this is reply 1', '2018-07-01 07:27:30'),
-('employer3', 'freelancer2', 'this is reply 2', '2018-07-01 07:27:37'),
-('employer3', 'freelancer1', 'this is reply 3', '2018-07-01 07:27:43');
+('freelancer1', 'clients3', 'This is a message', '2018-07-01 07:22:58'),
+('freelancer2', 'clients3', 'This is message 2', '2018-07-01 07:24:45'),
+('freelancer3', 'clients3', 'This is message 3', '2018-07-01 07:25:36'),
+('clients3', 'freelancer3', 'this is reply 1', '2018-07-01 07:27:30'),
+('clients3', 'freelancer2', 'this is reply 2', '2018-07-01 07:27:37'),
+('clients3', 'freelancer1', 'this is reply 3', '2018-07-01 07:27:43');
 
 -- --------------------------------------------------------
 
@@ -217,7 +217,7 @@ INSERT INTO `message` (`sender`, `receiver`, `msg`, `timestamp`) VALUES
 
 CREATE TABLE `selected` (
   `f_username` varchar(200) NOT NULL,
-  `job_id` varchar(30) NOT NULL,
+  `offer_id` varchar(30) NOT NULL,
   `e_username` varchar(200) NOT NULL,
   `price` int(11) NOT NULL,
   `valid` tinyint(1) NOT NULL
@@ -227,7 +227,7 @@ CREATE TABLE `selected` (
 -- Dumping data for table `selected`
 --
 
-INSERT INTO `selected` (`f_username`, `job_id`, `e_username`, `price`, `valid`) VALUES
+INSERT INTO `selected` (`f_username`, `offer_id`, `e_username`, `price`, `valid`) VALUES
 ('ffffff', '8', 'dddddd', 50, 0),
 ('ssssss', '9', 'dddddd', 50, 1);
 
@@ -236,9 +236,9 @@ INSERT INTO `selected` (`f_username`, `job_id`, `e_username`, `price`, `valid`) 
 --
 
 --
--- Indexes for table `employer`
+-- Indexes for table `clients`
 --
-ALTER TABLE `employer`
+ALTER TABLE `clients`
   ADD PRIMARY KEY (`username`);
 
 --
@@ -266,27 +266,27 @@ ALTER TABLE `f_social`
   ADD PRIMARY KEY (`f_username`);
 
 --
--- Indexes for table `job_offer`
+-- Indexes for table `farm_output`
 --
-ALTER TABLE `job_offer`
-  ADD PRIMARY KEY (`job_id`),
-  ADD UNIQUE KEY `job_id` (`job_id`);
+ALTER TABLE `farm_output`
+  ADD PRIMARY KEY (`offer_id`),
+  ADD UNIQUE KEY `offer_id` (`offer_id`);
 
 --
 -- Indexes for table `job_skill`
 --
 ALTER TABLE `job_skill`
-  ADD PRIMARY KEY (`job_id`);
+  ADD PRIMARY KEY (`offer_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `job_offer`
+-- AUTO_INCREMENT for table `farm_output`
 --
-ALTER TABLE `job_offer`
-  MODIFY `job_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+ALTER TABLE `farm_output`
+  MODIFY `offer_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

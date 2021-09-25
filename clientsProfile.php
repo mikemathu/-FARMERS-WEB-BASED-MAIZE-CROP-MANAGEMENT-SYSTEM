@@ -1,4 +1,5 @@
-<?php include('server.php');
+<?php 
+include('includes/server.php');
 if(isset($_SESSION["Username"])){
 	$username=$_SESSION["Username"];
 }
@@ -18,7 +19,8 @@ if(isset($_POST["e_user"])){
 }
 
 
-$sql = "SELECT * FROM artisan WHERE username='$username'";
+// $sql = "SELECT * FROM artisan WHERE username='$username'";
+$sql = "SELECT * FROM clients WHERE username='$username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
@@ -29,68 +31,25 @@ if ($result->num_rows > 0) {
 		$gender=$row["gender"];
 		$birthdate=$row["birthdate"];
 		$address=$row["address"];
-		$prof_title=$row["prof_title"];
-		$location=$row["location"];
+		// $prof_title=$row["prof_title"];
+		// $location=$row["location"];
 		$profile_sum=$row["profile_sum"];
-		$experience=$row["experience"];
-		$photo=$row["photo"];
+		// $experience=$row["experience"];
+		// $photo=$row["photo"];
 	    }
 } else {
-    echo "0 results";
+    // echo "0 results";
 }
 
+include('includes/header.php');
+
+include('includes/artisan-navbar.php');
  ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Artisans profile</title>
-	<meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" type="text/css" href="../awesome/css/fontawesome-all.min.css">
 
-<style>
-	body{padding-top: 3%;margin: 0;}
-	.card{box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background:#fff}
-</style>
 
-</head>
-<body>
 
-<!--Navbar menu-->
-<nav class="navbar navbar-inverse navbar-fixed-top" id="my-navbar">
-	<div class="container">
-		<div class="navber-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a href="index.php" class="navbar-brand">MCMS</a>
-		</div>
-		<div class="collapse navbar-collapse" id="navbar-collapse">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="farmOutput.php">Browse all Crop Offers</a></li>
-				<li><a href="allClients.php">Browse Clients</a></li>
-				<li><a href="allclients.php">Browse clients</a></li>
-				<li class="dropdown" style="background:#000;padding:0 20px 0 20px;">
-			        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $username; ?>
-			        </a>
-			        <ul class="dropdown-menu list-group list-group-item-info">
-			        	<a href="farmerProfile.php" class="list-group-item"><span class="glyphicon glyphicon-home"></span>  View profile</a>
-			          	<a href="editArtisan.php" class="list-group-item"><span class="glyphicon glyphicon-inbox"></span>  Edit Profile</a>
-					  	<a href="message.php" class="list-group-item"><span class="glyphicon glyphicon-envelope"></span>  Messages</a> 
-					  	<a href="logout.php" class="list-group-item"><span class="glyphicon glyphicon-ok"></span>  Logout</a>
-			        </ul>
-			    </li>
-			</ul>
-		</div>		
-	</div>	
-</nav>
-<!--End Navbar menu-->
+
 
 
 <!--main body-->
@@ -142,13 +101,15 @@ if ($result->num_rows > 0) {
 			  <div class="panel-heading"><h4>Reputation</h4></div>
 			</div>
 			<div class="panel panel-warning">
-			  <div class="panel-heading">Reviews</div>
-			  <div class="panel-body">Nothing to show</div>
+			  <div class="panel-heading">Rating</div>
+			  <div class="panel-body">
+			  <?php
+			  include('includes/artisan_rating.php');
+			  ?>
+			  
+			  </div>
 			</div>
-			<div class="panel panel-warning">
-			  <div class="panel-heading">Ratings</div>
-			  <div class="panel-body">Nothing to show</div>
-			</div>
+			
 		</div>
 <!--End Reputation-->
 
@@ -156,7 +117,7 @@ if ($result->num_rows > 0) {
 <!--End Column 1-->
 
 <!--Column 2-->
-	<div class="col-lg-7">
+	<div class="col-lg-6">
 
 <!--Client Profile Details-->	
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
@@ -167,7 +128,7 @@ if ($result->num_rows > 0) {
 			<?php if(!empty($prof_title)){ ?>
 				<div class="panel panel-primary">
 				  	<div class="panel-heading">Professional Title</div>
-	               	<h4> <?php echo $prof_title; ?> </h4>
+					  <div class="panel-body">	<h4> <?php echo $prof_title; ?> </h4></div>
 					   <!-- <div class="panel-body"><h4><?php //echo $profile_sum; ?></h4></div> -->
 	           </div>
            <?php }?>
@@ -183,7 +144,7 @@ if ($result->num_rows > 0) {
 			<?php	if(!empty($profile_sum)){ ?>
 				<div class="panel panel-primary">
 					<div class="panel-heading">Profile Summery</div>
-					<h4> <?php echo $profile_sum; ?> </h4>
+					<div class="panel-body"><h4> <?php echo $profile_sum; ?> </h4></div>
 					<!-- <div class="panel-body"><h4><?php //echo $profile_sum; ?></h4></div> -->
 				</div>
 			<?php }?>			
@@ -191,7 +152,7 @@ if ($result->num_rows > 0) {
 			<?php	if(!empty($education)){ ?>
 				<div class="panel panel-primary">
 					<div class="panel-heading">Education</div>
-					<h4> <?php echo $education; ?> </h4>
+					<div class="panel-body"><h4> <?php echo $education; ?> </h4></div>
 					<!-- <div class="panel-body"><h4><?php //echo $profile_sum; ?></h4></div> -->
 				</div>
 			<?php }?>
@@ -199,17 +160,17 @@ if ($result->num_rows > 0) {
 			<?php	if(!empty($experience)){ ?>
 				<div class="panel panel-primary">
 					<div class="panel-heading">Experience</div>
-					<h4> <?php echo $experience; ?> </h4>
+					<div class="panel-body"><h4> <?php echo $experience; ?> </h4></div>
 					<!-- <div class="panel-body"><h4><?php //echo $profile_sum; ?></h4></div> -->
 				</div>
 			<?php }?>
 		
 			<div class="panel panel-primary">
-			  <div class="panel-heading">Current jobs</div>
+			  <div class="panel-heading">Current Offers</div>
 			  <div class="panel-body"><h4>
                   <table style="width:100%">
                       <tr>
-                          <td style="font-weight:bold; padding-bottom:10px;">Job Id</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">Offer Id</td>
                           <td style="font-weight:bold; padding-bottom:10px;">Title</td>
                           <td style="font-weight:bold; padding-bottom:10px;">client</td>
                       </tr>
@@ -253,7 +214,7 @@ if ($result->num_rows > 0) {
 			  <div class="panel-body"><h4>
                   <table style="width:100%">
                       <tr>
-                          <td style="font-weight:bold; padding-bottom:10px;">Job Id</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">Offer Id</td>
                           <td style="font-weight:bold; padding-bottom:10px;">Title</td>
                           <td style="font-weight:bold; padding-bottom:10px;">client</td>
                       </tr>
@@ -292,6 +253,18 @@ if ($result->num_rows > 0) {
                   </table>
               </h4></div>
 			</div>
+
+							  
+     
+
+
+
+
+
+
+
+			<div>			
+			</div>
 		</div>
 <!--End Client Profile Details-->
 
@@ -300,34 +273,39 @@ if ($result->num_rows > 0) {
 
 
 <!--Column 3-->
-	<div class="col-lg-2">
+	<div class="col-lg-3">
 <!--My Wallet-->
-		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
-			<div class="panel panel-info">
-			  <div class="panel-heading"><h3>My Wallet</h3></div>
-			</div>
-			<ul class="list-group">
-			  <li class="list-group-item">Balance: $0.0</li>
-			  <li class="list-group-item">Hourly Rate: $3.0</li>
-			  <li class="list-group-item">Payment Method: </li>
-			  <li class="list-group-item">Withdraw</li>
-			</ul>
-		</div>
+<div style="margin-top:20px">
+
+
+<div>
+<div class="panel panel-default" style="height: 400px;">
+    <div style="height:10px;"></div>
+    <span style="margin-left:10px;">Welcome to Chatroom</span><br>
+    <span style="font-size:10px; margin-left:10px;"><i>Note: Avoid using foul language and hate speech to avoid banning of account</i></span>
+    <div style="height:10px;"></div>
+    <div id="chat_area" style="margin-left:10px; max-height:320px; overflow-y:scroll;">
+    <?php
+		include('chat.php');
+    ?>
+    </div>
+</div>
+<form method="POST" action="">
+<div class="input-group">
+    <input type="text" class="form-control" placeholder="Type message..." name="chat_msg">
+    <span class="input-group-btn">
+    <button class="btn btn-success" type="submit" name="send_msg" value="<?php echo $id; ?>">
+    <span class="glyphicon glyphicon-comment"></span> Send
+    </button>
+    </span>
+</div>
+</form>
+
+</div>
+
+</div>
 <!--End My Wallet-->
 
-<!--Social Network Profiles-->
-		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
-			<div class="panel panel-info">
-			  <div class="panel-heading"><h3>Social Network Profiles</h3></div>
-			</div>
-			<ul class="list-group">
-			  <li class="list-group-item" style="font-size:20px;color:#3B579D;"><i class="fab fa-facebook-square"> Facebook</i></li>
-			  <li class="list-group-item" style="font-size:20px;color:#D34438;"><i class="fab fa-google-plus-square"> Google</i></li>
-			  <li class="list-group-item" style="font-size:20px;color:#2CAAE1;"><i class="fab fa-twitter-square"> Twitter</i></li>
-			  <li class="list-group-item" style="font-size:20px;color:#0274B3;"><i class="fab fa-linkedin"> Linkedin</i></li>
-			</ul>
-		</div>
-<!--End Social Network Profiles-->
 
 	</div>
 <!--End Column 3-->
@@ -337,42 +315,4 @@ if ($result->num_rows > 0) {
 <!--End main body-->
 
 
-<!--Footer-->
-<div class="text-center" style="padding:4%;background:#222;color:#fff;margin-top:20px;">
-	<div class="row">
-			<div class="col-lg-3">
-			<h3>Quick Links</h3>
-			<p><a href="index.php">Home</a></p>
-			<p><a href="farmOutput.php">Browse all Crop Offers</a></p>
-			<p><a href="allClients.php">Browse Clients</a></p>
-			<p><a href="allclients.php">Browse clients</a></p>
-		</div>
-		<div class="col-lg-3">
-			<h3>About Us</h3>
-			<p>Rahamat-E-Elahi, CUET ID-1304054</p>
-			<p>Shovagata Sarker Borno, CUET ID-1304041</p>
-			<p>Md. Sharifullah, CUET ID-1304049</p>
-			<p>&copy 2018</p>
-		</div>
-		<div class="col-lg-3">
-			<h3>Contact Us</h3>
-			<p>Chittagong University of Engineering and Technology</p>
-			<p>Chittagong, Bangladesh</p>
-			<p>&copy CUET 2018</p>
-		</div>
-		<div class="col-lg-3">
-			<h3>Social Contact</h3>
-			<p style="font-size:20px;color:#3B579D;"><i class="fab fa-facebook-square"> Facebook</i></p>
-			<p style="font-size:20px;color:#D34438;"><i class="fab fa-google-plus-square"> Google</i></p>
-			<p style="font-size:20px;color:#2CAAE1;"><i class="fab fa-twitter-square"> Twitter</i></p>
-			<p style="font-size:20px;color:#0274B3;"><i class="fab fa-linkedin"> Linkedin</i></p>
-		</div>
-	</div>
-</div>
-<!--End Footer-->
-
-
-<script type="text/javascript" src="jquery/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-</body>
-</html>
+<?php include('includes/footer.php'); ?>

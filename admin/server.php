@@ -3,7 +3,7 @@ session_start();
 
 
 // Create connection
-$conn = new mysqli("localhost", "root", "35703436mikemathu", "fmarket");
+$conn = new mysqli("localhost", "root", "", "fmarket");
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -21,7 +21,8 @@ if ($result->num_rows > 0) {
     echo "0 results";
 }*/
 
-$username=$name=$email=$password=$contactNo=$birthdate=$address="";
+// $username=$name=$email=$password=$contactNo=$birthdate=$address="";
+$username=$password=$contactNo=$IdCardNo="";
 
 // if(isset($_POST["register"])){
 // 	$username=test_input($_POST["username"]);
@@ -48,7 +49,7 @@ $username=$name=$email=$password=$contactNo=$birthdate=$address="";
 // 			if($result==true){
 // 				$_SESSION["Username"]=$username;
 // 				$_SESSION["Usertype"]=1;
-// 				header("location: artisanProfile.php");
+// 				header("location: farmerProfile.php");
 // 			}
 
 // 		}
@@ -66,7 +67,7 @@ $username=$name=$email=$password=$contactNo=$birthdate=$address="";
 // 			if($result==true){
 // 				$_SESSION["Username"]=$username;
 // 				$_SESSION["Usertype"]=2;
-// 				header("location: clientProfile.php");
+// 				header("location: farmerProfile.php");
 // 			}
 
 // 		}
@@ -77,34 +78,39 @@ if(isset($_POST["login"])){
 	session_unset();
 	$username=test_input($_POST["username"]);
 	$password=test_input($_POST["password"]);
-	// $usertype=test_input($_POST["usertype"]);
+	$usertype=test_input($_POST["usertype"]);
 
-	// if ($usertype=="artisan") {
-		$sql = "SELECT * FROM admin WHERE username = '$username' AND password = '$password'";
+	if ($usertype=="farmer")
+	 {
+		// $sql = "SELECT * FROM admin WHERE username = '$username' AND password = '$password'";
+		$sql = "SELECT * FROM farmer WHERE username = '$username' AND password = '$password'";
 		$result = $conn->query($sql);
-		if($result->num_rows == 1){
+		// if($result->num_rows == 1){
+		if($result->num_rows == 0){
 			$_SESSION["Username"]=$username;
 			$_SESSION["Usertype"]=1;
 			unset($_SESSION["errorMsg"]);
-			header("location: artisanProfile.php");
+			header("location: farmerProfile.php");
+			
 		}
 		else{
 			$_SESSION["errorMsg"]="username/password is incorrect";
 		}
-	// }
-	// else{
-	// 	$sql = "SELECT * FROM client WHERE username = '$username' AND password = '$password'";
-	// 	$result = $conn->query($sql);
-	// 	if($result->num_rows == 1){
-	// 		$_SESSION["Username"]=$username;
-	// 		$_SESSION["Usertype"]=2;
-	// 		unset($_SESSION["errorMsg"]);
-	// 		header("location: clientProfile.php");
-	// 	}
-	// 	else{
-	// 		$_SESSION["errorMsg"]="username/password is incorrect";
-	// 	}
-	// }
+	}
+	else{
+		$sql = "SELECT * FROM clients WHERE username = '$username' AND password = '$password'";
+		$result = $conn->query($sql);
+		if($result->num_rows == 1){
+			$_SESSION["Username"]=$username;
+			$_SESSION["Usertype"]=2;
+			unset($_SESSION["errorMsg"]);
+			// header("location: farmerProfile.php");
+			header("location: clientsProfile.php");
+		}
+		else{
+			$_SESSION["errorMsg"]="username/password is incorrect";
+		}
+	}
 	
 }
 

@@ -2,16 +2,16 @@
 if(isset($_SESSION["Username"])){
 	$username=$_SESSION["Username"];
 	if ($_SESSION["Usertype"]==1) {
-		$linkPro="artisanProfile.php";
+		$linkPro="farmerProfile.php";
 		$linkEditPro="editArtisan.php";
-		$linkBtn="applyJob.php";
-		$textBtn="Apply for this job";
+		$linkBtn="bidOffer.php";
+		$textBtn="Bid this Offer";
 	}
 	else{
-		$linkPro="clientProfile.php";
+		$linkPro="farmerProfile.php";
 		$linkEditPro="editclient.php";
-		$linkBtn="editJob.php";
-		$textBtn="Edit the job offer";
+		$linkBtn="editFarmOutputOffer.php";
+		$textBtn="Edit the Offer";
 	}
 }
 else{
@@ -81,9 +81,9 @@ if(isset($_POST["s_email"])){
 		</div>
 		<div class="collapse navbar-collapse" id="navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="allJob.php">Browse all jobs</a></li>
-				<li><a href="allArtisan.php">Browse Artisans</a></li>
-				<li><a href="allclient.php">Browse clients</a></li>
+				<li><a href="farmOutput.php">Browse all Crop Offers</a></li>
+				<li><a href="allClients.php">Browse Clients</a></li>
+				<li><a href="allclients.php">Browse clients</a></li>
 				<li class="dropdown" style="background:#000;padding:0 20px 0 20px;">
 			        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $username; ?>
 			        </a>
@@ -108,7 +108,7 @@ if(isset($_POST["s_email"])){
 <!--Column 1-->
 	<div class="col-lg-9">
 
-<!--artisan Profile Details-->	
+<!--client Profile Details-->	
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<div class="panel panel-success">
 			  <div class="panel-heading"><h3>All client</h3></div>
@@ -130,7 +130,7 @@ if(isset($_POST["s_email"])){
                                 $company=$row["company"];
 
                                 echo '
-                                <form action="allclient.php" method="post">
+                                <form action="allclients.php" method="post">
                                 <input type="hidden" name="e_user" value="'.$e_username.'">
                                     <tr>
                                     <td><input type="submit" class="btn btn-link btn-lg" value="'.$e_username.'"></td>
@@ -152,7 +152,7 @@ if(isset($_POST["s_email"])){
 			</div>
 			<p></p>
 		</div>
-<!--End artisan Profile Details-->
+<!--End client Profile Details-->
 
 	</div>
 <!--End Column 1-->
@@ -164,21 +164,21 @@ if(isset($_POST["s_email"])){
 <!--Main profile card-->
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<p></p>
-			<form action="allclient.php" method="post">
+			<form action="allclients.php" method="post">
 				<div class="form-group">
 				  <input type="text" class="form-control" name="s_username">
 				  <center><button type="submit" class="btn btn-info">Search by username</button></center>
 				</div>
 	        </form>
 
-	        <form action="allclient.php" method="post">
+	        <form action="allclients.php" method="post">
 				<div class="form-group">
 				  <input type="text" class="form-control" name="s_name">
 				  <center><button type="submit" class="btn btn-info">Search by Name</button></center>
 				</div>
 	        </form>
 
-	        <form action="allclient.php" method="post">
+	        <form action="allclients.php" method="post">
 				<div class="form-group">
 				  <input type="text" class="form-control" name="s_email">
 				  <center><button type="submit" class="btn btn-info">Search by Email</button></center>
@@ -203,9 +203,9 @@ if(isset($_POST["s_email"])){
 			<div class="col-lg-3">
 			<h3>Quick Links</h3>
 			<p><a href="index.php">Home</a></p>
-			<p><a href="allJob.php">Browse all jobs</a></p>
-			<p><a href="allArtisan.php">Browse Artisans</a></p>
-			<p><a href="allclient.php">Browse clients</a></p>
+			<p><a href="farmOutput.php">Browse all Crop Offers</a></p>
+			<p><a href="allClients.php">Browse Clients</a></p>
+			<p><a href="allclients.php">Browse clients</a></p>
 		</div>
 		<div class="col-lg-3">
 			<h3>About Us</h3>

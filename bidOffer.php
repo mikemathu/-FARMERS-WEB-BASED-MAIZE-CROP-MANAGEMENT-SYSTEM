@@ -43,7 +43,7 @@ if(isset($_POST["apply"]) && $msg==""){
     $bid=test_input($_POST["bid"]);
 
 
-    $sql = "INSERT INTO apply (artisanid, offer_id, bid, cover_letter) VALUES ('$artisanId', '$offer_id', '$bid','$cover')";
+    $sql = "INSERT INTO apply (f_username, offer_id, bid, cover_letter) VALUES ('$username', '$offer_id', '$bid','$cover')";
 
     
     $result = $conn->query($sql);

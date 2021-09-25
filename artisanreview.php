@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Star Rating System using PHP and Javascript</title>
-<style>
+
+<?php 
+include('includes/header.php'); ?>
+
+
+<script>
 body {
     width: 550px;
     font-family: arial;
@@ -43,16 +43,17 @@ li.star.selected {
 p.text-address {
     font-size: 12px;
 }
-</style>
-</head>
+</script>
+
 
 <body onload="showRestaurantData('getRatingData.php')">
     <div class="container">
-        <h2>Star Rating System using PHP and Javascript</h2>
+    <h2>Artisan Review</h2>
         <span id="restaurant_list"></span>
+        <a href="offerDetails.php" class="btn btn-primary">Go back</a>
     </div>
 </body>
-</html>
+
 
 <script type="text/javascript">
 

@@ -2,16 +2,16 @@
 if(isset($_SESSION["Username"])){
 	$username=$_SESSION["Username"];
 	if ($_SESSION["Usertype"]==1) {
-		$linkPro="artisanProfile.php";
+		$linkPro="farmerProfile.php";
 		$linkEditPro="editArtisan.php";
-		$linkBtn="applyJob.php";
-		$textBtn="Apply for this job";
+		$linkBtn="bidOffer.php";
+		$textBtn="Bid this Offer";
 	}
 	else{
-		$linkPro="clientProfile.php";
+		$linkPro="farmerProfile.php";
 		$linkEditPro="editclient.php";
-		$linkBtn="editJob.php";
-		$textBtn="Edit the job offer";
+		$linkBtn="editFarmOutputOffer.php";
+		$textBtn="Edit the Offer";
 	}
 }
 else{
@@ -29,7 +29,7 @@ if(isset($_POST["sr"])){
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) {
 		$_SESSION["f_user"]=$t;
-		header("location: viewartisan.php");
+		header("location: viewclient.php");
 	} else {
 	    $sql = "SELECT * FROM client WHERE username='$t'";
 		$result = $conn->query($sql);
@@ -110,9 +110,9 @@ if(isset($_POST["rep"])){
 		</div>
 		<div class="collapse navbar-collapse" id="navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="allJob.php">Browse all jobs</a></li>
-				<li><a href="allArtisan.php">Browse Artisans</a></li>
-				<li><a href="allclient.php">Browse clients</a></li>
+				<li><a href="farmOutput.php">Browse all Crop Offers</a></li>
+				<li><a href="allClients.php">Browse Clients</a></li>
+				<li><a href="allclients.php">Browse clients</a></li>
 				<li class="dropdown" style="background:#000;padding:0 20px 0 20px;">
 			        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $username; ?>
 			        </a>
@@ -137,7 +137,7 @@ if(isset($_POST["rep"])){
 <!--Column 1-->
 	<div class="col-lg-9">
 
-<!--Artisan Profile Details-->	
+<!--Client Profile Details-->	
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<div class="panel panel-success">
 			  <div class="panel-heading"><h3>All Messages</h3></div>
@@ -189,7 +189,7 @@ if(isset($_POST["rep"])){
 			</div>
 			<p></p>
 		</div>
-<!--End Artisan Profile Details-->
+<!--End Client Profile Details-->
 
 	</div>
 <!--End Column 1-->
@@ -245,9 +245,9 @@ if(isset($_POST["rep"])){
 			<div class="col-lg-3">
 			<h3>Quick Links</h3>
 			<p><a href="index.php">Home</a></p>
-			<p><a href="allJob.php">Browse all jobs</a></p>
-			<p><a href="allArtisans.php">Browse Artisans</a></p>
-			<p><a href="allclient.php">Browse clients</a></p>
+			<p><a href="farmOutput.php">Browse all Crop Offers</a></p>
+			<p><a href="allArtisans.php">Browse Clients</a></p>
+			<p><a href="allclients.php">Browse clients</a></p>
 		</div>
 		<div class="col-lg-3">
 			<h3>About Us</h3>

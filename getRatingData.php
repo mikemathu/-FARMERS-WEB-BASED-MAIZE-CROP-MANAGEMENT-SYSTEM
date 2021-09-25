@@ -1,7 +1,15 @@
 <?php
 // require_once "db.php";
 include('includes/server.php');
+
+
+
 include('includes/rating.php');
+
+
+
+
+// print_r($username);
 // require_once "functions.php";
 // // Here the user id is harcoded.
 // // You can integrate your authentication code here to get the logged in user id

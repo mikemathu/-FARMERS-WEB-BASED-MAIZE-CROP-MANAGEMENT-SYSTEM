@@ -2,10 +2,10 @@
 if(isset($_SESSION["Username"])){
 	$username=$_SESSION["Username"];
 	if ($_SESSION["Usertype"]==1) {
-		header("location: artisanProfile.php");
+		header("location: farmerProfile.php");
 	}
 	else{
-		header("location: clientProfile.php");
+		header("location: farmerProfile.php");
 	}
 }
 else{
@@ -33,7 +33,7 @@ include('includes/index-navbar.php');
 	<div class="col-lg-4">
 		<div class="jumbotron">
 			<div class="container text-center">
-				<h1>Kilifi Artisan Marketplace</h1>
+				<h1>Maize crop Management System</h1>
 				<p>Remember, time is money. Use it properly. Do not waste your time thinking when others are getting things done here.</p>
 				<a href="loginReg.php" class="btn btn-warning btn-lg">It's Free!! Join Now!!!</a>
 				<p></p>

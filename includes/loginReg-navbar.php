@@ -8,7 +8,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a href="index.php" class="navbar-brand">Artisan Marketplace</a>
+			<a href="index.php" class="navbar-brand">MCMS</a>
 		</div>
 		<div class="collapse navbar-collapse" id="navbar-collapse">
 			<a href="loginReg.php" class="btn btn-info navbar-btn navbar-right" data-toggle="modal" data-target="#registerModal">Register</a>

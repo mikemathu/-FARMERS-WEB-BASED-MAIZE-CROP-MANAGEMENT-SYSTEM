@@ -15,12 +15,12 @@ if(isset($_POST["postJob"])){
     $location=test_input($_POST["location"]);
     // $deadline=test_input($_POST["deadline"]);
 
-    $sql = "INSERT INTO job_offer (title, description, budget, location, e_username, valid) VALUES ('$title', '$description','$budget','$location', '$username',1)";
+    $sql = "INSERT INTO farm_output (title, description, budget, location, e_username, valid) VALUES ('$title', '$description','$budget','$location', '$username',1)";
     
     $result = $conn->query($sql);
     if($result==true){
-        $_SESSION["job_id"] = $conn->insert_id;
-        header("location: jobDetails.php");
+        $_SESSION["offer_id"] = $conn->insert_id;
+        header("location: offerDetails.php");
     } else {
         echo 'nothing';
     }
@@ -30,7 +30,7 @@ include('includes/header.php');
 
 // include('includes/dashboard-navbar.php');
 
-include('includes/artisan-navbar.php');
+include('includes/client-navbar.php');
 
 
  ?>

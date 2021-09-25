@@ -2,13 +2,16 @@
 if(isset($_SESSION["Username"])){
 	$username=$_SESSION["Username"];
 	if ($_SESSION["Usertype"]==1) {
-		$linkPro="farmerProfile.php";
-		$linkEditPro="editArtisan.php";
+		// $linkPro="farmerProfile.php";
+		$linkPro="clientProfile.php";
+		// $linkEditPro="editArtisan.php";
+		$linkEditPro="editClient.php";
 		$linkBtn="bidOffer.php";
 		$textBtn="Bid this Offer";
 	}
 	else{
-		$linkPro="farmerProfile.php";
+		// $linkPro="farmerProfile.php";
+		$linkPro="clientProfile.php";
 		$linkEditPro="editclient.php";
 		$linkBtn="editFarmOutputOffer.php";
 		$textBtn="Edit the Offer";
@@ -19,30 +22,52 @@ else{
 	//header("location: index.php");
 }
 
-if(isset($_POST["e_user"])){
-	$_SESSION["e_user"]=$_POST["e_user"];
-	header("location: viewclient.php");
+if(isset($_POST["f_user"])){
+	$_SESSION["f_user"]=$_POST["f_user"];
+	header("location: viewClient.php");
 }
 
-$sql = "SELECT * FROM client";
+// $sql = "SELECT * FROM client";
+$sql = "SELECT * FROM clients";
 $result = $conn->query($sql);
 
 if(isset($_POST["s_username"])){
 	$t=$_POST["s_username"];
-	$sql = "SELECT * FROM client WHERE username='$t'";
+	// $sql = "SELECT * FROM client WHERE username='$t'";
+	$sql = "SELECT * FROM clients WHERE username='$t'";
 	$result = $conn->query($sql);
 }
 
 if(isset($_POST["s_name"])){
 	$t=$_POST["s_name"];
-	$sql = "SELECT * FROM client WHERE Name='$t'";
+	// $sql = "SELECT * FROM client WHERE Name='$t'";
+	$sql = "SELECT * FROM clients WHERE Name='$t'";
 	$result = $conn->query($sql);
 }
 
 if(isset($_POST["s_email"])){
 	$t=$_POST["s_email"];
-	$sql = "SELECT * FROM client WHERE email='$t'";
+	// $sql = "SELECT * FROM client WHERE email='$t'";
+	$sql = "SELECT * FROM clients WHERE email='$t'";
 	$result = $conn->query($sql);
+}
+
+// Delete client
+if(isset($_POST["deleteClient"])){
+	// $sql = "SELECT * FROM client WHERE email='$t'";
+	$sql = "SELECT * FROM clients WHERE email='$t'";
+
+
+	// $sql = "DELETE FROM apply WHERE offer_id='$offer_id'";
+	// $result = $conn->query($sql);
+	// if($result==true){
+	// 	$sql = "UPDATE farm_output SET valid=0 WHERE offer_id='$offer_id'";
+	// 	$result = $conn->query($sql);
+	// 	if($result==true){
+	// 		header("location: offerDetails.php");
+	// 	}
+	// }
+
 }
 
  ?>
@@ -52,12 +77,12 @@ if(isset($_POST["s_email"])){
 <!DOCTYPE html>
 <html>
 <head>
-	<title>All client</title>
+	<title>All Artisan</title>
 	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" type="text/css" href="awesome/css/fontawesome-all.min.css">
+	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="../awesome/css/fontawesome-all.min.css">
 
 <style>
 	body{padding-top: 3%;margin: 0;}
@@ -83,7 +108,7 @@ if(isset($_POST["s_email"])){
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="farmOutput.php">Browse all Crop Offers</a></li>
 				<li><a href="allClients.php">Browse Clients</a></li>
-				<!-- <li><a href="allclients.php">Browse clients</a></li> -->
+				<li><a href="allclients.php">Browse clients</a></li>
 				<li class="dropdown" style="background:#000;padding:0 20px 0 20px;">
 			        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $username; ?>
 			        </a>
@@ -108,36 +133,49 @@ if(isset($_POST["s_email"])){
 <!--Column 1-->
 	<div class="col-lg-9">
 
-<!--client Profile Details-->	
+<!--Client Profile Details-->	
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<div class="panel panel-success">
-			  <div class="panel-heading"><h3>All client</h3></div>
+			  <div class="panel-heading"><h3>All Clients</h3></div>
 			  <div class="panel-body"><h4>
                   <table style="width:100%">
                       <tr>
-                          <td>Username</td>
-                          <td>Name</td>
-                          <td>Email</td>
-                          <td>Company</td>
+                      <td style="font-weight:bold; padding-bottom:10px;">Photo</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">Username</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">Name</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">Email</td>
                       </tr>
                       <?php 
                       if ($result->num_rows > 0) {
                             // output data of each row
                             while($row = $result->fetch_assoc()) {
-                                $e_username=$row["username"];
-                                $Name=$row["Name"];
+                                $f_username=$row["username"];
+								$Name=$row["Name"];
+								// $id=$row["id"];
+                                $photo = (!empty($row['photo'])) ? 'image/'.$row['photo'] : 'image/profile.jpg';
                                 $email=$row["email"];
-                                $company=$row["company"];
 
                                 echo '
-                                <form action="allclients.php" method="post">
-                                <input type="hidden" name="e_user" value="'.$e_username.'">
+                                <form action="allClients.php" method="post">
+                                <input type="hidden" name="f_user" value="'.$f_username.'">
                                     <tr>
-                                    <td><input type="submit" class="btn btn-link btn-lg" value="'.$e_username.'"></td>
+                                    <td> <img src="".$photo."" height="30px" width="30px"></td>
+                                    <td><input type="submit" class="btn btn-link btn-lg" value="'.$f_username.'"></td>
                                     <td>'.$Name.'</td>
-                                    <td>'.$email.'</td>
-                                    <td>'.$company.'</td>
-                                    </tr>
+                                    
+									<td>'.$email.'</td>
+									
+									<td>
+									<form id="registrationForm" method="post">
+								
+									<button type="submit" name="deleteClient" class="btn btn-danger btn-lg">Delete</button>
+									
+									</form>
+								  
+								  </td>
+									</tr>
+									
+
                                 </form>
                                 ';
 
@@ -152,7 +190,7 @@ if(isset($_POST["s_email"])){
 			</div>
 			<p></p>
 		</div>
-<!--End client Profile Details-->
+<!--End Artusan Profile Details-->
 
 	</div>
 <!--End Column 1-->
@@ -164,21 +202,21 @@ if(isset($_POST["s_email"])){
 <!--Main profile card-->
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<p></p>
-			<form action="allclients.php" method="post">
+			<form action="allClients.php" method="post">
 				<div class="form-group">
 				  <input type="text" class="form-control" name="s_username">
 				  <center><button type="submit" class="btn btn-info">Search by username</button></center>
 				</div>
 	        </form>
 
-	        <form action="allclients.php" method="post">
+	        <form action="allClients.php" method="post">
 				<div class="form-group">
 				  <input type="text" class="form-control" name="s_name">
 				  <center><button type="submit" class="btn btn-info">Search by Name</button></center>
 				</div>
 	        </form>
 
-	        <form action="allclients.php" method="post">
+	        <form action="allClients.php" method="post">
 				<div class="form-group">
 				  <input type="text" class="form-control" name="s_email">
 				  <center><button type="submit" class="btn btn-info">Search by Email</button></center>
@@ -204,8 +242,8 @@ if(isset($_POST["s_email"])){
 			<h3>Quick Links</h3>
 			<p><a href="index.php">Home</a></p>
 			<p><a href="farmOutput.php">Browse all Crop Offers</a></p>
-			<p><a href="allClients.php">Browse Clients</a></p>
-			<!-- <p><a href="allclients.php">Browse clients</a></p> -->
+			<p><a href="allClients.php">Browse Clientss</a></p>
+			<p><a href="allclients.php">Browse clients</a></p>
 		</div>
 		<div class="col-lg-3">
 			<h3>About Us</h3>
@@ -234,8 +272,6 @@ if(isset($_POST["s_email"])){
 
 <script type="text/javascript" src="jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-
-
 
 
 </body>

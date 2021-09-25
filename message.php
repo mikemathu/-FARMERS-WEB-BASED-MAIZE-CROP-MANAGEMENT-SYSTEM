@@ -2,16 +2,16 @@
 if(isset($_SESSION["Username"])){
 	$username=$_SESSION["Username"];
 	if ($_SESSION["Usertype"]==1) {
-		$linkPro="artisanProfile.php";
+		$linkPro="farmerProfile.php";
 		$linkEditPro="editArtisan.php";
-		$linkBtn="applyJob.php";
-		$textBtn="Apply for this job";
+		$linkBtn="bidOffer.php";
+		$textBtn="Bid this Offer";
 	}
 	else{
-		$linkPro="clientProfile.php";
+		$linkPro="farmerProfile.php";
 		$linkEditPro="editclient.php";
-		$linkBtn="editJob.php";
-		$textBtn="Edit the job offer";
+		$linkBtn="editFarmOutputOffer.php";
+		$textBtn="Edit the Offer";
 	}
 }
 else{
@@ -29,7 +29,7 @@ if(isset($_POST["sr"])){
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) {
 		$_SESSION["f_user"]=$t;
-		header("location: viewArtisan.php");
+		header("location: viewClient.php");
 	} else {
 	    $sql = "SELECT * FROM client WHERE username='$t'";
 		$result = $conn->query($sql);
@@ -92,7 +92,7 @@ include('includes/client-navbar.php');
 <!--Column 1-->
 	<div class="col-lg-9">
 
-<!--Artisan Profile Details-->	
+<!--Client Profile Details-->	
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<div class="panel panel-success">
 			  <div class="panel-heading"><h3>All Messages</h3></div>
@@ -144,7 +144,7 @@ include('includes/client-navbar.php');
 			</div>
 			<p></p>
 		</div>
-<!--End Artisan Profile Details-->
+<!--End Client Profile Details-->
 
 	</div>
 <!--End Column 1-->
