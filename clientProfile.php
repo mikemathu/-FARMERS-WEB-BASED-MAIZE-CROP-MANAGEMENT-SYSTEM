@@ -4,12 +4,15 @@ if(isset($_SESSION["Username"])){
 }
 else{
 	$username="";
-	//header("location: index.php");
 }
 
 if(isset($_POST["jid"])){
 	$_SESSION["offer_id"]=$_POST["jid"];
-	header("location: offerDetails.php");
+	header("location: marketRequestinfo.php");
+}
+if(isset($_POST["jid2"])){
+	$_SESSION["offer_id"]=$_POST["jid2"];
+	header("location: marketRequest.php");
 }
 
 if(isset($_POST["f_user"])){
@@ -18,27 +21,22 @@ if(isset($_POST["f_user"])){
 }
 
 
-// $sql = "SELECT * FROM client WHERE username='$username'";
 $sql = "SELECT * FROM clients WHERE username='$username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        $name=$row["Name"];
-        $email=$row["email"];
+        $name=$row["username"];
+        $id_card_no=$row["id_card_no"];
         $contactNo=$row["contact_no"];
         $gender=$row["gender"];
-        $birthdate=$row["birthdate"];
-        $address=$row["address"];
-        $profile_sum=$row["profile_sum"];
-		$company=$row["company"];
-		// $photo=$row["photo"];
+        $location=$row["location"];
         }
 } else {
     echo "0 results";
 }
 
-$sql = "SELECT * FROM farm_output WHERE e_username='$username' and valid=1 ORDER BY timestamp DESC";
+$sql = "SELECT * FROM market_request WHERE e_username='$username' and valid=1 ORDER BY timestamp DESC";
 $result = $conn->query($sql);
 
 include('includes/header.php');
@@ -46,8 +44,6 @@ include('includes/header.php');
 include('includes/client-navbar.php');
 
  ?>
-
-
 
 
 <!--main body-->
@@ -65,9 +61,9 @@ include('includes/client-navbar.php');
 			<h2><?php echo $name; ?></h2>
 			<p><span class="glyphicon glyphicon-user"></span> <?php echo $username; ?></p>
 			<ul class="list-group">
-				<a href="postFarmOutput.php" class="list-group-item list-group-item-info">Post a job offer</a>
+				<a href="postRequestToMarket.php" class="list-group-item list-group-item-info">Make Your Order </a>
 	          	<a href="editclient.php" class="list-group-item list-group-item-info">Edit Profile</a>
-			  	<a href="message.php" class="list-group-item list-group-item-info">Messages</a>
+			  	<a href="message2.php" class="list-group-item list-group-item-info">Messages</a>
 			  	<a href="logout.php" class="list-group-item list-group-item-info">Logout</a>
 	        </ul>
 	    </div>
@@ -76,19 +72,19 @@ include('includes/client-navbar.php');
 <!--Contact Information-->
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<div class="panel panel-success">
-			  <div class="panel-heading"><h4>Contact Information</h4></div>
-			</div>
-			<div class="panel panel-success">
-			  <div class="panel-heading">Email</div>
-			  <div class="panel-body"><?php echo $email; ?></div>
-			</div>
+			  <div class="panel-heading"><h4>About</h4></div>
+			</div>		
 			<div class="panel panel-success">
 			  <div class="panel-heading">Mobile</div>
 			  <div class="panel-body"><?php echo $contactNo; ?></div>
 			</div>
+      <div class="panel panel-success">
+			  <div class="panel-heading">ID Card No.</div>
+			  <div class="panel-body"><?php echo $id_card_no; ?></div>
+			</div>
 			<div class="panel panel-success">
-			  <div class="panel-heading">Address</div>
-			  <div class="panel-body"><?php echo $address; ?></div>
+			  <div class="panel-heading">Location</div>
+			  <div class="panel-body"><?php echo $location; ?></div>
 			</div>
 		</div>
 <!--End Contact Information-->
@@ -102,9 +98,9 @@ include('includes/client-navbar.php');
 	<div class="col-lg-7">
 
 <!--client Profile Details-->	
-		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
-			<div class="panel panel-primary">
-			  <div class="panel-heading"><h3>Farmer Profile Details</h3></div>
+		<div class="card" style="padding:20px 20px 5px 20px;margin:20px 0px 100px">
+			<div class="panel panel-info">
+			  <div class="panel-heading"><h3>Your Maize Orders Details</h3></div>
 			</div>
 
 
@@ -126,7 +122,7 @@ include('includes/client-navbar.php');
 
 			
 			<div class="panel panel-primary">
-			  <div class="panel-heading">Current Farm Output Offerings</div>
+			  <div class="panel-heading">Active Farm Output Offers</div>
 			  <div class="panel-body"><h4>
                   <table style="width:100%">
                       <tr>
@@ -135,16 +131,19 @@ include('includes/client-navbar.php');
                           <td style="font-weight:bold; padding-bottom:10px;">Posted on</td>
                       </tr>
                       <?php 
+
+                        // $sql = "select * from market_request where e_username=$username";
+
                       if ($result->num_rows > 0) {
                             // output data of each row
                             while($row = $result->fetch_assoc()) {
-                                $offer_id=$row["offer_id"];
+                                $offer_id=$row["id"];
                                 $title=$row["title"];
                                 $timestamp=$row["timestamp"];
 
                                 echo '
-                                <form action="farmerProfile.php" method="post">
-                                <input type="hidden" name="jid" value="'.$offer_id.'">
+                                <form action="clientProfile.php" method="post">
+                                <input type="hidden" name="jid2" value="'.$offer_id.'">
                                     <tr>
                                     <td>'.$offer_id.'</td>
                                     <td><input type="submit" class="btn btn-link btn-lg" value="'.$title.'"></td>
@@ -164,7 +163,7 @@ include('includes/client-navbar.php');
 			</div>
 
 			<div class="panel panel-primary">
-			  <div class="panel-heading">Ongoing crop Offerings</div>
+			  <div class="panel-heading">Previous Farm Output Offers</div>
 			  <div class="panel-body"><h4>
                   <table style="width:100%">
                       <tr>
@@ -173,7 +172,58 @@ include('includes/client-navbar.php');
                           <td style="font-weight:bold; padding-bottom:10px;">Posted on</td>
                       </tr>
                       <?php 
-                      	$sql = "SELECT * FROM farm_output WHERE e_username='$username' and valid=0 ORDER BY timestamp DESC";
+
+                        // $sql = "select * from market_request where e_username=$username";
+                        $sql = "SELECT * FROM market_request WHERE e_username='$username' and valid=0 ORDER BY timestamp DESC";
+$result = $conn->query($sql);
+
+                      if ($result->num_rows > 0) {
+                            // output data of each row
+                            while($row = $result->fetch_assoc()) {
+                                $offer_id=$row["id"];
+                                $title=$row["title"];
+                                $timestamp=$row["timestamp"];
+
+                                echo '
+                                <form action="clientProfile.php" method="post">
+                                <input type="hidden" name="jid2" value="'.$offer_id.'">
+                                    <tr>
+                                    <td>'.$offer_id.'</td>
+                                    <td><input type="submit" class="btn btn-link btn-lg" value="'.$title.'"></td>
+                                    <td>'.$timestamp.'</td>
+                                    </tr>
+                                </form>
+                                ';
+
+                                }
+                        } else {
+                            echo "<tr><td>N/A</td></tr>";
+                        }
+
+                       ?>
+                  </table>
+              </h4></div>
+			</div>
+			</div>
+
+            <div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
+            <div class="panel panel-info">
+			  <div class="panel-heading"><h3>Maize Offer Details Details</h3></div>
+			</div>
+
+
+			<div class="panel panel-primary">
+			  <div class="panel-heading">Previous crop Offers Deals</div>
+			  <div class="panel-body"><h4>
+                  <table style="width:100%">
+                      <tr>
+                          <td style="font-weight:bold; padding-bottom:10px;">Crop Id</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">Title</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">Posted on</td>
+                      </tr>
+                      <?php 
+                      	$sql = "select * from `farm_output` left join `selected` on selected.offer_id=farm_output.offer_id where selected.e_username='$username' ORDER BY timestamp DESC";
+                      	// $sql = "select * from `farm_output` left join `accepted` on accepted.offer_id=farm_output.offer_id where accepted.e_username='$username' ORDER BY timestamp DESC";
 						$result = $conn->query($sql);
                       if ($result->num_rows > 0) {
                             // output data of each row
@@ -183,7 +233,7 @@ include('includes/client-navbar.php');
                                 $timestamp=$row["timestamp"];
 
                                 echo '
-                                <form action="farmerProfile.php" method="post">
+                                <form action="clientProfile.php" method="post">
                                 <input type="hidden" name="jid" value="'.$offer_id.'">
                                     <tr>
                                     <td>'.$offer_id.'</td>
@@ -202,54 +252,52 @@ include('includes/client-navbar.php');
                   </table>
               </h4></div>
 			</div>
-
-
-
-			
-			<div class="panel panel-primary">
+		
+			<!-- <div class="panel panel-primary">
 			  <div class="panel-heading">Currently Hired artisans(Clients)</div>
 			  <div class="panel-body"><h4>
                   <table style="width:100%">
                       <tr>
                           <td style="font-weight:bold; padding-bottom:10px;">Crop Id</td>
                           <td style="font-weight:bold; padding-bottom:10px;">Title</td>
-                          <td style="font-weight:bold; padding-bottom:10px;">artisan</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">Farmer</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">Posted On</td>
                       </tr>
                       <?php 
-                      	$sql = "SELECT * FROM farm_output,selected WHERE farm_output.offer_id=selected.offer_id AND selected.e_username='$username' AND selected.valid=1 ORDER BY farm_output.timestamp DESC";
-						$result = $conn->query($sql);
-                      if ($result->num_rows > 0) {
-                            // output data of each row
-                            while($row = $result->fetch_assoc()) {
-                                $offer_id=$row["offer_id"];
-                                $title=$row["title"];
-                                $f_username=$row["f_username"];
-                                $timestamp=$row["timestamp"];
+                    //   	$sql = "SELECT * FROM farm_output,selected WHERE farm_output.offer_id=selected.offer_id AND selected.e_username='$username' AND selected.valid=1 ORDER BY farm_output.timestamp DESC";
+					// 	$result = $conn->query($sql);
+                    //   if ($result->num_rows > 0) {
+                    //         // output data of each row
+                    //         while($row = $result->fetch_assoc()) {
+                    //             $offer_id=$row["offer_id"];
+                    //             $title=$row["title"];
+                    //             $f_username=$row["f_username"];
+                    //             $timestamp=$row["timestamp"];
 
-                                echo '
-                                <form action="farmerProfile.php" method="post">
-                                <input type="hidden" name="jid" value="'.$offer_id.'">
-                                    <tr>
-                                    <td>'.$offer_id.'</td>
-                                    <td><input type="submit" class="btn btn-link btn-lg" value="'.$title.'"></td>
-                                    </form>
-                                    <form action="farmerProfile.php" method="post">
-                                    <input type="hidden" name="f_user" value="'.$f_username.'">
-                                    <td><input type="submit" class="btn btn-link btn-lg" value="'.$f_username.'"></td>
-                                    <td>'.$timestamp.'</td>
-                                    </tr>
-                                </form>
-                                ';
+                    //             echo '
+                    //             <form action="clientProfile.php" method="post">
+                    //             <input type="hidden" name="jid" value="'.$offer_id.'">
+                    //                 <tr>
+                    //                 <td>'.$offer_id.'</td>
+                    //                 <td><input type="submit" class="btn btn-link btn-lg" value="'.$title.'"></td>
+                    //                 </form>
+                    //                 <form action="clientProfile.php" method="post">
+                    //                 <input type="hidden" name="f_user" value="'.$f_username.'">
+                    //                 <td>'.$f_username.'</td>
+                    //                 <td>'.$timestamp.'</td>
+                    //                 </tr>
+                    //             </form>
+                    //             ';
 
-                                }
-                        } else {
-                            echo "<tr><td>N/A</td></tr>";
-                        }
+                    //             }
+                    //     } else {
+                    //         echo "<tr><td>N/A</td></tr>";
+                    //     }
 
                        ?>
                   </table>
               </h4></div>
-			</div>
+			</div> -->
 
 
 			
@@ -257,34 +305,8 @@ include('includes/client-navbar.php');
 	</div>
 <!--End Column 2-->
 
-
 <!--Column 3-->
-	<!-- <div class="col-lg-2">
-My Wallet
-		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
-			<div class="panel panel-info">
-			  <div class="panel-heading"><h3>My Wallet</h3></div>
-			</div>
-			<ul class="list-group">
-			  <li class="list-group-item">Balance: $0.0</li>
-			  <li class="list-group-item">Payment Method: </li>
-			  <li class="list-group-item">Deposit</li>
-			</ul>
-		</div> -->
-<!--End My Wallet-->
 
-<!--Social Network Profiles-->
-		<!-- <div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
-			<div class="panel panel-info">
-			  <div class="panel-heading"><h3>Social Network Profiles</h3></div>
-			</div>
-			<ul class="list-group">
-			  <li class="list-group-item" style="font-size:20px;color:#3B579D;"><i class="fab fa-facebook-square"> Facebook</i></li>
-			  <li class="list-group-item" style="font-size:20px;color:#D34438;"><i class="fab fa-google-plus-square"> Google</i></li>
-			  <li class="list-group-item" style="font-size:20px;color:#2CAAE1;"><i class="fab fa-twitter-square"> Twitter</i></li>
-			  <li class="list-group-item" style="font-size:20px;color:#0274B3;"><i class="fab fa-linkedin"> Linkedin</i></li>
-			</ul>
-		</div> -->
 <!--End Social Network Profiles-->
 
 	</div>

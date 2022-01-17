@@ -4,7 +4,6 @@ if(isset($_SESSION["Username"])){
 }
 else{
     $username="";
-	//header("location: index.php");
 }
 
 if(isset($_SESSION["c_letter"])){
@@ -14,11 +13,7 @@ if(isset($_SESSION["c_letter"])){
 include('includes/header.php');
 
 include('includes/client-navbar.php');
-
-
  ?>
-
-
 
 <div class="container">
         <div class="row">

@@ -4,57 +4,38 @@ if(isset($_SESSION["Username"])){
 }
 else{
     $username="";
-	//header("location: index.php");
 }
 
-// $sql = "SELECT * FROM client WHERE username='$username'";
-$sql = "SELECT * FROM freelancer WHERE username='$username'";
+$sql = "SELECT * FROM clients WHERE username='$username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        $name=$row["Name"];
-        $email=$row["email"];
+        $name=$row["username"];
+        $id_card_no=$row["id_card_no"];
         $contactNo=$row["contact_no"];
-        $gender=$row["gender"];
-        $birthdate=$row["birthdate"];
-        $address=$row["address"];
-        $profile_sum=$row["profile_sum"];
-        // $company=$row["company"];
-        // $photo=$row["photo"];
+        $location=$row["location"];
         }
 } 
-// else {
-//     echo "0 results";
-// }
-
 
 if(isset($_POST["editclient"])){
-    $name=test_input($_POST["name"]);
-    $email=test_input($_POST["email"]);
-    $contactNo=test_input($_POST["contactNo"]);
-    $gender=test_input($_POST["gender"]);
-    $birthdate=test_input($_POST["birthdate"]);
-    $address=test_input($_POST["address"]);
-    $profile_sum=test_input($_POST["profile_sum"]);
-    $company=test_input($_POST["company"]);
-    $photo=test_input($_POST["photo"]);
+    $name=test_input($_POST["username"]);
+    $id_card_no=test_input($_POST["id_card_no"]);
+    $contactNo=test_input($_POST["contact_no"]);
+    $location=test_input($_POST["location"]);
+    // $photo=test_input($_POST["photo"]);
 
+    $sql = "UPDATE clients SET username='$name',contact_no='$contactNo', id_card_no='$id_card_no', location='$location' WHERE username='$username'";
 
-    $sql = "UPDATE client SET Name='$name',email='$email',contact_no='$contactNo', address='$address', gender='$gender', profile_sum='$profile_sum', birthdate='$birthdate', company='$company', photo='$photo' WHERE username='$username'";
-
-    
     $result = $conn->query($sql);
     if($result==true){
-        header("location: farmerProfile.php");
+        header("location: clientProfile.php");
     }
 }
 
 include('includes/header.php');
 
-// include('includes/client-navbar.php');
-include('includes/artisan-navbar.php');
-
+include('includes/client-navbar.php');
  ?>
 
 
@@ -66,88 +47,41 @@ include('includes/artisan-navbar.php');
                 <div class="page-header">
                     <h2>Edit Profile</h2>
                 </div>
-
                 <form id="registrationForm" method="post" class="form-horizontal">
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="col-sm-4 control-label">Choose photo</label>
                         <div class="col-sm-5">
                         <input type="file" name="photo" class="form-control-file" id="exampleFormControlFile1">
                     </div>
-                </div>
+                </div> -->
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Name</label>
+                    <label class="col-sm-4 control-label">Username</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Email address</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="email" value="<?php echo $email; ?>" />
+                        <input type="text" class="form-control" name="username" value="<?php echo $username; ?>" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Contact no.</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" name="contactNo" value="<?php echo $contactNo; ?>" />
+                        <input type="number" min="1"  class="form-control" name="contact_no" value="<?php echo $contactNo; ?>" />
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Gender</label>
+                    <label class="col-sm-4 control-label">ID Card no.</label>
                     <div class="col-sm-5">
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="gender" 
-                                <?php if (isset($gender) && $gender=="male") echo "checked";?>
-                                 value="male" /> Male
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="gender" 
-                                <?php if (isset($gender) && $gender=="female") echo "checked";?>
-                                 value="female" /> Female
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="gender" 
-                                <?php if (isset($gender) && $gender=="other") echo "checked";?>
-                                 value="other" /> Other
-                            </label>
-                        </div>
+                        <input type="number" min="1" class="form-control" name="id_card_no" value="<?php echo $id_card_no; ?>" />
                     </div>
-                </div>
+                </div>        
+
+               
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Date of birth</label>
+                    <label class="col-sm-4 control-label">Location</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" name="birthdate" placeholder="YYYY/MM/DD" value="<?php echo $birthdate; ?>" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Address</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="address" value="<?php echo $address; ?>" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Company Name</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="company" value="<?php echo $company; ?>" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Profile Summery</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="profile_sum" value="<?php echo $profile_sum; ?>" />
+                        <input type="text" class="form-control" name="location" value="<?php echo $location; ?>" />
                     </div>
                 </div>
 
@@ -161,7 +95,6 @@ include('includes/artisan-navbar.php');
             </div>
         </div>
     </div>
-
 
 <?php include('includes/footer.php')?>
 

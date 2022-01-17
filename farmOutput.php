@@ -16,12 +16,12 @@ if(isset($_SESSION["Username"])){
 }
 else{
     $username="";
-	//header("location: index.php");
 }
 
 if(isset($_POST["jid"])){
 	$_SESSION["offer_id"]=$_POST["jid"];
-	header("location: offerDetails.php");
+	// header("location: offerDetails.php");
+	header("location: clientOfferDetailsView.php");
 }
 
 $sql = "SELECT * FROM farm_output WHERE valid=1 ORDER BY timestamp DESC";
@@ -57,44 +57,11 @@ if(isset($_POST["oldJob"])){
 
 include('includes/header.php');
 
-// include('includes/dashboard-navbar.php');
-
-
-
 $userName =  $_SESSION['Username'];
 
-
-
-
-// echo $userName;
-
-// $sql = "SELECT * FROM client WHERE username='$username'";
-// $result = $conn->query($sql);
-// if ($result->num_rows > 0) {
-
-// 	echo 'This is the CLIENT DASHBOARD '. $userName;
-
-// 	include('includes/client-navbar.php');
- 
-// 	}else {
-
-// 		$sql = "SELECT * FROM artisan WHERE username='$username'";
-// $result = $conn->query($sql);
-// if ($result->num_rows > 0) {
-
-// 		echo 'This is the ARTISAN DASHBOARD '. $userName;
-// 		include('includes/artisan-navbar.php');
-// }
-// 	}
-
-include('includes/artisan-navbar.php');
+include('includes/client-navbar.php');
 
  ?>
-
-
-
-
-
 
 <!--main body-->
 <div style="padding:1% 3% 1% 3%;">
@@ -123,9 +90,6 @@ include('includes/artisan-navbar.php');
                       if ($result->num_rows > 0) {
                             // output data of each row
                             while($row = $result->fetch_assoc()) {
-                                // $offer_id=$row["offer_id"];
-                                // $title=$row["title"];
-                                // $budget=$row["budget"];
 								
                                 $offer_id=$row["offer_id"];
 								$title=$row["title"];
@@ -134,8 +98,6 @@ include('includes/artisan-navbar.php');
 								$selling_price=$row["selling_price"];
                                 $e_username=$row["e_username"];
                                 $timestamp=$row["timestamp"];
-								// $description=$row["description"];
-								// $location=$row["location"];
 
                                 echo '
                                 <form action="farmOutput.php" method="post">
@@ -175,25 +137,6 @@ include('includes/artisan-navbar.php');
 <!--Main profile card-->
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<p></p>
-			<form action="farmOutput.php" method="post">
-				<div class="form-group">
-				  <input type="text" class="form-control" name="s_title">
-				  <center><button type="submit" class="btn btn-info">Search by Offer Title</button></center>
-				</div>
-	        </form>
-	        <form action="farmOutput.php" method="post">
-				<div class="form-group">
-				  <input type="text" class="form-control" name="s_client">
-				  <center><button type="submit" class="btn btn-info">Search by client</button></center>
-				</div>
-	        </form>
-
-	        <form action="farmOutput.php" method="post">
-				<div class="form-group">
-				  <input type="text" class="form-control" name="s_id">
-				  <center><button type="submit" class="btn btn-info">Search by  ID</button></center>
-				</div>
-	        </form>
 
 	        <form action="farmOutput.php" method="post">
 				<div class="form-group">
@@ -219,17 +162,10 @@ include('includes/artisan-navbar.php');
 <!--End main body-->
 
 
-
-
 <?php 
 
 include('includes/footer.php');
 
-if($e_username!=$username && $_SESSION["Usertype"]!=1){
-	echo "<script>
-		        $('#applybtn').hide();
-		</script>";
-} 
 ?>
 
 

@@ -1,5 +1,8 @@
-<?php include('server.php');
+<?php 
 
+include('server.php');
+
+include('includes/login-navbar.php');
  ?>
 
 <!DOCTYPE html>
@@ -45,13 +48,10 @@
                     <div class="col-sm-5">
                         <input type="password" class="form-control" name="password" />
                     </div>
-                </div>
-
-               
+                </div>               
 
                 <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3">
-                        <!-- Do NOT use name="submit" or id="submit" for the Submit button -->
                         <button type="submit" name="login" class="btn btn-info btn-lg">Login</button>
                     </div>
                 </div>

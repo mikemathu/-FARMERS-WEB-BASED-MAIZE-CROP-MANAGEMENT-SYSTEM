@@ -4,7 +4,6 @@ if(isset($_SESSION["Username"])){
 }
 else{
     $username="";
-	//header("location: index.php");
 }
 
 if(isset($_SESSION["offer_id"])){
@@ -12,14 +11,12 @@ if(isset($_SESSION["offer_id"])){
 }
 else{
     $offer_id="";
-    //header("location: index.php");
 }
 
 // Get ArtisanID
 $artisanName = $_SESSION["Username"];
 
 $checkArtisanID = mysqli_query
-// ($conn, "SELECT * FROM artisan WHERE username= '$artisanName' ");
 ($conn, "SELECT * FROM freelancer WHERE username= '$artisanName' ");
 
 if(mysqli_num_rows($checkArtisanID) > 0){
@@ -28,7 +25,6 @@ if(mysqli_num_rows($checkArtisanID) > 0){
      $artisanId = $row[0];
    }
 
-// $sql = "SELECT * FROM apply WHERE offer_id='$offer_id' and artisanid='$artisanId'";
 $sql = "SELECT * FROM apply WHERE offer_id='$offer_id' and f_username='$username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -41,11 +37,8 @@ if ($result->num_rows > 0) {
 if(isset($_POST["apply"]) && $msg==""){
     $cover=test_input($_POST["cover"]);
     $bid=test_input($_POST["bid"]);
-
-
     $sql = "INSERT INTO apply (artisanid, offer_id, bid, cover_letter) VALUES ('$artisanId', '$offer_id', '$bid','$cover')";
 
-    
     $result = $conn->query($sql);
     if($result==true){
         header("location: farmOutput.php");
@@ -54,7 +47,7 @@ if(isset($_POST["apply"]) && $msg==""){
  
 include('includes/header.php');
 
-include('includes/artisan-navbar.php');
+include('includes/farmer-navbar.php');
 
  ?>
 
@@ -99,7 +92,3 @@ include('includes/artisan-navbar.php');
 
 
     <?php include('includes/footer.php');?>
-
-
-
-

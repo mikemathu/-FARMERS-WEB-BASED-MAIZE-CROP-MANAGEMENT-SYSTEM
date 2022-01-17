@@ -16,7 +16,6 @@ if(isset($_SESSION["Username"])){
 }
 else{
     $username="";
-	//header("location: index.php");
 }
 
 $sql = "SELECT * FROM message WHERE receiver='$username' ORDER BY timestamp DESC";
@@ -25,13 +24,13 @@ $f=0;
 
 if(isset($_POST["sr"])){
 	$t=$_POST["sr"];
-	$sql = "SELECT * FROM artisan WHERE username='$t'";
+	$sql = "SELECT * FROM farmer WHERE username='$t'";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) {
 		$_SESSION["f_user"]=$t;
 		header("location: viewClient.php");
 	} else {
-	    $sql = "SELECT * FROM client WHERE username='$t'";
+	    $sql = "SELECT * FROM clients WHERE username='$t'";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
 			$_SESSION["e_user"]=$t;
@@ -74,16 +73,8 @@ if(isset($_POST["rep"])){
 
 include('includes/header.php');
 
-include('includes/client-navbar.php');
-
-
-
+include('includes/farmer-navbar.php');
  ?>
-
-
-
-
-
 
 <!--main body-->
 <div style="padding:1% 3% 1% 3%;">
@@ -123,7 +114,7 @@ include('includes/client-navbar.php');
                                 <input type="hidden" name="sr" value="'.$sr.'">
                                     <tr>
                                     <td>'.$msg.'</td>
-                                    <td><input type="submit" class="btn btn-link btn-lg" value="'.$sr.'"></td>
+                                    <td>'.$sr.'</td>
                                     </form>
                                     <form action="message.php" method="post">
                                     <input type="hidden" name="rep" value="'.$sr.'">
@@ -156,20 +147,6 @@ include('includes/client-navbar.php');
 <!--Main profile card-->
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<p></p>
-			<form action="message.php" method="post">
-				<div class="form-group">
-				  <input type="text" class="form-control" name="s_inbox">
-				  <center><button type="submit" class="btn btn-info">Search Inbox</button></center>
-				</div>
-	        </form>
-
-	        <form action="message.php" method="post">
-				<div class="form-group">
-				  <input type="text" class="form-control" name="s_sm">
-				  <center><button type="submit" class="btn btn-info">Search Sent Messages</button></center>
-				</div>
-	        </form>
-
 	        <form action="message.php" method="post">
 				<div class="form-group">
 				  <center><button type="submit" name="inbox" class="btn btn-warning">Inbox Messages</button></center>

@@ -4,12 +4,17 @@ if(isset($_SESSION["Username"])){
 }
 else{
 	$username="";
-	//header("location: index.php");
 }
 
 if(isset($_POST["jid"])){
 	$_SESSION["offer_id"]=$_POST["jid"];
-	header("location: offerDetails.php");
+	header("location: offerDetailsInfo.php");
+	// header("location: offerDetails.php");
+}
+if(isset($_POST["jid2"])){
+    $_SESSION["offer_id"]=$_POST["jid2"];
+    // header("location: offerDetailsInfo2.php?id= echo ' hi there';");
+	header("location: offerDetailsInfo3.php");
 }
 
 if(isset($_POST["f_user"])){
@@ -18,21 +23,17 @@ if(isset($_POST["f_user"])){
 }
 
 
-// $sql = "SELECT * FROM client WHERE username='$username'";
-$sql = "SELECT * FROM clients WHERE username='$username'";
+$sql = "SELECT * FROM farmer WHERE username='$username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        // $name=$row["Name"];
-        // $email=$row["email"];
         $contactNo=$row["contact_no"];
         $gender=$row["gender"];
-        $birthdate=$row["birthdate"];
-        // $address=$row["address"];
-        $profile_sum=$row["profile_sum"];
-		$company=$row["company"];
-		// $photo=$row["photo"];
+        $id_card_no=$row["id_card_no"];
+        $farm_location=$row["farm_location"];
+        $farm_size=$row["farm_size"];
+        $soil_type=$row["soil_type"];
         }
 } else {
     echo "0 results";
@@ -41,14 +42,13 @@ if ($result->num_rows > 0) {
 $sql = "SELECT * FROM farm_output WHERE e_username='$username' and valid=1 ORDER BY timestamp DESC";
 $result = $conn->query($sql);
 
+
+
 include('includes/header.php');
 
-include('includes/client-navbar.php');
+include('includes/farmer-navbar.php');
 
  ?>
-
-
-
 
 <!--main body-->
 <div style="padding:1% 3% 1% 3%;">
@@ -66,6 +66,10 @@ include('includes/client-navbar.php');
 			<p><span class="glyphicon glyphicon-user"></span> <?php echo $username; ?></p>
 			<ul class="list-group">
 				<a href="postFarmOutput.php" class="list-group-item list-group-item-info">Sell Your Maize Here</a>
+				<a href="chatapp.php" class="list-group-item list-group-item-info">Chat</a>
+                <div class="col-auto">
+           
+        </div>
 	          	<a href="editFarmer.php" class="list-group-item list-group-item-info">Edit Profile</a>
 			  	<a href="message.php" class="list-group-item list-group-item-info">Messages</a>
 			  	<a href="logout.php" class="list-group-item list-group-item-info">Logout</a>
@@ -76,24 +80,31 @@ include('includes/client-navbar.php');
 <!--Contact Information-->
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<div class="panel panel-success">
-			  <div class="panel-heading"><h4>Contact Information</h4></div>
+			  <div class="panel-heading"><h4>About</h4></div>
 			</div>
 			<div class="panel panel-success">
-			  <div class="panel-heading">Email</div>
-			  <div class="panel-body"><?php //echo $email; ?></div>
-			</div>
-			<div class="panel panel-success">
-			  <div class="panel-heading">Mobile</div>
+			  <div class="panel-heading">Contact</div>
 			  <div class="panel-body"><?php echo $contactNo; ?></div>
 			</div>
 			<div class="panel panel-success">
-			  <div class="panel-heading">Address</div>
-			  <div class="panel-body"><?php //echo $address; ?></div>
+			  <div class="panel-heading">ID Card No</div>
+			  <div class="panel-body"><?php echo $id_card_no; ?></div>
 			</div>
+			<div class="panel panel-success">
+			  <div class="panel-heading">Farm Location</div>
+			  <div class="panel-body"><?php echo $farm_location; ?></div>
+			</div>
+      <div class="panel panel-success">
+			  <div class="panel-heading">Farm Size</div>
+			  <div class="panel-body"><?php echo $farm_size .' (ha)'; ?></div>
+			</div>
+			<div class="panel panel-success">
+			  <div class="panel-heading">Soil Type</div>
+			  <div class="panel-body"><?php echo $soil_type; ?></div>
+			</div>
+		
 		</div>
 <!--End Contact Information-->
-
-
 
 	</div>
 <!--End Column 1-->
@@ -103,7 +114,7 @@ include('includes/client-navbar.php');
 
 <!--client Profile Details-->	
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
-			<div class="panel panel-primary">
+			<div class="panel panel-info">
 			  <div class="panel-heading"><h3>Farmer Profile Details</h3></div>
 			</div>
 
@@ -126,7 +137,7 @@ include('includes/client-navbar.php');
 
 			
 			<div class="panel panel-primary">
-			  <div class="panel-heading">Current Farm Output Offerings</div>
+			  <div class="panel-heading">Maize in the market ready for sell.</div>
 			  <div class="panel-body"><h4>
                   <table style="width:100%">
                       <tr>
@@ -135,6 +146,9 @@ include('includes/client-navbar.php');
                           <td style="font-weight:bold; padding-bottom:10px;">Posted on</td>
                       </tr>
                       <?php 
+                                //    <td> <a class="btn btn-link btn-lg" href="offerDetailsInfo2.php?id='.$offer_id.'">'.$title.'</a></td>
+
+                      
                       if ($result->num_rows > 0) {
                             // output data of each row
                             while($row = $result->fetch_assoc()) {
@@ -144,10 +158,11 @@ include('includes/client-navbar.php');
 
                                 echo '
                                 <form action="farmerProfile.php" method="post">
-                                <input type="hidden" name="jid" value="'.$offer_id.'">
+                                <input type="hidden" name="jid2" value="'.$offer_id.'">
                                     <tr>
                                     <td>'.$offer_id.'</td>
-                                    <td><input type="submit" class="btn btn-link btn-lg" value="'.$title.'"></td>
+                                    <td><input type="submit" class="btn btn-link btn-lg" value="'.$title.'" ></td>
+                                   
                                     <td>'.$timestamp.'</td>
                                     </tr>
                                 </form>
@@ -163,8 +178,8 @@ include('includes/client-navbar.php');
               </h4></div>
 			</div>
 
-			<div class="panel panel-primary">
-			  <div class="panel-heading">Ongoing deals Offerings</div>
+      <div class="panel panel-primary">
+			  <div class="panel-heading">Accepted Bids & Sold Maize Deals </div>
 			  <div class="panel-body"><h4>
                   <table style="width:100%">
                       <tr>
@@ -203,28 +218,32 @@ include('includes/client-navbar.php');
               </h4></div>
 			</div>
 
+	</div>
+<!--End Column 2-->
+
+<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
+            <div class="panel panel-info">
+			  <div class="panel-heading"><h3>Maize Offer Details Details</h3></div>
+			</div>
 
 
-			
 			<div class="panel panel-primary">
-			  <div class="panel-heading">Currently Hired Clients</div>
+			  <div class="panel-heading">Previous crop Offers Deals</div>
 			  <div class="panel-body"><h4>
                   <table style="width:100%">
                       <tr>
                           <td style="font-weight:bold; padding-bottom:10px;">Crop Id</td>
                           <td style="font-weight:bold; padding-bottom:10px;">Title</td>
-                          <td style="font-weight:bold; padding-bottom:10px;">Client</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">Posted on</td>
                       </tr>
                       <?php 
-                      	$sql = "SELECT * FROM farm_output,selected WHERE farm_output.offer_id=selected.offer_id AND selected.e_username='$username' AND selected.valid=1 ORDER BY farm_output.timestamp DESC";
+                      	$sql = "select * from `market_request` left join `accepted` on accepted.offer_id=market_request.id where accepted.e_username='$username'";
 						$result = $conn->query($sql);
                       if ($result->num_rows > 0) {
                             // output data of each row
                             while($row = $result->fetch_assoc()) {
                                 $offer_id=$row["offer_id"];
                                 $title=$row["title"];
-                                $f_username=$row["f_username"];
-                                $timestamp=$row["timestamp"];
 
                                 echo '
                                 <form action="farmerProfile.php" method="post">
@@ -232,10 +251,55 @@ include('includes/client-navbar.php');
                                     <tr>
                                     <td>'.$offer_id.'</td>
                                     <td><input type="submit" class="btn btn-link btn-lg" value="'.$title.'"></td>
-                                    </form>
-                                    <form action="farmerProfile.php" method="post">
-                                    <input type="hidden" name="f_user" value="'.$f_username.'">
-                                    <td><input type="submit" class="btn btn-link btn-lg" value="'.$f_username.'"></td>
+                                    <td>'.$timestamp.'</td>
+                                    </tr>
+                                </form>
+                                ';
+
+                                }
+                        } else {
+                            echo "<tr><td>N/A</td></tr>";
+                        }
+
+                       ?>
+                  </table>
+              </h4></div>
+			</div>		
+
+	</div>
+
+<!--Column 3-->
+
+
+<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
+            <div class="panel panel-info">
+			  <div class="panel-heading"><h3>Farm Inputs</h3></div>
+			</div>
+
+            <div class="panel panel-primary">
+			  <div class="panel-heading">Bought Farm Inputs</div>
+			  <div class="panel-body"><h4>
+                  <table style="width:100%">
+                      <tr>
+                          <td style="font-weight:bold; padding-bottom:10px;">Item Id</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">Title</td>
+                          <td style="font-weight:bold; padding-bottom:10px;">Posted on</td>
+                      </tr>
+                      <?php 
+                      	$sql = "select * from `farm_input` left join `selected_farminput` on selected_farminput.offer_id=farm_input.item_id where selected_farminput.f_username='$username'";
+						$result = $conn->query($sql);
+                      if ($result->num_rows > 0) {
+                            // output data of each row
+                            while($row = $result->fetch_assoc()) {
+                                $offer_id=$row["item_id"];
+                                $title=$row["title"];
+
+                                echo '
+                                <form action="farmerProfile.php" method="post">
+                                <input type="hidden" name="jid" value="'.$offer_id.'">
+                                    <tr>
+                                    <td>'.$offer_id.'</td>
+                                    <td><input type="submit" class="btn btn-link btn-lg" value="'.$title.'"></td>
                                     <td>'.$timestamp.'</td>
                                     </tr>
                                 </form>
@@ -250,41 +314,13 @@ include('includes/client-navbar.php');
                   </table>
               </h4></div>
 			</div>
+		
+
 
 
 			
 
 	</div>
-<!--End Column 2-->
-
-
-<!--Column 3-->
-	<!-- <div class="col-lg-2">
-My Wallet
-		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
-			<div class="panel panel-info">
-			  <div class="panel-heading"><h3>My Wallet</h3></div>
-			</div>
-			<ul class="list-group">
-			  <li class="list-group-item">Balance: $0.0</li>
-			  <li class="list-group-item">Payment Method: </li>
-			  <li class="list-group-item">Deposit</li>
-			</ul>
-		</div> -->
-<!--End My Wallet-->
-
-<!--Social Network Profiles-->
-		<!-- <div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
-			<div class="panel panel-info">
-			  <div class="panel-heading"><h3>Social Network Profiles</h3></div>
-			</div>
-			<ul class="list-group">
-			  <li class="list-group-item" style="font-size:20px;color:#3B579D;"><i class="fab fa-facebook-square"> Facebook</i></li>
-			  <li class="list-group-item" style="font-size:20px;color:#D34438;"><i class="fab fa-google-plus-square"> Google</i></li>
-			  <li class="list-group-item" style="font-size:20px;color:#2CAAE1;"><i class="fab fa-twitter-square"> Twitter</i></li>
-			  <li class="list-group-item" style="font-size:20px;color:#0274B3;"><i class="fab fa-linkedin"> Linkedin</i></li>
-			</ul>
-		</div> -->
 <!--End Social Network Profiles-->
 
 	</div>
@@ -294,6 +330,4 @@ My Wallet
 </div>
 <!--End main body-->
 
-
 <?php include('includes/footer.php') ?>
-

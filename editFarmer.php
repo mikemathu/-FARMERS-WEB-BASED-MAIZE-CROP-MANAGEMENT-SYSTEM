@@ -7,59 +7,41 @@ else{
 	//header("location: index.php");
 }
 
-// $sql = "SELECT * FROM client WHERE username='$username'";
-// $sql = "SELECT * FROM freelancer WHERE username='$username'";
 $sql = "SELECT * FROM farmer WHERE username='$username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        $name=$row["Name"];
-        $email=$row["email"];
+        $username=$row["username"];
         $contactNo=$row["contact_no"];
-        $gender=$row["gender"];
-        $birthdate=$row["birthdate"];
-        $address=$row["address"];
-        // $profile_sum=$row["profile_sum"];
-        // $company=$row["company"];
-        $photo=$row["photo"];
+        $IdCardNo=$row["id_card_no"];
+        $farm_location=$row["farm_location"];
+        $farm_size=$row["farm_size"];
+        $soil_type=$row["soil_type"];
         }
 } 
-// else {
-//     echo "0 results";
-// }
-
 
 if(isset($_POST["editclient"])){
-    $name=test_input($_POST["name"]);
-    $email=test_input($_POST["email"]);
+    $name=test_input($_POST["username"]);
     $contactNo=test_input($_POST["contactNo"]);
-    $gender=test_input($_POST["gender"]);
-    $birthdate=test_input($_POST["birthdate"]);
-    $address=test_input($_POST["address"]);
-    // $profile_sum=test_input($_POST["profile_sum"]);
-    // $company=test_input($_POST["company"]);
-    $photo=test_input($_POST["photo"]);
+    $IdCardNo=test_input($_POST["IdCardNo"]);
+    $farm_location=test_input($_POST["farm_location"]);
+    $farm_size=test_input($_POST["farm_size"]);
+    $soil_type=test_input($_POST["soil_type"]);
 
-
-    // $sql = "UPDATE client SET Name='$name',email='$email',contact_no='$contactNo', address='$address', gender='$gender', profile_sum='$profile_sum', birthdate='$birthdate', company='$company', photo='$photo' WHERE username='$username'";
-    $sql = "UPDATE farmer SET Name='$name',email='$email',contact_no='$contactNo', address='$address', gender='$gender', birthdate='$birthdate', photo='$photo' WHERE username='$username'";
-
+    $sql = "UPDATE farmer SET username='$name',contact_no='$contactNo', id_card_no='$IdCardNo', farm_location='$farm_location', farm_size='$farm_size', soil_type='$soil_type' WHERE username='$username'";
     
     $result = $conn->query($sql);
     if($result==true){
-        header("location: farmerProfile.php");
+        header("location: farmerProfile2.php");
     }
 }
 
 include('includes/header.php');
 
-include('includes/client-navbar.php');
+include('includes/farmer-navbar.php');
 
  ?>
-
-
-
 
 <div class="container">
         <div class="row">
@@ -70,87 +52,75 @@ include('includes/client-navbar.php');
 
                 <form id="registrationForm" method="post" class="form-horizontal">
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="col-sm-4 control-label">Choose photo</label>
                         <div class="col-sm-5">
                         <input type="file" name="photo" class="form-control-file" id="exampleFormControlFile1">
                     </div>
-                </div>
+                </div> -->
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Name</label>
+                    <label class="col-sm-4 control-label">Username</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Email address</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="email" value="<?php echo $email; ?>" />
+                        <input type="text" class="form-control" name="username" value="<?php echo $username; ?>" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Contact no.</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" name="contactNo" value="<?php echo $contactNo; ?>" />
+                        <input type="number" class="form-control" min="1" name="contactNo" value="<?php echo $contactNo; ?>" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">ID Card No</label>
+                    <div class="col-sm-5">
+                        <input type="number" min="1" class="form-control" name="IdCardNo" value="<?php echo $IdCardNo; ?>" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Farm Location</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="farm_location" value="<?php echo $farm_location; ?>" />
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Gender</label>
-                    <div class="col-sm-5">
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="gender" 
-                                <?php if (isset($gender) && $gender=="male") echo "checked";?>
-                                 value="male" /> Male
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="gender" 
-                                <?php if (isset($gender) && $gender=="female") echo "checked";?>
-                                 value="female" /> Female
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="gender" 
-                                <?php if (isset($gender) && $gender=="other") echo "checked";?>
-                                 value="other" /> Other
-                            </label>
-                        </div>
-                    </div>
-                </div>
+            <label class="col-sm-4 control-label">Farm Size in hectare(ha)</label>
+            <div class="col-sm-5">
 
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Date of birth</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="birthdate" placeholder="YYYY/MM/DD" value="<?php echo $birthdate; ?>" />
-                    </div>
-                </div>
+                <select  name="farm_size" class="form-control" id="doctor" required="required">
+                    <option value="<?php echo $farm_size; ?>" disabled selected>Select Farm Size in hectare(ha)</option>                
+                    <option value="<0.5">Less than 1/2 ha</option>
+                    <option value="0.5">1/2 ha</option>
+                    <option value="1">1 ha</option>
+                    <option value="2">2 ha</option>
+                    <option value="3">3 ha</option>
+                    <option value="4">4 ha</option>
+                    <option value="5">5 ha</option>
+                    <option value=">5">More than 5 ha</option>
+                </select>
 
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Address</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="address" value="<?php echo $address; ?>" />
-                    </div>
-                </div>
+            </div>
+        </div>
 
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Company Name</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="company" value="<?php echo $company; ?>" />
-                    </div>
-                </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Farm Soil Type</label>
+            <div class="col-sm-5">
 
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Profile Summery</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="profile_sum" value="<?php echo $profile_sum; ?>" />
-                    </div>
-                </div>
+                <select name="soil_type" class="form-control" id="doctor" required="required">
+                    <option value="<?php echo $soil_type; ?>" disabled selected>Select Soil Type in your Farm</option>                
+                    <option value="Not Yet Tested">Not Yet Tested</option>
+                    <option value="Sand">Sand</option>
+                    <option value="clay">clay</option>
+                    <option value="loam">loam</option>
+                    <option value="sandy-clay">sandy-clay</option>
+                    <option value="sandy-loam">sandy-loam</option>
+                    <option value="silty-clay">silty-clay</option>
+                    <option value="other">Other</option>
+                </select>
+
+            </div>
+        </div>
 
                 <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3">
@@ -162,7 +132,6 @@ include('includes/client-navbar.php');
             </div>
         </div>
     </div>
-
 
 <?php include('includes/footer.php')?>
 

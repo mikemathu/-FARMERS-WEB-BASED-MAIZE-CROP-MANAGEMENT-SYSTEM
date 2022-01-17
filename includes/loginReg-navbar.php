@@ -10,13 +10,29 @@
 			</button>
 			<a href="index.php" class="navbar-brand">MCMS</a>
 		</div>
+		<!-- <div class="collapse navbar-collapse" id="navbar-collapse">
+			
+		</div>		 -->
+
 		<div class="collapse navbar-collapse" id="navbar-collapse">
-			<a href="loginReg.php" class="btn btn-info navbar-btn navbar-right" data-toggle="modal" data-target="#registerModal">Register</a>
+			<a href="index.php" class="btn btn-info navbar-btn navbar-right">Home</a>
+
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="index.php">Home</a></li>
-				<li><a href="loginReg.php" data-toggle="modal" data-target="#loginModal">Login</a></li>
-			</ul>
-		</div>		
+				<li><a href="loginReg.php">Login</a></li> 
+
+
+				<li class="dropdown" >
+			        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Registration
+			        </a>
+			        <ul class="dropdown-menu list-group list-group-item-info">
+						<a href="farmerReg.php" class="list-group-item">Farmer Registration</a>
+						<a href="clientReg.php" class="list-group-item">Client Registration</a>
+			        </ul>
+			    </li>
+				<li><a href="admin/login.php">Admin</a></li>
+
+			</ul>		
+		</div>
 	</div>	
 </nav>
 <!--End Navbar menu-->

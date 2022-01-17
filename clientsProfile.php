@@ -19,7 +19,6 @@ if(isset($_POST["e_user"])){
 }
 
 
-// $sql = "SELECT * FROM artisan WHERE username='$username'";
 $sql = "SELECT * FROM clients WHERE username='$username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -31,11 +30,7 @@ if ($result->num_rows > 0) {
 		$gender=$row["gender"];
 		$birthdate=$row["birthdate"];
 		$address=$row["address"];
-		// $prof_title=$row["prof_title"];
-		// $location=$row["location"];
 		$profile_sum=$row["profile_sum"];
-		// $experience=$row["experience"];
-		// $photo=$row["photo"];
 	    }
 } else {
     // echo "0 results";
@@ -43,7 +38,7 @@ if ($result->num_rows > 0) {
 
 include('includes/header.php');
 
-include('includes/artisan-navbar.php');
+include('includes/farmer-navbar.php');
  ?>
 
 

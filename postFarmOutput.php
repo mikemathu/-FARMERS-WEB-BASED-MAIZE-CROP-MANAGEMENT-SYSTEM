@@ -4,7 +4,6 @@ if(isset($_SESSION["Username"])){
 }
 else{
     $username="";
-	//header("location: index.php");
 }
 
 $title=$maize_type=$description=$number_of_bags=$selling_price=$location="";
@@ -16,12 +15,7 @@ if(isset($_POST["postOffer"])){
     $number_of_bags=test_input($_POST["number_of_bags"]);
     $selling_price=test_input($_POST["selling_price"]);
     $location=test_input($_POST["location"]);
-    // $location=test_input($_POST["location"]);
-    // $deadline=test_input($_POST["deadline"]);
 
-    // $sql = "INSERT INTO farm_output (title, description, budget, location, e_username, valid) VALUES ('$title', '$description','$budget','$location', '$username',1)";
-    // $sql = "INSERT INTO farm_output (title, description, budget, e_username, valid) VALUES ('$title', '$description','$budget', '$username',1)";
-    // $sql = "INSERT INTO farm_output (title, description, budget, e_username, valid) VALUES ('$title', '$description','$budget', '$username',1)";
     $sql = "INSERT INTO farm_output (maize_type,title, description,number_of_bags, selling_price, location,e_username, valid) VALUES ('$maize_type','$title', '$description','$number_of_bags','$selling_price','$location', '$username',1)";
     
     $result = $conn->query($sql);
@@ -35,9 +29,7 @@ if(isset($_POST["postOffer"])){
 
 include('includes/header.php');
 
-// include('includes/dashboard-navbar.php');
-
-include('includes/client-navbar.php');
+include('includes/farmer-navbar.php');
 
 
  ?>
@@ -62,7 +54,6 @@ include('includes/client-navbar.php');
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Maize Type</label>
                     <div class="col-sm-5">
-                        <!-- <input type="text" class="form-control" name="title" value="" /> -->
                         <select name="maize_type" class="form-control" id="" required="required">
                                 <option value="<?php echo $maize_type; ?>" disabled selected>Select Maize Type</option>                
                                 <option value="White">White Maize</option>
@@ -90,7 +81,7 @@ include('includes/client-navbar.php');
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Selling Price per Bag</label>
                     <div class="col-sm-5">
-                        <input placeholder="Price" type="number" class="form-control" name="selling_price" value="<?php echo $selling_price; ?>" />
+                        <input placeholder="Price" type="number" class="form-control" min="1" name="selling_price" value="<?php echo $selling_price; ?>" />
                     </div>
                 </div>
 
@@ -101,16 +92,8 @@ include('includes/client-navbar.php');
                     </div>
                 </div>
 
-                <!-- <div class="form-group">
-                    <label class="col-sm-4 control-label">Deadline</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="deadline" value="" placeholder="YYYY-MM-DD" />
-                    </div>
-                </div> -->
-
                 <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3">
-                        <!-- Do NOT use name="submit" or id="submit" for the Submit button -->
                         <button type="submit" name="postOffer" class="btn btn-info btn-lg">Post</button>
                     </div>
                 </div>
@@ -121,6 +104,3 @@ include('includes/client-navbar.php');
 
 
 <?php include('includes/footer.php') ?>
-
-
-

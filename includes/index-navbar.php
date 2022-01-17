@@ -11,14 +11,20 @@
 			<a href="index.php" class="navbar-brand">MCMS</a>
 		</div>
 		<div class="collapse navbar-collapse" id="navbar-collapse">
-			<a href="loginReg.php" class="btn btn-info navbar-btn navbar-right">Register</a>
+			<a href="loginReg.php" class="btn btn-info navbar-btn navbar-right">Login</a>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="index.php">Home</a></li>
-				<li><a href="#how">How it works</a></li>
-				<li><a href="#faq">FAQ</a></li>
-				<li><a href="loginReg.php">Login</a></li>
 				<li><a href="admin/login.php">Admin</a></li>
-			</ul>
+
+
+				<li class="dropdown" >
+			        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Registration
+			        </a>
+			        <ul class="dropdown-menu list-group list-group-item-info">
+						<a href="farmerReg.php" class="list-group-item">Farmer Registration</a>
+						<a href="clientReg.php" class="list-group-item">Client Registration</a>
+			        </ul>
+			    </li>
+			</ul>		
 		</div>		
 	</div>	
 </nav>

@@ -18,7 +18,6 @@ if(isset($_SESSION["Username"])){
 }
 else{
     $username="";
-	//header("location: index.php");
 }
 
 if(isset($_SESSION["offer_id"])){
@@ -26,7 +25,6 @@ if(isset($_SESSION["offer_id"])){
 }
 else{
     $offer_id="";
-    //header("location: index.php");
 }
 
 if(isset($_POST["f_user"])){
@@ -43,7 +41,6 @@ if(isset($_POST["c_letter"])){
 	$artisanName = $_SESSION["Username"];
 	
 	$checkArtisanID = mysqli_query
-	// ($conn, "SELECT * FROM artisan WHERE username= '$artisanName' ");
 	($conn, "SELECT * FROM clients WHERE username= '$artisanName' ");
 	
 	if(mysqli_num_rows($checkArtisanID) > 0){
@@ -57,21 +54,6 @@ if(isset($_POST["f_hire"])){
 	$f_hire=$_POST["f_hire"];
 	$f_price=$_POST["f_price"];
 
-	
-	// Get ClientID
-
-// $checkClientID = mysqli_query
-// ($conn, "SELECT * FROM apply WHERE bid= '$offer_id' ");
-
-// if(mysqli_num_rows($checkClientID) > 0){
-//     $row   = mysqli_fetch_row($checkClientID);
-
-//      $clientId = $row[0];
-//    }
-
-// 		echo $clientId;
-
-
 	$sql = "INSERT INTO selected (artisanid,f_username, offer_id, e_username, price, valid) VALUES ('$artisanid','$f_hire', '$offer_id', '$username','$f_price',1)";
     
     $result = $conn->query($sql);
@@ -79,7 +61,6 @@ if(isset($_POST["f_hire"])){
     	$sql = "DELETE FROM apply WHERE offer_id='$offer_id'";
 		$result = $conn->query($sql);
 		if($result==true){
-			// $sql = "UPDATE farm_output SET valid=0 WHERE offer_id='$offer_id'";
 			$sql = "UPDATE farm_output SET valid=0 WHERE offer_id='$offer_id'";
 			$result = $conn->query($sql);
 			if($result==true){
@@ -88,7 +69,6 @@ if(isset($_POST["f_hire"])){
 		}
     }
 }
-
 
 if(isset($_POST["f_done"])){
 	$f_done=$_POST["f_done"];
@@ -99,8 +79,6 @@ if(isset($_POST["f_done"])){
     }
 }
 
-
-// $sql = "SELECT * FROM farm_output WHERE offer_id='$offer_id'";
 $sql = "SELECT * FROM farm_output WHERE offer_id='$offer_id'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -110,10 +88,8 @@ if ($result->num_rows > 0) {
         $title=$row["title"];
         $description=$row["description"];
         $budget=$row["budget"];
-        // $location=$row["location"];
         $timestamp=$row["timestamp"];
         $jv=$row["valid"];
-        // $deadline=$row["deadline"];
         }
 } else {
     echo "0 results";
@@ -122,15 +98,8 @@ if ($result->num_rows > 0) {
 $_SESSION["msgRcv"]=$e_username;
 
 include('includes/header.php');
-
-// include('includes/dashboard-navbar.php');
-
 include('includes/client-navbar.php');
  ?>
-
-
-
-
 
 <!--main body-->
 <div style="padding:1% 3% 1% 3%;">
@@ -170,9 +139,6 @@ include('includes/client-navbar.php');
 		</div>
 <!--End client Profile Details-->
  
-
- 
- 
 <!--client Profile Details-->	
 		<div id="applicant" class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<div class="panel panel-success">
@@ -184,30 +150,19 @@ include('includes/client-navbar.php');
                       <td>Bid</td>
                   </tr>
 					<?php 
-					
-// 					$query=mysqli_query($conn, "select * from `artisan` left join `selected` on selected.f_username=artisan.username") or die(mysqli_error());
 
-
-// while($row=mysqli_fetch_array($query)){
-// $artisanid = $row['artisanid'];
-// $artisanemail = $row['email'];
-// }
-// echo $artisanemail;
-// echo $artisanid;
-
- $sql = "SELECT * FROM apply WHERE offer_id='$offer_id' ORDER BY bid";
+ 					$sql = "SELECT * FROM apply WHERE offer_id='$offer_id' ORDER BY bid";
 					$result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         // output data of each row
                         while($row = $result->fetch_assoc()) {
 						$artisanid=$row["artisanid"];
 
-$query=mysqli_query($conn, "select * from `apply` left join `artisan` on artisan.artisanid=apply.artisanid where offer_id='$offer_id' ORDER BY bid") or die(mysqli_error());
+						$query=mysqli_query($conn, "select * from `apply` left join `artisan` on artisan.artisanid=apply.artisanid where offer_id='$offer_id' ORDER BY bid");
 						}
 					}
 				
-if ($result->num_rows > 0) {
-	// if ($result->num_rows > 0 && $_SESSION["Usertype"] == 2 ) {
+				if ($result->num_rows > 0) {
 	
 						 while($row=mysqli_fetch_array($query)){
 							$artisanid=$row["artisanid"];
@@ -215,10 +170,6 @@ if ($result->num_rows > 0) {
                         $f_username=$row["username"];
                         $bid=$row["bid"];
                         $cover_letter=$row["cover_letter"];
-						 
-
-
-                  
 					
 						echo '
                         <form action="offerDetails.php" method="post">
@@ -237,8 +188,6 @@ if ($result->num_rows > 0) {
                             <td><input type="submit" class="btn btn-link btn-lg" value="Hire"></td>
                             </tr>
 						</form>';					
-						
-					                     
 
                         }
                     } else {
@@ -279,8 +228,6 @@ if ($result->num_rows > 0) {
 								<form action="artisanreview.php?id=<?php echo $id; ?>" method="post">
 								<input type="submit" class="btn btn-link btn-lg" value="Review this artisan">							
 								</form>
-
-                                                             
                                 ';
 
                                 }
@@ -290,7 +237,6 @@ if ($result->num_rows > 0) {
 						}		  
 
 						 $checkartisanName = mysqli_query
-// ($conn, "SELECT * FROM client WHERE username= '$username' ");
 ($conn, "SELECT * FROM clients WHERE username= '$username' ");
 
 if(mysqli_num_rows($checkartisanName) > 0){
@@ -299,64 +245,32 @@ if(mysqli_num_rows($checkartisanName) > 0){
      $username= $row[3];
    }
 
-
-// $query=mysqli_query($conn, "select * from `artisan` left join `selected` on selected.f_username=artisan.username") or die(mysqli_error());
-$query=mysqli_query($conn, "select * from `freelancer` left join `selected` on selected.f_username=freelancer.username") or die(mysqli_error());
+$query=mysqli_query($conn, "select * from `freelancer` left join `selected` on selected.f_username=freelancer.username");
 
 
 						 while($row=mysqli_fetch_array($query)){
-						//  $artisanid = $row['artisanid'];
 						 $artisanemail = $row['email'];
 						 }
 ?>
-<?php
-									 
-
-
-									 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                	
-                       ?>
                      </table>
               </h4></div>
 			</div>
 			<p></p>
 		</div>
 <!--End client Profile Details-->
-
-
-
 	</div>
 <!--End Column 1-->
 
 <?php 
-// $sql = "SELECT * FROM client WHERE username='$e_username'";
 $sql = "SELECT * FROM clients WHERE username='$e_username'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-    	// $e_Name=$row["Name"];
         $email=$row["email"];
         $contact_no=$row["contact_no"];
 		$address=$row["address"];
-		// $photo=$row["photo"];
         }
-} else {
-    // echo "0 results";
 }
 
 ?>
@@ -368,7 +282,6 @@ if ($result->num_rows > 0) {
 		<div class="card" style="padding:20px 20px 5px 20px;margin-top:20px">
 			<p></p>
 
-			<!-- <img src="image/img04.jpg"> -->
 			<img src="<?php echo (!empty($photo)) ? 'image/'.$photo : 'image/profile.jpg'; ?>" width="100%">
 			<h2><?php //echo $e_Name; ?></h2>
 			<p><span class="glyphicon glyphicon-user"></span> <?php echo $e_username; ?></p>
@@ -407,18 +320,14 @@ if ($_SESSION["Usertype"] == 1) {
 		</div>
 <!--End Contact Information-->
 
-
 	</div>
 <!--End Column 2-->
 
-
 <!--Column 3-->
-
 
 </div>
 </div>
 <!--End main body-->
-
 
 <?php
  include('includes/footer.php');
@@ -448,13 +357,7 @@ if($e_username!=$username){
 		</script>";
 }
 
-
 ?>
-
-
-
-
-
 
 <script>
 
@@ -489,7 +392,3 @@ $(document).on('click', '.status', function(e){
 });
 
 </script>
-
-
-
-

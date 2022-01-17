@@ -1,0 +1,80 @@
+.form-control-borderless {
+    border: none;
+  }
+  
+  .form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+  
+  #chat {
+    overflow-y: scroll;
+    display: none;
+    /* max-width: 800px; */
+    padding: 0 100px !important;
+  }
+  
+  .first {
+      border: 2px solid #dedede;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 10px 0;
+  }
+  
+  .second {
+      border-color: #ccc;
+      background-color: #ddd;
+  }
+  
+  
+  div.ex1 {
+  
+      height: 400px;
+      width: 100%;
+      overflow-y: scroll;
+  }
+
+  .text-light {
+    color: black !important;
+}
+
+.navbar-fixed-bottom, .navbar-fixed-top {
+  /* position: inherit !important; */
+}
+
+.card {
+  box-shadow: none !important;
+}
+
+.card-body {
+  padding: 1.25rem !important;
+}
+
+.row {
+  display: flex!important;
+}
+
+.col-auto {
+  width: auto !important;
+}
+
+.col {
+flex-basis: 0 !important;
+  flex-grow: 1 !important;
+}
+
+.float-right {
+  float: right!important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.enter{
+  margin-left: 20vw;
+}
+
+  
